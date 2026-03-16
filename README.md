@@ -2,7 +2,7 @@
 
 > The right watch order for every movie universe, franchise & saga.
 
-**Live site:** [watchinorder.com](https://watchinorder.com)
+**Live site:** [watchinorder.org](https://watchinorder.org)
 
 ---
 
