@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#1a0010"/>
+      <stop offset="100%" style="stop-color:#07070f"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Grid lines -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="52" x2="1200" y2="52"/>
+    <line x1="0" y1="104" x2="1200" y2="104"/>
+    <line x1="0" y1="156" x2="1200" y2="156"/>
+    <line x1="0" y1="208" x2="1200" y2="208"/>
+    <line x1="0" y1="260" x2="1200" y2="260"/>
+    <line x1="0" y1="312" x2="1200" y2="312"/>
+    <line x1="0" y1="364" x2="1200" y2="364"/>
+    <line x1="0" y1="416" x2="1200" y2="416"/>
+    <line x1="0" y1="468" x2="1200" y2="468"/>
+    <line x1="0" y1="520" x2="1200" y2="520"/>
+    <line x1="0" y1="572" x2="1200" y2="572"/>
+    <line x1="52" y1="0" x2="52" y2="630"/>
+    <line x1="104" y1="0" x2="104" y2="630"/>
+    <line x1="156" y1="0" x2="156" y2="630"/>
+    <line x1="208" y1="0" x2="208" y2="630"/>
+    <line x1="260" y1="0" x2="260" y2="630"/>
+    <line x1="312" y1="0" x2="312" y2="630"/>
+    <line x1="364" y1="0" x2="364" y2="630"/>
+    <line x1="416" y1="0" x2="416" y2="630"/>
+    <line x1="468" y1="0" x2="468" y2="630"/>
+    <line x1="520" y1="0" x2="520" y2="630"/>
+    <line x1="572" y1="0" x2="572" y2="630"/>
+    <line x1="624" y1="0" x2="624" y2="630"/>
+    <line x1="676" y1="0" x2="676" y2="630"/>
+    <line x1="728" y1="0" x2="728" y2="630"/>
+    <line x1="780" y1="0" x2="780" y2="630"/>
+    <line x1="832" y1="0" x2="832" y2="630"/>
+    <line x1="884" y1="0" x2="884" y2="630"/>
+    <line x1="936" y1="0" x2="936" y2="630"/>
+    <line x1="988" y1="0" x2="988" y2="630"/>
+    <line x1="1040" y1="0" x2="1040" y2="630"/>
+    <line x1="1092" y1="0" x2="1092" y2="630"/>
+    <line x1="1144" y1="0" x2="1144" y2="630"/>
+  </g>
+  
+  <!-- Red glow top center -->
+  <ellipse cx="600" cy="0" rx="500" ry="250" fill="rgba(224,58,40,0.12)"/>
+  
+  <!-- Brand badge -->
+  <rect x="480" y="170" width="240" height="32" rx="16" fill="rgba(224,58,40,0.15)" stroke="rgba(224,58,40,0.3)" stroke-width="1"/>
+  <text x="600" y="191" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#ff6b4a" letter-spacing="3">★ 45+ FRANCHISES</text>
+  
+  <!-- Main title -->
+  <text x="600" y="295" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="92" font-weight="900" fill="white" letter-spacing="8">WATCH</text>
+  <text x="600" y="295" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="92" font-weight="900" fill="white" letter-spacing="8">
+    <tspan fill="white">WATCH</tspan><tspan fill="#e03a28">IN</tspan><tspan fill="white">ORDER</tspan>
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="360" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="22" fill="rgba(238,235,248,0.6)">The right watch order for every movie universe</text>
+  
+  <!-- Emoji row -->
+  <text x="310" y="440" text-anchor="middle" font-size="44">🦸</text>
+  <text x="410" y="440" text-anchor="middle" font-size="44">🔪</text>
+  <text x="510" y="440" text-anchor="middle" font-size="44">🚀</text>
+  <text x="600" y="440" text-anchor="middle" font-size="44">⚔️</text>
+  <text x="690" y="440" text-anchor="middle" font-size="44">💥</text>
+  <text x="790" y="440" text-anchor="middle" font-size="44">🎨</text>
+  <text x="890" y="440" text-anchor="middle" font-size="44">🎬</text>
+  
+  <!-- URL bar -->
+  <rect x="440" y="490" width="320" height="38" rx="19" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="600" y="514" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="rgba(238,235,248,0.5)" letter-spacing="1">watchinorder.com</text>
+  
+  <!-- Bottom stats -->
+  <text x="270" y="580" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="#e03a28">45+</text>
+  <text x="270" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(238,235,248,0.4)" letter-spacing="1">FRANCHISES</text>
+  
+  <text x="450" y="580" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="#e03a28">700+</text>
+  <text x="450" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(238,235,248,0.4)" letter-spacing="1">FILMS</text>
+  
+  <text x="630" y="580" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="#e03a28">8</text>
+  <text x="630" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(238,235,248,0.4)" letter-spacing="1">RANKS</text>
+  
+  <text x="810" y="580" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="#e03a28">FREE</text>
+  <text x="810" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(238,235,248,0.4)" letter-spacing="1">ALWAYS</text>
+  
+  <text x="990" y="580" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="#e03a28">XP</text>
+  <text x="990" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="rgba(238,235,248,0.4)" letter-spacing="1">SYSTEM</text>
+</svg>
