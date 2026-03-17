@@ -4187,6 +4187,61 @@ if(initPath==='before')showPage('before');
 else if(initPath==='guide')showPage('guide');
 else if(initPath==='profile')showPage('profile');
 else if(initPath==='settings')showPage('settings');
+
+
+// ═══════════════════════════════════════════════════════════
+// HISTORY / BACK BUTTON SUPPORT
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // Wrap navigation functions to update browser history
+  const _origOpenUniverse = openUniverse;
+  const _origShowPage = showPage;
+  const _origGoHome = goHome;
+
+  window.openUniverse = function(id, skipPush){
+    const franchise = U.find(f => f.id === id) || BEFORE_RELEASE.find(f => f.id === id);
+    const slug = franchise ? franchise.slug : id;
+    if(!skipPush) history.pushState({page:'universe',id}, '', '/' + slug);
+    _origOpenUniverse(id);
+  };
+
+  window.showPage = function(pg, skipPush){
+    const urls = {home:'/', before:'/before-release', guide:'/guide', profile:'/profile', settings:'/settings'};
+    if(!skipPush && urls[pg]) history.pushState({page:pg}, '', urls[pg]);
+    _origShowPage(pg);
+  };
+
+  window.goHome = function(skipPush){
+    if(!skipPush) history.pushState({page:'home'}, '', '/');
+    _origGoHome();
+  };
+
+  // Handle back/forward button
+  window.addEventListener('popstate', function(e){
+    const state = e.state;
+    if(!state) { _origGoHome(); return; }
+    if(state.page === 'universe') _origOpenUniverse(state.id);
+    else if(state.page === 'home') _origGoHome();
+    else _origShowPage(state.page);
+  });
+
+  // Handle initial page load from URL (direct links)
+  const path = window.location.pathname.replace(/^\//, '');
+  if(path && path !== '') {
+    if(path === 'before-release') { _origShowPage('before'); }
+    else if(path === 'guide') { _origShowPage('guide'); }
+    else if(path === 'profile') { _origShowPage('profile'); }
+    else if(path === 'settings') { _origShowPage('settings'); }
+    else {
+      // Try to find a franchise by slug
+      const franchise = U.find(f => f.slug === path) || (typeof BEFORE_RELEASE !== 'undefined' && BEFORE_RELEASE.find(f => f.slug === path));
+      if(franchise) _origOpenUniverse(franchise.id);
+    }
+  }
+  // Set initial history state
+  history.replaceState({page:'home'}, '', window.location.pathname || '/');
+})();
+
 </script>
 </body>
 </html>
