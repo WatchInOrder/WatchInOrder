@@ -1539,7 +1539,7 @@ function renderSettings(){
         <button class="settings-btn sb-plain" onclick="openAuth('login')">Change →</button>
       </div>
       <div class="settings-row">
-        <div class="settings-row-info"><div class="settings-row-label">Password</div><div class="settings-row-sub">Last changed: Never</div></div>
+        <div class="settings-row-info"><div class="settings-row-label">Password</div><div class="settings-row-sub" id="pwdDisplaySub">Last changed: Never</div></div>        <div class="settings-inline-edit" id="pwdEditWrap" style="display:none"><input class="settings-input" type="password" id="pwdEditCurrent" placeholder="Current password"><input class="settings-input" type="password" id="pwdEditNew" placeholder="New password (min 8)"><input class="settings-input" type="password" id="pwdEditConfirm" placeholder="Confirm new password"><button class="settings-btn sb-save" onclick="savePassword()">Save</button><button class="settings-btn sb-plain" onclick="cancelPwdEdit()">Cancel</button><span class="save-status" id="pwdSaveStatus">✓ Saved</span></div>        <button class="settings-btn sb-plain" id="pwdEditBtn" onclick="document.getElementById('pwdEditWrap').style.display='flex';document.getElementById('pwdEditBtn').style.display='none'">Change →</button>
         <button class="settings-btn sb-plain" onclick="openAuth('login');setTimeout(showForgotPwd,200)">Reset Password →</button>
       </div>
     </div>
@@ -1657,7 +1657,7 @@ function saveUsername(){
   setTimeout(()=>document.getElementById('userSaveStatus').classList.remove('show'),2000);
   refreshNavUI();
 }
-function toggleSetting(key,btnId){
+function startEmailEdit(){  const wrap=document.getElementById('emailEditWrap');
   STATE.settings[key]=!STATE.settings[key];
   document.getElementById(btnId).classList.toggle('on',STATE.settings[key]);
   saveState();
