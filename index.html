@@ -3587,7 +3587,7 @@ function savePosterCache() {
 
 function tmdbKeyConfigured() {
   const key = window._tmdbKeyOverride || TMDB_KEY;
-  return key && key !== 'abdb5f3a4a494419a295de1027d5423b' && key.length > 10;
+  return key && key.trim().length > 10;
 }
 
 function getActiveKey() {
