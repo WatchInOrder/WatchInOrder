@@ -3028,6 +3028,7 @@ function renderGrid(cat='all'){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   const activeChip=document.querySelector(`.chip[onclick*="'${cat}'"]`);
   if(activeChip)activeChip.classList.add('on');
+  setTimeout(applyFranchisePosters, 50);
 }
 
 function filterCat(cat){
@@ -3555,7 +3556,7 @@ function getWatchlistFranchises(){
 // ════════════════════════════════════════════════════════════
 // Instructions: Get a free API key at themoviedb.org/settings/api
 // Then set it here OR in your Vercel environment variables
-const TMDB_KEY = (typeof process !== 'undefined' && process.env?.TMDB_API_KEY) || 'YOUR_TMDB_API_KEY_HERE';
+const TMDB_KEY = (typeof process !== 'undefined' && process.env?.TMDB_API_KEY) || 'abdb5f3a4a494419a295de1027d5423b';
 const TMDB_IMG = 'https://image.tmdb.org/t/p/';
 const POSTER_CACHE_KEY = 'wio_posters_v2';
 const BACKDROP_CACHE_KEY = 'wio_backdrops_v1';
@@ -3586,7 +3587,7 @@ function savePosterCache() {
 
 function tmdbKeyConfigured() {
   const key = window._tmdbKeyOverride || TMDB_KEY;
-  return key && key !== 'YOUR_TMDB_API_KEY_HERE' && key.length > 10;
+  return key && key !== 'abdb5f3a4a494419a295de1027d5423b' && key.length > 10;
 }
 
 function getActiveKey() {
@@ -3594,7 +3595,135 @@ function getActiveKey() {
 }
 
 // Fetch a single film's poster + backdrop from TMDB
-async function fetchPoster(tmdbId) {
+async 
+// ── FRANCHISE POSTER MAP (TMDB collection & movie IDs) ──────────────────
+const FRANCHISE_TMDB = {
+  mcu:          {t:'m', id:1726},
+  conjuring:    {t:'c', id:313086},
+  halloween:    {t:'c', id:91361},
+  saw:          {t:'c', id:656},
+  scream:       {t:'c', id:2602},
+  starwars:     {t:'c', id:10},
+  lotr:         {t:'c', id:119},
+  harrypotter:  {t:'c', id:1241},
+  fastfurious:  {t:'c', id:9485},
+  johnwick:     {t:'c', id:404609},
+  jamesbond:    {t:'c', id:645},
+  rockycreed:   {t:'m', id:1366},
+  terminator:   {t:'c', id:528},
+  monsterverse: {t:'m', id:124905},
+  matrix:       {t:'c', id:2344},
+  spiderverse:  {t:'c', id:573436},
+  shrek:        {t:'c', id:2150},
+  hungeragmes:  {t:'c', id:131635},
+  mission:      {t:'c', id:87359},
+  xmen:         {t:'c', id:748},
+  dceu:         {t:'m', id:297762},
+  batman:       {t:'c', id:120794},
+  jurassicpark: {t:'c', id:328},
+  alien:        {t:'c', id:8091},
+  predator:     {t:'c', id:399},
+  planapes:     {t:'c', id:1709},
+  transformers: {t:'c', id:8650},
+  indiana:      {t:'c', id:84},
+  backtofuture: {t:'c', id:264},
+  diehard:      {t:'c', id:1570},
+  bourne:       {t:'c', id:31562},
+  kingsman:     {t:'c', id:391860},
+  insidious:    {t:'c', id:228446},
+  childplay:    {t:'c', id:10455},
+  cloverfield:  {t:'m', id:7191},
+  evildead:     {t:'c', id:1960},
+  paranormal:   {t:'c', id:41437},
+  nightmare:    {t:'c', id:8581},
+  fridaythe13th:{t:'c', id:9735},
+  minions:      {t:'c', id:86066},
+  kungfu:       {t:'c', id:77816},
+  howtotrainyour:{t:'c',id:89137},
+  toystory:     {t:'c', id:10194},
+  sonic:        {t:'c', id:720879},
+  iceage:       {t:'c', id:8354},
+  pirates:      {t:'c', id:295},
+  ghostbusters: {t:'c', id:2980},
+  meninblack:   {t:'c', id:86055},
+  thepurge:     {t:'c', id:256322},
+  finaldestination:{t:'c',id:8864},
+  residentevil: {t:'c', id:133352},
+  avatar:       {t:'c', id:87096},
+  dune:         {t:'c', id:726871},
+  bladerunner:  {t:'c', id:422837},
+  expendables:  {t:'c', id:126125},
+  badboys:      {t:'c', id:14890},
+  rushhour:     {t:'c', id:90863},
+  lethalweapon: {t:'c', id:945},
+  hotelT:       {t:'c', id:185103},
+  beetlejuice:  {t:'c', id:945475},
+  twilight:     {t:'c', id:33514},
+  knivestout:   {t:'c', id:722971},
+  karatekid:    {t:'c', id:8580},
+  hangover:     {t:'c', id:86119},
+  austinpowers: {t:'c', id:1006},
+  mammamia:     {t:'c', id:458558},
+  traintobusan: {t:'c', id:619537},
+  baahubali:    {t:'c', id:350309},
+  ghibli:       {t:'m', id:129},
+  rrr:          {t:'m', id:579974},
+  ipman:        {t:'c', id:70068},
+  stepup:       {t:'c', id:86092},
+  beverlyHills: {t:'c', id:85861},
+  jumanji:      {t:'c', id:495527},
+  oceans:       {t:'m', id:161},
+  pitchperfect: {t:'c', id:306031},
+  nightmuseum:  {t:'c', id:85943},
+  olympusfallen:{t:'c', id:386534},
+  equalizer:    {t:'c', id:523855},
+  paddington:   {t:'c', id:488924},
+  coraline:     {t:'m', id:14836},
+  wanderingearth:{t:'c',id:1073029},
+  nezha:        {t:'c', id:1449595},
+  nobodymovie:  {t:'c', id:1129084},
+  extraction:   {t:'c', id:735127}
+};
+
+// Pre-load poster for a franchise card using TMDB collection or movie endpoint
+async function loadFranchisePoster(franchiseId, imgEl, bgEl) {
+  const entry = FRANCHISE_TMDB[franchiseId];
+  if (!entry || !tmdbKeyConfigured()) return;
+  const apiKey = TMDB_KEY;
+  const endpoint = entry.t === 'c'
+    ? `https://api.themoviedb.org/3/collection/${entry.id}?api_key=${apiKey}`
+    : `https://api.themoviedb.org/3/movie/${entry.id}?api_key=${apiKey}`;
+  try {
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    const path = data.poster_path;
+    if (!path) return;
+    const url = `https://image.tmdb.org/t/p/w342${path}`;
+    if (imgEl) { imgEl.src = url; imgEl.style.opacity = '1'; }
+    if (bgEl) { bgEl.style.backgroundImage = `url(${url})`; bgEl.style.backgroundSize = 'cover'; }
+  } catch(e) {}
+}
+
+// Run poster loading on all visible franchise cards
+function applyFranchisePosters() {
+  document.querySelectorAll('.ucard[onclick]').forEach(card => {
+    const match = card.getAttribute('onclick').match(/openUniverse\('([^']+)'\)/);
+    if (!match) return;
+    const fid = match[1];
+    if (!FRANCHISE_TMDB[fid]) return;
+    const posterBg = card.querySelector('.ucard-poster-bg');
+    let img = card.querySelector('.ucard-poster img');
+    if (!img) {
+      img = document.createElement('img');
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transition:opacity .3s';
+      card.querySelector('.ucard-poster').appendChild(img);
+    }
+    if (img.src && img.src.includes('tmdb')) return; // already loaded
+    loadFranchisePoster(fid, img, null);
+  });
+}
+
+function fetchPoster(tmdbId) {
   if (!tmdbId || tmdbId === 0 || tmdbId === '0') return null;
   if (POSTERS[tmdbId] !== undefined) return POSTERS[tmdbId]; // cached (even if '')
   if (!tmdbKeyConfigured()) return null;
