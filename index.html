@@ -3723,7 +3723,7 @@ function applyFranchisePosters() {
   });
 }
 
-function fetchPoster(tmdbId) {
+async function fetchPoster(tmdbId) {
   if (!tmdbId || tmdbId === 0 || tmdbId === '0') return null;
   if (POSTERS[tmdbId] !== undefined) return POSTERS[tmdbId]; // cached (even if '')
   if (!tmdbKeyConfigured()) return null;
