@@ -687,7 +687,6 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       <span id="navRankName" style="font-size:11px;color:var(--gold2)">First-Timer</span>
     </div>
     <div class="nav-avatar" id="navAvatar" onclick="showPage('profile')" style="display:none">👤</div>
-    <button class="npill-gold" id="navProBtn" onclick="openPro()" style="display:none">⭐ Go Pro</button>
     <button class="npill" id="navLoginBtn" onclick="openAuth('login')">Sign In</button>
     <button class="hamburger" onclick="openSearch()">☰</button>
   </div>
@@ -798,37 +797,6 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 
 <!-- ═══ PRO MODAL (hidden for launch) ═══ -->
 <div style="display:none">
-<div class="modal-wrap" id="proModal">
-  <div class="modal pro-modal">
-    <button class="modal-close" onclick="closePro()">✕</button>
-    <div class="pro-header">
-      <div class="pro-ico">⭐</div>
-      <div class="pro-title">WATCHINORDER PRO</div>
-      <div class="pro-sub">The ultimate movie marathon companion</div>
-    </div>
-    <div class="pro-social">Joined by <strong>4,800+</strong> movie fans this month</div>
-    <div class="feat-grid">
-      <div class="feat"><span class="feat-chk">✓</span><span>Sync progress across all devices</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>Completely ad-free browsing</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>Spoiler-safe viewing mode</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>12 exclusive achievement badges</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>Shareable profile stats card</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>Speed-run XP bonuses</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>Custom multi-franchise lists</span></div>
-      <div class="feat"><span class="feat-chk">✓</span><span>New release notifications</span></div>
-    </div>
-    <div class="price-row">
-      <button class="price-btn" onclick="handleSubscribe('monthly')">$3.99<br><span style="font-size:11px;font-weight:400;opacity:.7">/month</span></button>
-      <button class="price-btn hl" onclick="handleSubscribe('annual')">
-        <span class="price-save">SAVE 37%</span>
-        $29.99<br><span style="font-size:11px;font-weight:400;opacity:.7">/year</span>
-      </button>
-    </div>
-    <div class="pro-trial">7-day free trial · Cancel anytime · Instant access</div>
-    <div class="pro-trust">🔒 Stripe · SSL encrypted · Your data stays private</div>
-  </div>
-</div>
-</div><!-- end pro modal hidden -->
 
 <!-- ═══ HOME PAGE ═══ -->
 <div class="page active" id="page-home">
@@ -836,7 +804,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
     <div class="hero-bg"></div>
     <div class="hero-grid"></div>
     <div class="hero-c">
-      <div class="hero-badge">★ 85+ Franchises · 1000+ Films · Always Free</div>
+      <div class="hero-badge">★ 85+ Franchises · 543+ Films · Always Free</div>
       <h1 class="hero-title">WATCH<span class="r">IN</span>ORDER</h1>
       <p class="hero-sub">The right watch order for every movie universe, franchise & saga — with must-know tips, streaming links, and cinematic ranks.</p>
       <div class="search-box">
@@ -856,9 +824,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
         <div class="chip" onclick="showPage('guide')">🆕 Beginner Guide</div>
       </div>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-n">40+</div><div class="hstat-l">Franchises</div></div>
-        <div class="hstat"><div class="hstat-n">600+</div><div class="hstat-l">Films</div></div>
-        <div class="hstat"><div class="hstat-n">XP</div><div class="hstat-l">System</div></div>
+        <div class="hstat"><div class="hstat-n">85+</div><div class="hstat-l">Franchises</div></div>
+        <div class="hstat"><div class="hstat-n">543+</div><div class="hstat-l">Films</div></div>
         <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Always</div></div>
       </div>
       <div class="hero-xp-bar" id="heroXpBar">
@@ -950,7 +917,6 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       <a onclick="showPage('guide')">Beginner Guide</a>
       <a onclick="showPage('profile')">My Profile</a>
       <a onclick="showPage('settings')">Settings</a>
-      <a onclick="openPro()">⭐ Go Pro</a>
       <a>Privacy Policy</a>
       <a>Affiliate Disclosure</a>
     </div>
@@ -1008,19 +974,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       <!-- UPCOMING -->
       <div class="sb-card"><div class="sb-title">🗓 Coming Up</div><div id="upcomingEl"></div></div>
       <!-- PREM CARD hidden for launch -->
-      <div style="display:none">
-      <div class="prem-card" id="premSideCard">
-        <div class="prem-badge">PRO</div>
-        <div class="prem-title">GO PRO</div>
-        <ul class="prem-feats">
-          <li>12 exclusive XP badges</li><li>Shareable stats card</li><li>Ad-free browsing</li>
-          <li>Sync across devices</li><li>Spoiler-safe mode</li><li>Speed-run bonuses</li>
-        </ul>
-        <div><span class="prem-amt">$3.99</span><span class="prem-per">/month</span></div>
-        <button class="prem-btn" onclick="openPro()">Start Free Trial →</button>
-        <div class="prem-trial">7-day free trial · Cancel anytime</div>
-      </div>
-      </div><!-- end prem card hidden -->
+      
       <div class="sb-ad"></div>
     </div>
   </div>
@@ -2507,7 +2461,7 @@ const U=[
         ]
       }
     }
-  },,
+  },
 
   // ─── NEW FRANCHISES ──────────────────────────────────────────────────────
 
@@ -2560,10 +2514,6 @@ const U=[
   {id:'sonic',slug:'sonic-the-hedgehog-watch-order',name:'Sonic the Hedgehog',short:'Sonic',cat:'animated',tag:'Animated / Action',tagClass:'t-animated',emoji:'🦔',bg:'linear-gradient(135deg,#000a1a,#001a00,#1a0000)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'All films',url:'https://www.peacocktv.com'}],desc:'Three live-action/CGI films following Sonic, Tails, Knuckles, and Dr. Eggman (Jim Carrey). The most successful video game film franchise in history.',stats:{entries:3,years:'2020–2024',complexity:1,type:'Movies',runtime:360},xpBonus:180,mustKnow:['Sonic the Hedgehog (2020) is genuinely entertaining — the character design controversy (the original leaked design caused a massive backlash, Paramount reanimated) is now cinema legend.','Jim Carrey\'s Dr. Robotnik is a highlight of all three films — he clearly had enormous fun.','Knuckles arrives in film 2 and gets his own spin-off TV series on Paramount+.','All three films are one continuous story — watch in order.'],timelineWarn:null,faqs:[{q:'Can my kids watch these?',a:'Perfect family films. PG-rated, genuinely funny, action-packed. Age 5+ is appropriate. Jim Carrey\'s physical comedy is reminiscent of his 1990s peak.'},{q:'Is the original design controversy worth knowing?',a:'Yes — in 2019, the original Sonic design for the film was revealed and universally criticised for looking uncanny and disturbing. Paramount pulled the film and spent months redesigning the character. The improved design is genuinely great. Look up both online for context.'}],orders:{release:{label:'All 3 Films',note:'<strong>Watch in order.</strong> Continuous story across all three.',items:[film('Sonic the Hedgehog',2020,'🦔',['essential'],'Sonic comes to Earth and makes an unlikely friend in a small-town cop.','Jim Carrey is magnificent. Far better than expected.',99,63,454626,['peacock','rent_amazon']),film('Sonic the Hedgehog 2',2022,'🦔',['essential'],'Knuckles and Tails arrive. The Master Emerald.','' ,122,68,675353,['peacock','rent_amazon']),film('Sonic the Hedgehog 3',2024,'🦔',['essential'],'Shadow the Hedgehog. Jim Carrey returns as Eggman.','' ,109,0,939243,['peacock','rent_amazon'])]}}},
 
   {id:'iceage',slug:'ice-age-watch-order',name:'Ice Age Franchise',short:'Ice Age',cat:'animated',tag:'Animated',tagClass:'t-animated',emoji:'❄️',bg:'linear-gradient(135deg,#001a1a,#0a0a1a,#001a00)',streams:['disney','rent_amazon'],wtw:[{p:'disney',label:'Disney+',dot:'#0063e5',avail:'All Ice Age films',url:'https://www.disneyplus.com/?cid=WATCHINORDER'}],desc:'Blue Sky Studios\' prehistoric franchise — five films and a Disney+ special following Manny the mammoth, Sid the sloth, and Diego the sabre-tooth tiger across multiple ice ages.',stats:{entries:6,years:'2002–2022',complexity:1,type:'Animated Movies',runtime:540},xpBonus:180,mustKnow:['Ice Age (2002) is a warm, funny film about unlikely friendship — still holds up entirely.','Ice Age: Dawn of the Dinosaurs (Part 3) adds Scrat\'s acorn subplot prominently — the most consistently entertaining running gag in animation.','The Scrat acorn chase scenes are the most beloved thing in the franchise — the short films alone have hundreds of millions of views.','Ice Age Adventures of Buck Wild (2022, Disney+) is a direct-to-streaming spinoff following fan favourite Buck.'],timelineWarn:null,faqs:[{q:'How many should I actually watch?',a:'Ice Age (1), The Meltdown (2), and Dawn of the Dinosaurs (3) are the essential run — after that the quality drops significantly. Collision Course (5) is widely considered the franchise nadir.'},{q:'Who is Scrat?',a:'The sabre-toothed squirrel chasing his acorn is the franchise\'s most iconic character despite rarely interacting with the main plot. His acorn short films (independent of the main features) are worth watching separately on YouTube.'}],orders:{release:{label:'All 5 Films',note:'<strong>Films 1-3 are the essential run.</strong> Quality declines after that.',items:[film('Ice Age',2002,'❄️',['essential'],'A mammoth, a sloth, and a sabre-tooth tiger return a human baby to his tribe.','Genuinely warm and funny. The opening Scrat sequence still lands.',81,77,425,['disney','rent_amazon']),film('Ice Age: The Meltdown',2006,'❄️',['optional'],'The ice valley is flooding.','' ,91,56,945526,['disney','rent_amazon']),film('Ice Age: Dawn of the Dinosaurs',2009,'❄️',['optional'],'Dinosaurs alive underground. Buck is introduced.','' ,94,45,38739,['disney','rent_amazon']),film('Ice Age: Continental Drift',2012,'❄️',['optional'],'Pirates. Seafaring.','' ,88,37,83542,['disney','rent_amazon']),film('Ice Age: Collision Course',2016,'❄️',['optional'],'Asteroid. Aliens. The weakest entry.','' ,94,15,246655,['disney','rent_amazon'])]}}},
-
-
-
-,
 // ─── BATCH 1: ACTION / ADVENTURE ────────────────────────────
   {id:'pirates',slug:'pirates-of-the-caribbean-watch-order',name:'Pirates of the Caribbean',short:'Pirates of the Caribbean',cat:'action',tag:'Action Adventure',tagClass:'t-action',emoji:'🏴‍☠️',bg:'linear-gradient(135deg,#001a1a,#0a0800,#001000)',streams:['disney','rent_amazon'],wtw:[{p:'disney',label:'Disney+',dot:'#0063e5',avail:'All 5 films',url:'https://www.disneyplus.com/?cid=WATCHINORDER'},{p:'prime',label:'Amazon Video',dot:'#00a8e0',avail:'Rent from $3.99',url:'https://www.amazon.com/gp/video?tag=watchinorder-20'}],
   desc:'Five swashbuckling adventures following Captain Jack Sparrow across the high seas. The original trilogy (films 1–3) is one complete story; films 4 and 5 are separate arcs.',
@@ -2720,7 +2670,7 @@ const U=[
     film('Lethal Weapon',1987,'🔫',['essential'],'Suicidal cop Riggs partners with family man Murtaugh. South African drug lords.','Richard Donner. A genuine character study as much as an action film.',110,79,941,['hbo','rent_amazon']),
     film('Lethal Weapon 2',1989,'🔫',['essential'],'South African diplomats with immunity. Joe Pesci as Leo Getz. The best sequel.','' ,114,79,942,['hbo','rent_amazon']),
     film('Lethal Weapon 3',1992,'🔫',['optional'],'Rene Russo joins the cast. The partnership deepens.','' ,115,61,943,['hbo','rent_amazon']),
-    film('Lethal Weapon 4',1998,'🔫',['optional'],'Jet Li as the villain. Chinese triads. The franchise\'s action peak.','' ,127,55,944,['hbo','rent_amazon'])]}}},,
+    film('Lethal Weapon 4',1998,'🔫',['optional'],'Jet Li as the villain. Chinese triads. The franchise\'s action peak.','' ,127,55,944,['hbo','rent_amazon'])]}}},
 {id:'hotelT',slug:'hotel-transylvania-watch-order',name:'Hotel Transylvania',short:'Hotel Transylvania',cat:'animated',tag:'Animated Comedy',tagClass:'t-animated',emoji:'🧛',bg:'linear-gradient(135deg,#0a000a,#1a0008,#000a0a)',streams:['netflix','rent_amazon'],wtw:[{p:'netflix',label:'Netflix',dot:'#e50914',avail:'All 4 films',url:'https://www.netflix.com'}],
   desc:'Adam Sandler voices Dracula in four animated comedies about a monster hotel and the Dracula family\'s relationship with the human world. Lighthearted, funny, and great for families.',
   stats:{entries:4,years:'2012–2022',complexity:1,type:'Animated Movies',runtime:370},xpBonus:180,
@@ -2886,7 +2836,7 @@ const U=[
     film('Step Up 2: The Streets',2008,'💃',['optional'],'Andie returns. The Maryland School of the Arts. An underground dance battle.','' ,98,27,9693,['netflix','rent_amazon']),
     film('Step Up 3D',2010,'💃',['optional'],'New York. House of Pirates. The World Jam competition. Best dance sequences of the series.','' ,107,43,43580,['netflix','rent_amazon']),
     film('Step Up Revolution',2012,'💃',['optional'],'Miami. Flash mob performance art as protest. The most visually inventive entry.','' ,99,34,91185,['netflix','rent_amazon']),
-    film('Step Up All In',2014,'💃',['optional'],'Las Vegas. Characters from all previous films converge for a competition.','' ,112,40,227549,['netflix','rent_amazon'])]}}},,
+    film('Step Up All In',2014,'💃',['optional'],'Las Vegas. Characters from all previous films converge for a competition.','' ,112,40,227549,['netflix','rent_amazon'])]}}},
 {id:'beverlyHills',slug:'beverly-hills-cop-watch-order',name:'Beverly Hills Cop',short:'Beverly Hills Cop',cat:'action',tag:'Action Comedy',tagClass:'t-action',emoji:'🕶️',bg:'linear-gradient(135deg,#1a0800,#001a0a,#0a0000)',streams:['netflix','paramount','rent_amazon'],wtw:[{p:'netflix',label:'Netflix',dot:'#e50914',avail:'Axel F (2024)',url:'https://www.netflix.com'},{p:'paramount',label:'Paramount+',dot:'#0066cc',avail:'Original films',url:'https://www.paramountplus.com'}],
   desc:'Eddie Murphy as Axel Foley — Detroit detective operating in Beverly Hills — across three classic action comedies and a 2024 Netflix revival. The original is a comedy masterpiece.',
   stats:{entries:4,years:'1984–2024',complexity:1,type:'Movies',runtime:430},xpBonus:220,
@@ -3269,7 +3219,7 @@ function sR(u){return `<div class="sresult" onclick="closeSearch();openUniverse(
 // ════════════════════════════════════════════════════════════
 // MODALS
 // ════════════════════════════════════════════════════════════
-function openPro(){document.getElementById('proModal').classList.add('open');}
+function openPro(){/* Pro features coming soon */}
 function closePro(){document.getElementById('proModal').classList.remove('open');}
 
 // ════════════════════════════════════════════════════════════
@@ -3525,12 +3475,7 @@ function renderBeforeRelease(){
         <div class="sb-title">🗓 All Upcoming</div>
         ${BEFORE_RELEASE.map(r=>`<div class="upcoming-item"><div class="up-ico">${r.emoji}</div><div><div class="up-name">${r.film}</div><div class="up-date">${r.date}</div><div class="up-type">${r.type}</div></div></div>`).join('')}
       </div>
-      <div class="prem-card" style="display:none">
-        <div class="prem-badge">PRO</div>
-        <div class="prem-title">GET RELEASE ALERTS</div>
-        <ul class="prem-feats"><li>Email when a new release page drops</li><li>Watch order ready 4 weeks early</li><li>Personalised to your progress</li></ul>
-        <button class="prem-btn" onclick="openPro()">Enable Alerts →</button>
-      </div>
+      
     </div>
   </div>`;
   el.innerHTML=html;
@@ -4199,7 +4144,7 @@ else if(initPath==='settings')showPage('settings');
   const _origGoHome = goHome;
 
   window.openUniverse = function(id, skipPush){
-    const franchise = U.find(f => f.id === id) || BEFORE_RELEASE.find(f => f.id === id);
+    const franchise = U.find(f => f && f.id === id) || BEFORE_RELEASE.find(f => f && f.id === id);
     const slug = franchise ? franchise.slug : id;
     if(!skipPush) history.pushState({page:'universe',id}, '', '/' + slug);
     _origOpenUniverse(id);
@@ -4234,7 +4179,7 @@ else if(initPath==='settings')showPage('settings');
     else if(path === 'settings') { _origShowPage('settings'); }
     else {
       // Try to find a franchise by slug
-      const franchise = U.find(f => f.slug === path) || (typeof BEFORE_RELEASE !== 'undefined' && BEFORE_RELEASE.find(f => f.slug === path));
+      const franchise = U.find(f => f && f.slug === path) || (typeof BEFORE_RELEASE !== 'undefined' && BEFORE_RELEASE.find(f => f.slug === path));
       if(franchise) _origOpenUniverse(franchise.id);
     }
   }
