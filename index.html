@@ -1279,7 +1279,6 @@ function logoutUser(){
 function refreshNavUI(){
   const loggedIn=!!STATE.user;
   document.getElementById('navLoginBtn').style.display=loggedIn?'none':'';
-  document.getElementById('navProBtn').style.display=loggedIn&&STATE.user?.isPro?'none':'';
   document.getElementById('navRankBadge').style.display=loggedIn?'flex':'none';
   document.getElementById('navAvatar').style.display=loggedIn?'flex':'none';
   if(loggedIn){
