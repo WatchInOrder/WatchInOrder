@@ -4087,10 +4087,8 @@ function posterImg(tmdbId, emoji, alt, size = 'w185') {
   const path = tmdbId ? (POSTERS_STATIC[tmdbId] || POSTERS[tmdbId]) : null;
   if (path) {
     return `<img src="${posterUrl(path, size)}" alt="${alt}" loading="lazy"
-      class="img-loading"
-      onload="this.classList.remove('img-loading');this.classList.add('img-loaded')"
-      onerror="this.style.display='none'">
-      <div class="wcard-poster-fb">${emoji}</div>`;
+      class="img-loaded"
+      onerror="this.style.display='none'">`;
   }
   // No poster yet — show emoji, queue a fetch
   if (tmdbId && tmdbId !== 0 && tmdbKeyConfigured() && POSTERS[tmdbId] === undefined) {
@@ -4101,10 +4099,8 @@ function posterImg(tmdbId, emoji, alt, size = 'w185') {
         const els = document.querySelectorAll(`[data-tmdb="${tmdbId}"]`);
         els.forEach(el => {
           el.innerHTML = `<img src="${posterUrl(path, size)}" alt="${alt}" loading="lazy"
-            class="img-loading"
-            onload="this.classList.remove('img-loading');this.classList.add('img-loaded')"
-            onerror="this.style.display='none'">
-            <div class="wcard-poster-fb">${emoji}</div>`;
+            class="img-loaded"
+            onerror="this.style.display='none'">`;
         });
       }
     });
