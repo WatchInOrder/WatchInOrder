@@ -1,4 +1,4 @@
-  !DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -633,7 +633,9 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 .btr-grid{max-width:1280px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start}
 .btr-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden;margin-bottom:1rem}
 .btr-card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;gap:.75rem}
-.btr-card-ico{font-size:24px;flex-shrink:0}
+.btr-card-ico{font-size:24px;flex-shrink:0;width:54px;height:78px;border-radius:8px;overflow:hidden;position:relative;background:var(--bg4);display:flex;align-items:center;justify-content:center}
+.btr-card-ico img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:8px}
+.btr-card-ico-fb{font-size:24px;position:relative;z-index:0}
 .btr-card-title{font-family:var(--font-d);font-size:18px;letter-spacing:1px}
 .btr-card-date{font-size:11px;color:var(--red2);font-weight:600;margin-left:auto;flex-shrink:0}
 .btr-card-body{padding:1rem 1.25rem;font-size:13px;color:var(--muted);line-height:1.65}
@@ -1834,12 +1836,12 @@ const SP={
 
 // Updated upcoming releases
 const UPCOMING=[
-  {ico:'1003596',name:'Spider-Man: Brand New Day',date:'Jul 2026',type:'MCU Film'},
-  {ico:'💎',name:'Avengers: Doomsday',date:'Dec 2026',type:'MCU Film'},
-  {ico:'⭐',name:'Star Wars: Mando & Grogu',date:'May 2026',type:'Star Wars Film'},
-  {ico:'😱',name:'Scream 7',date:'2026',type:'Horror Sequel'},
+  {ico:'🕷️',name:'Spider-Man: Brand New Day',date:'Jul 2026',type:'MCU Film',tmdb:1003596},
+  {ico:'💎',name:'Avengers: Doomsday',date:'Dec 2026',type:'MCU Film',tmdb:986056},
+  {ico:'⭐',name:'Star Wars: Mando & Grogu',date:'May 2026',type:'Star Wars Film',tmdb:1230230},
+  {ico:'😱',name:'Scream 7',date:'2026',type:'Horror Sequel',tmdb:1101738},
   {ico:'🏹',name:'Sunrise on the Reaping',date:'Nov 2026',type:'Hunger Games Film'},
-  {ico:'🐉',name:'HTTYD Live Action',date:'2025',type:'Remake'},
+  {ico:'🐉',name:'HTTYD Live Action',date:'2025',type:'Remake',tmdb:933131},
   {ico:'🧅',name:'Shrek 5',date:'Jun 2027',type:'Animated Sequel'},
   {ico:'🕷️',name:'Spider-Verse: Beyond',date:'Jun 2027',type:'Animated Film'},
 ];
@@ -3472,7 +3474,7 @@ function renderRecommender(containerId){
 // ════════════════════════════════════════════════════════════
 const BEFORE_RELEASE=[
   {
-    film:'Avengers: Doomsday',date:'December 2026',type:'MCU Film',emoji:'💎',
+    film:'Avengers: Doomsday',date:'December 2026',type:'MCU Film',emoji:'💎',tmdb:986056,
     why:'Avengers: Doomsday brings together every character from the Multiverse Saga under one roof. To understand what\'s at stake, you need the full context of everything since Endgame.',
     essential:[
       {id:'mcu',order:'release',title:'MCU — Full Release Order',why:'The complete Multiverse Saga context'},
@@ -3483,7 +3485,7 @@ const BEFORE_RELEASE=[
     ]
   },
   {
-    film:'Spider-Man: Brand New Day',date:'July 2026',type:'MCU Film',emoji:'🕷️',
+    film:'Spider-Man: Brand New Day',date:'July 2026',type:'MCU Film',emoji:'🕷️',tmdb:1003596,
     why:'A new chapter for Peter Parker. Requires understanding of No Way Home\'s universe reset.',
     essential:[
       {id:'mcu',order:'firsttime',title:'MCU First-Timer',why:'Essential Spider-Man context'},
@@ -3493,7 +3495,7 @@ const BEFORE_RELEASE=[
     ]
   },
   {
-    film:'Star Wars: Mando & Grogu',date:'May 2026',type:'Star Wars Film',emoji:'⭐',
+    film:'Star Wars: Mando & Grogu',date:'May 2026',type:'Star Wars Film',emoji:'⭐',tmdb:1230230,
     why:'Din Djarin and Grogu\'s story continues on the big screen after three TV seasons. Watch The Mandalorian first.',
     essential:[
       {id:'starwars',order:'release',title:'Star Wars — Release Order',why:'Full Mandalorian context within the saga'},
@@ -3501,7 +3503,7 @@ const BEFORE_RELEASE=[
     optional:[]
   },
   {
-    film:'Scream 7',date:'2026',type:'Horror Sequel',emoji:'😱',
+    film:'Scream 7',date:'2026',type:'Horror Sequel',emoji:'😱',tmdb:1101738,
     why:'Sidney Prescott returns. The entire Scream franchise is one continuous timeline — watch them all.',
     essential:[
       {id:'scream',order:'release',title:'Scream Franchise (All 6)',why:'One connected timeline — no shortcuts'},
@@ -3509,7 +3511,7 @@ const BEFORE_RELEASE=[
     optional:[]
   },
   {
-    film:'Sunrise on the Reaping',date:'November 2026',type:'Hunger Games Film',emoji:'🏹',
+    film:'Sunrise on the Reaping',date:'November 2026',type:'Hunger Games Film',emoji:'🏹',tmdb:1008042,
     why:'Young Haymitch\'s story set during the 50th Hunger Games — watch the original saga first.',
     essential:[
       {id:'hungeragmes',order:'firsttime',title:'The Hunger Games Saga',why:'Essential context for Haymitch\'s arc'},
@@ -3517,7 +3519,7 @@ const BEFORE_RELEASE=[
     optional:[]
   },
   {
-    film:'How to Train Your Dragon (Live Action)',date:'2025',type:'Animated Remake',emoji:'🐉',
+    film:'How to Train Your Dragon (Live Action)',date:'2025',type:'Animated Remake',emoji:'🐉',tmdb:933131,
     why:'Netflix\'s live-action remake of the animated classic. Watch the animated trilogy first — it\'s one of the finest trilogies in cinema history.',
     essential:[
       {id:'howtotrainyour',order:'release',title:'HTTYD Animated Trilogy',why:'The story you\'re seeing remade'},
@@ -3535,7 +3537,7 @@ function renderBeforeRelease(){
       ${BEFORE_RELEASE.map(r=>`
         <div class="btr-card">
           <div class="btr-card-header">
-            <div class="btr-card-ico">${r.emoji}</div>
+            <div class="btr-card-ico" data-btrtmdb="${r.tmdb||0}">${(()=>{const p=r.tmdb?POSTERS[r.tmdb]:null;if(p)return `<img src="${posterUrl(p,'w185')}" alt="${r.film}" loading="lazy"><div class="btr-card-ico-fb" style="display:none">${r.emoji}</div>`;if(r.tmdb&&tmdbKeyConfigured()&&POSTERS[r.tmdb]===undefined)fetchPoster(r.tmdb).then(path=>{if(path){savePosterCache();document.querySelectorAll(`.btr-card-ico[data-btrtmdb="${r.tmdb}"]`).forEach(el=>{el.innerHTML=`<img src="${posterUrl(path,'w185')}" loading="lazy">`;});}}); return `<div class="btr-card-ico-fb">${r.emoji}</div>`;})()}</div>
             <div>
               <div class="btr-card-title">${r.film}</div>
               <div style="font-size:11px;color:var(--dim)">${r.type}</div>
@@ -3554,7 +3556,7 @@ function renderBeforeRelease(){
     <div>
       <div class="sb-card">
         <div class="sb-title">🗓 All Upcoming</div>
-        ${BEFORE_RELEASE.map(r=>`<div class="upcoming-item"><div class="up-ico">${r.emoji}</div><div><div class="up-name">${r.film}</div><div class="up-date">${r.date}</div><div class="up-type">${r.type}</div></div></div>`).join('')}
+        ${BEFORE_RELEASE.map(r=>`<div class="upcoming-item"><div class="up-ico" style="width:36px;height:52px;border-radius:5px;overflow:hidden;position:relative;background:var(--bg4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">${(()=>{const p=r.tmdb?POSTERS[r.tmdb]:null;return p?`<img src="${posterUrl(p,'w92')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:5px">`:r.emoji;})()}</div><div><div class="up-name">${r.film}</div><div class="up-date">${r.date}</div><div class="up-type">${r.type}</div></div></div>`).join('')}
       </div>
       
     </div>
@@ -4603,7 +4605,7 @@ else if(initPath==='settings')showPage('settings');
     }
   }
   // Set initial history state
-  history.replaceState({page:'home'}, '', window.location.pathname || '/');
+  history.replaceState({page:'home'}, '', window.location.href.replace(window.location.origin,'') || '/');
 })();
 
 </script>
