@@ -53,6 +53,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .logo-in{color:var(--red)}
 .nav-l{display:flex;align-items:center;gap:1.25rem}
 .nav-link{color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:color var(--trans);letter-spacing:.3px}
+.nav-link.active{color:var(--text);border-bottom:2px solid var(--red)}
 .nav-link:hover{color:var(--text)}
 .nav-r{display:flex;align-items:center;gap:.5rem}
 .npill{background:var(--bg3);border:1px solid var(--border2);color:var(--muted);padding:5px 12px;border-radius:50px;font-size:12px;font-weight:500;cursor:pointer;transition:all var(--trans);white-space:nowrap}
@@ -64,7 +65,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .nav-rank-badge{display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border2);border-radius:50px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer;transition:all var(--trans)}
 .nav-rank-badge:hover{border-color:var(--border3)}
 .rank-ico-sm{font-size:13px}
-.hamburger{display:none;background:none;border:none;color:var(--muted);font-size:20px;padding:4px}
+.hamburger{display:none;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:4px}@media(max-width:640px){.hamburger{display:flex}.nav-l .nav-link{display:none}}
 
 /* ── TOAST / XP NOTIFICATION ── */
 .toast-stack{position:fixed;bottom:1.5rem;right:1.5rem;z-index:1000;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
@@ -673,16 +674,22 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 
 
 /* ── IMDb-STYLE FILM SCORE RATING ── */
-.score-wrap{display:flex;align-items:center;gap:3px;margin-top:5px;flex-wrap:wrap}
-.score-btn{width:20px;height:20px;border-radius:4px;border:1px solid var(--border2);background:none;font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:var(--font-b)}
+.score-wrap{display:flex;align-items:center;gap:3px;margin-top:6px;flex-wrap:wrap;padding-bottom:2px}
+.score-btn{width:22px;height:22px;border-radius:4px;border:1px solid var(--border2);background:none;font-size:10px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:var(--font-b)}
 .score-btn:hover{border-color:var(--gold);color:var(--gold2);background:var(--goldbg)}
-.score-btn.active{border-color:transparent;color:#000}
+.score-btn.active.score-lo{background:var(--red3);border-color:var(--red2);color:var(--red2)}
+.score-btn.active.score-mid{background:var(--goldbg);border-color:var(--gold);color:var(--gold2)}
+.score-btn.active.score-hi{background:var(--tealbg);border-color:var(--teal);color:var(--teal)}
+.score-btn.active{border-color:transparent;color:#fff;font-weight:900}
 .score-1.active,.score-2.active,.score-3.active{background:#e03a28}
 .score-4.active,.score-5.active,.score-6.active{background:#fb923c}
 .score-7.active,.score-8.active{background:#c9a030}
 .score-9.active,.score-10.active{background:#22d3b8}
 .score-label{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-left:3px}
-.score-display{font-size:11px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--goldbg);color:var(--gold2);border:1px solid rgba(201,160,48,.3)}
+.score-login-prompt{font-size:11px;color:var(--dim);cursor:pointer;margin-top:4px}
+.score-login-prompt:hover{color:var(--gold2)}
+.score-login-prompt u{text-underline-offset:2px}
+.score-display{font-size:11px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--goldbg);color:var(--gold2);border:1px solid rgba(201,160,48,.3);cursor:help;position:relative}
 .score-display.score-hi{background:var(--tealbg);color:var(--teal);border-color:rgba(34,211,184,.3)}
 .score-display.score-low{background:var(--red3);color:var(--red2);border-color:rgba(224,58,40,.2)}
 
@@ -755,7 +762,10 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
     <div class="logo" onclick="goHome()">WATCH<span class="logo-in">IN</span>ORDER</div>
     <span class="nav-link" onclick="filterCat('superhero')">Superhero</span>
     <span class="nav-link" onclick="filterCat('horror')">Horror</span>
+    <span class="nav-link" onclick="filterCat('scifi')">Sci-Fi</span>
+    <span class="nav-link" onclick="filterCat('action')">Action</span>
     <span class="nav-link" onclick="filterCat('animated')">Animated</span>
+    <span class="nav-link" onclick="filterCat('fantasy')">Fantasy</span>
     <span class="nav-link" onclick="showPage('before')">📅 Before Release</span>
     <span class="nav-link" onclick="showPage('guide')">Beginner Guide</span>
   </div>
@@ -767,7 +777,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
     </div>
     <div class="nav-avatar" id="navAvatar" onclick="showPage('profile')" style="display:none">👤</div>
     <button class="npill" id="navLoginBtn" onclick="openAuth('login')">Sign In</button>
-    <button class="hamburger" onclick="openSearch()">☰</button>
+    <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
   </div>
 </nav>
 
@@ -904,7 +914,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       </div>
       <div class="hero-stats">
         <div class="hstat"><div class="hstat-n">48+</div><div class="hstat-l">Franchises</div></div>
-        <div class="hstat"><div class="hstat-n">400+</div><div class="hstat-l">Films</div></div>
+        <div class="hstat"><div class="hstat-n">450+</div><div class="hstat-l">Films</div></div>
         <div class="hstat"><div class="hstat-n">Free</div><div class="hstat-l">Always</div></div>
       </div>
       <div class="hero-xp-bar" id="heroXpBar">
@@ -953,10 +963,25 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
     </div>
   </div>
 
+  <!-- Continue Watching (shown when logged in with progress) -->
+  <div class="sec" id="continueWatchingSec" style="display:none">
+    <div class="sec-head"><div><span class="sec-title">▶ Continue Watching</span></div></div>
+    <div class="ugrid" id="continueWatchingGrid"></div>
+  </div>
+
   <div class="sec" id="mainSec">
     <div class="sec-head">
       <div><span class="sec-title" id="secTitle">ALL UNIVERSES</span><span class="sec-sub" id="secCount"></span></div>
+      <div style="display:flex;align-items:center;gap:.75rem">
+      <select id="gridSort" onchange="renderGrid(currentFilter)" style="background:var(--bg2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 6px;border-radius:4px;cursor:pointer">
+        <option value="default">Default</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="films">Most Films</option>
+        <option value="progress">My Progress</option>
+      </select>
       <span class="sec-link" onclick="filterCat('all')">View all →</span>
+    </div>
     </div>
     <div class="ugrid" id="ugrid"></div>
   </div>
@@ -992,12 +1017,18 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       <a onclick="filterCat('scifi')">Sci-Fi</a>
       <a onclick="filterCat('action')">Action</a>
       <a onclick="filterCat('animated')">Animated</a>
+      <a onclick="filterCat('fantasy')">Fantasy</a>
       <a onclick="showPage('before')">Before Release</a>
       <a onclick="showPage('guide')">Beginner Guide</a>
       <a onclick="showPage('profile')">My Profile</a>
       <a onclick="showPage('settings')">Settings</a>
-      <a>Privacy Policy</a>
-      <a>Affiliate Disclosure</a>
+      <a onclick="document.getElementById('privacyModal').style.display='block'" style="cursor:pointer">Privacy Policy</a>
+      <a onclick="document.getElementById('affiliateModal').style.display='block'" style="cursor:pointer">Affiliate Disclosure</a>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;margin-bottom:.75rem">
+      <a href="https://x.com/WatchInOrder" target="_blank" rel="noopener" style="color:var(--dim);font-size:13px;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='var(--dim)'">𝕏 Twitter</a>
+      <a href="https://reddit.com/r/watchinorder" target="_blank" rel="noopener" style="color:var(--dim);font-size:13px;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#ff4500'" onmouseout="this.style.color='var(--dim)'">Reddit</a>
+      <a href="https://instagram.com/watchinorder" target="_blank" rel="noopener" style="color:var(--dim);font-size:13px;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='var(--dim)'">Instagram</a>
     </div>
     <div><strong style="color:var(--muted)">WatchInOrder</strong> — The right watch order for every universe.</div>
     <div class="footer-aff">Affiliate Disclosure: Some links are affiliate links. WatchInOrder may earn a small commission when you rent or purchase content through these links at no extra cost to you.</div>
@@ -1035,7 +1066,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       </div>
       <div class="otabs" id="otabsEl"></div>
       <div class="onote" id="onoteEl"></div>
-      <div class="progwrap"><div class="progbar"><div class="progfill" id="pfill" style="width:0%"></div></div><div class="proglbl"><span class="progpct" id="ppct">0</span>% watched</div><button class="prog-reset" onclick="resetProgress()">↺ Reset</button></div>
+      <div class="progwrap"><div class="progbar"><div class="progfill" id="pfill" style="width:0%"></div></div><div class="proglbl"><span class="progpct" id="ppct">0</span>% watched</div><button class="prog-reset" onclick="resetProgress()">↺ Reset</button>${STATE.streak>0?`<span style="font-size:11px;color:var(--gold2);margin-left:.5rem">🔥 ${STATE.streak} day streak</span>`:''}</div>
       <div class="wlist" id="wlistEl"></div>
       <div id="faqEl"></div>
       <div id="recContainer"></div>
@@ -1137,7 +1168,7 @@ const BADGES=[
   {id:'dc_fan',ico:'⚡',name:'DC Fan',desc:'Complete a DC franchise (DCEU or Batman Nolan)',xp:300,pro:false,check:()=>getFranchiseComplete('dceu','release')||getFranchiseComplete('batman','nolan')},
   {id:'pixar_fan',ico:'🎯',name:'Pixar Completionist',desc:'Watch all 13 essential Pixar films',xp:450,pro:false,check:()=>getFranchiseProgress('toystory','essential')>=13},
   {id:'classic_fan',ico:'🎩',name:'Classic Fan',desc:'Complete both Back to the Future and Indiana Jones',xp:350,pro:false,check:()=>getFranchiseComplete('backtofuture','release')&&getFranchiseComplete('indiana','release')},
-  {id:'bourne_bond',ico:'🔫',name:'Spy Master',desc:'Complete Bourne, Bond, and Kingsman',xp:500,pro:true,check:()=>getFranchiseComplete('bourne','release')&&getFranchiseComplete('jamesbond','craig')&&getFranchiseComplete('kingsman','release')},
+  {id:'bourne_bond',ico:'🔫',name:'Spy Master',desc:'Complete Mission: Impossible, Bond, and Kingsman',xp:500,pro:false,check:()=>getFranchiseComplete('mission','release')&&getFranchiseComplete('jamesbond','release')&&getFranchiseComplete('kingsman','release')},
   {id:'animated_fan',ico:'🐼',name:'Animation Devotee',desc:'Complete 5 animated franchises',xp:500,pro:true,check:()=>getCompletedInCat('animated')>=5},
 ];
 
@@ -1410,6 +1441,7 @@ function renderXPSideCard(){
     <div class="xp-stats">
       <div class="xp-stat"><div class="xp-stat-n">${getTotalWatched()}</div><div class="xp-stat-l">Watched</div></div>
       <div class="xp-stat"><div class="xp-stat-n">${getTotalCompletedFranchises()}</div><div class="xp-stat-l">Finished</div></div>
+      <div class="xp-stat"><div class="xp-stat-n">${STATE.streak||0}🔥</div><div class="xp-stat-l">Day Streak</div></div>
     </div>
     <button class="xp-view-profile" onclick="showPage('profile')">View full profile →</button>`;
 }
@@ -1552,16 +1584,25 @@ function renderProfile(){
 
 function shareProfile(){
   const u=STATE.user;
+  if(!u){openAuth('login');return;}
   const r=getRank(STATE.xp);
-  const text=`🎬 ${u.username} on WatchInOrder\n${r.ico} ${r.name} · ${STATE.xp.toLocaleString()} XP\n${getTotalWatched()} films watched · ${getTotalCompletedFranchises()} franchises complete\nwatchinorder.org`;
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>{
-      document.getElementById('shareBtn').textContent='✓ Copied to clipboard!';
-      setTimeout(()=>document.getElementById('shareBtn').textContent='Share my profile →',2000);
-    });
+  const watched=getTotalWatched();
+  const finished=getTotalCompletedFranchises();
+  const streak=STATE.streak||0;
+  const topBadges=BADGES.filter(b=>STATE.badges.includes(b.id)).slice(0,3).map(b=>b.ico).join('');
+  const txt=[
+    '🎬 '+u.username+' on WatchInOrder',
+    r.ico+' '+r.name+' · '+STATE.xp.toLocaleString()+' XP',
+    watched+' films watched · '+finished+' franchises complete'+(streak>0?' · 🔥 '+streak+' day streak':''),
+    topBadges?'Badges: '+topBadges:'',
+    'watchinorder.org'
+  ].filter(Boolean).join('\n');
+  if(navigator.share){
+    navigator.share({title:'My WatchInOrder Profile',text:txt,url:'https://www.watchinorder.org'}).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(()=>showToast('Profile copied! 📋','xp'));
   }
-  showToast('Profile link copied!','xp');
-  if(STATE.user)addXP(75,'Profile shared');
+  addXP(75,'Profile shared');
 }
 window.shareProfile=shareProfile;
 
@@ -1657,6 +1698,10 @@ function renderSettings(){
         <div class="settings-row-info"><div class="settings-row-label">Email Notifications</div><div class="settings-row-sub">Watch order guides before major releases</div></div>
         <div class="toggle-wrap"><button class="toggle ${s.emailNotifs?'on':''}" id="toggleEmail" onclick="toggleSetting('emailNotifs','toggleEmail')"></button></div>
       </div>
+      <div class="settings-row">
+        <div class="settings-row-info"><div class="settings-row-label">Newsletter</div><div class="settings-row-sub">Get curated watch order recommendations by email</div></div>
+        <div class="toggle-wrap"><button class="toggle ${s.newsletter?'on':''}" id="toggleNewsletter" onclick="toggleSetting('newsletter','toggleNewsletter')"></button></div>
+      </div>
     </div>
 
     <!-- Franchise Progress -->
@@ -1736,6 +1781,38 @@ function saveUsername(){
   setTimeout(()=>document.getElementById('userSaveStatus').classList.remove('show'),2000);
   refreshNavUI();
 }
+function toggleSetting(key, btnId) {
+  STATE.settings[key] = !STATE.settings[key];
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.toggle('on', STATE.settings[key]);
+  saveState();
+  // Re-render list if spoilerMode changed (tips show/hide)
+  if (key === 'spoilerMode' && document.getElementById('wlistEl')) renderList();
+  showToast(STATE.settings[key] ? '✓ Enabled' : '✓ Disabled', 'xp');
+}
+
+
+function savePassword() {
+  const cur = document.getElementById('pwdEditCurrent')?.value;
+  const nw = document.getElementById('pwdEditNew')?.value;
+  const cf = document.getElementById('pwdEditConfirm')?.value;
+  if (!cur) { showToast('Enter your current password', 'err'); return; }
+  if (!nw || nw.length < 8) { showToast('New password must be at least 8 characters', 'err'); return; }
+  if (nw !== cf) { showToast('Passwords do not match', 'err'); return; }
+  // Demo: show success (real implementation would call backend)
+  const st = document.getElementById('pwdSaveStatus');
+  if (st) { st.style.display = 'inline'; setTimeout(() => st.style.display = 'none', 2500); }
+  document.getElementById('pwdEditWrap').style.display = 'none';
+  document.getElementById('pwdEditBtn').style.display = '';
+  showToast('Password updated', 'xp');
+}
+
+function cancelPwdEdit() {
+  document.getElementById('pwdEditWrap').style.display = 'none';
+  document.getElementById('pwdEditBtn').style.display = '';
+}
+
+
 function startEmailEdit(){  const wrap=document.getElementById('emailEditWrap');
   STATE.settings[key]=!STATE.settings[key];
   document.getElementById(btnId).classList.toggle('on',STATE.settings[key]);
@@ -1827,9 +1904,9 @@ function handleSubscribe(plan){
 const SP={
   disney:{label:'Disney+',cls:'sbtn-disney',url:'https://www.disneyplus.com/?cid=WATCHINORDER',dot:'#0063e5'},
   prime:{label:'Prime Video',cls:'sbtn-prime',url:'https://www.amazon.com/gp/video?tag=watchinorder-20',dot:'#00a8e0'},
-  netflix:{label:'Netflix',cls:'sbtn-netflix',url:'https://www.netflix.com',dot:'#e50914'},
-  hbo:{label:'Max',cls:'sbtn-hbo',url:'https://www.max.com',dot:'#8b5cf6'},
-  peacock:{label:'Peacock',cls:'sbtn-peacock',url:'https://www.peacocktv.com',dot:'#00688b'},
+  netflix:{label:'Netflix',cls:'sbtn-netflix',url:'https://www.netflix.com?utm_source=watchinorder',dot:'#e50914'},
+  hbo:{label:'Max',cls:'sbtn-hbo',url:'https://www.max.com?utm_source=watchinorder&utm_medium=affiliate',dot:'#8b5cf6'},
+  peacock:{label:'Peacock',cls:'sbtn-peacock',url:'https://www.peacocktv.com?utm_source=watchinorder&utm_medium=affiliate',dot:'#00688b'},
   apple:{label:'Apple TV+',cls:'sbtn-apple',url:'https://tv.apple.com/?af_ref=watchinorder',dot:'#888'},
   rent_amazon:{label:'Rent on Amazon',cls:'sbtn-rent',url:'https://www.amazon.com/gp/video/storefront?tag=watchinorder-20',dot:'#666'},
   rent_apple:{label:'Rent on Apple',cls:'sbtn-rent',url:'https://tv.apple.com/?af_ref=watchinorder',dot:'#666'},
@@ -1854,13 +1931,10 @@ const UPCOMING_FILMS=[
   {name:'Sunrise on the Reaping',date:'November 2026',shortDate:'Nov 2026',type:'Hunger Games Film',emoji:'🏹',tmdb:1008042,
    why:"Young Haymitch's story set during the 50th Hunger Games.",
    essential:[{id:'hungeragmes',order:'firsttime',title:'The Hunger Games Saga',why:"Essential context for Haymitch's arc"}],optional:[]},
-  {name:'How to Train Your Dragon',date:'June 2025',shortDate:'Jun 2025',type:'Live Action Remake',emoji:'🐉',tmdb:933131,
-   why:'Live-action remake of the animated classic. Watch the trilogy first.',
-   essential:[{id:'howtotrainyour',order:'release',title:'HTTYD Animated Trilogy',why:"The story you're seeing remade"}],optional:[]},
-  {name:'Shrek 5',date:'July 2026',shortDate:'Jul 2026',type:'Animated Sequel',emoji:'🧅',tmdb:0,
+  {name:'Shrek 5',date:'July 2026',shortDate:'Jul 2026',type:'Animated Sequel',emoji:'🧅',tmdb:574736,
    why:'The Shrek franchise returns after 15 years.',
    essential:[{id:'shrek',order:'release',title:'Shrek Franchise',why:'The full Shrek story'}],optional:[]},
-  {name:'Spider-Man: Beyond the Spider-Verse',date:'2027',shortDate:'2027',type:'Animated Film',emoji:'🕸️',tmdb:0,
+  {name:'Spider-Man: Beyond the Spider-Verse',date:'2027',shortDate:'2027',type:'Animated Film',emoji:'🕸️',tmdb:1030032,
    why:'The long-awaited conclusion to the Miles Morales Spider-Verse trilogy.',
    essential:[{id:'spiderverse',order:'release',title:'Spider-Verse Trilogy',why:'Into + Across first'}],optional:[]},
 ];
@@ -2328,7 +2402,7 @@ film('Harry Potter and the Deathly Hallows - Part 1',2010,'⚡',['essential'],'T
       release:{label:'Full Saga',note:'<strong>47 years. One continuous timeline.</strong> From Rocky\'s first fight to Adonis\'s defining battle.',
         items:[
           film('Rocky',1976,'🥊',['essential'],'"Adriaaaan!" The origin. Best Picture winner.','Stallone wrote this in 3.5 days. Budget $1M. Box office $225M. The training montage invented the sports montage genre.',119,83,1367,['prime','rent_amazon']),
-          film('Rocky II',1979,'🥊',['essential'],'The rematch with Apollo Creed. Rocky\'s definitive championship.',119,73,1367,['prime','rent_amazon']),
+          film('Rocky II',1979,'🥊',['essential'],'The rematch with Apollo Creed. Rocky\'s definitive championship.',119,73,1368,['prime','rent_amazon']),
           film('Rocky III',1982,'🥊',['essential'],'Clubber Lang (Mr. T). Apollo trains Rocky. "Eye of the Tiger."','Establishes Apollo Creed\'s deep respect for Rocky — foundational for Creed (2015).',99,73,1369,['prime','rent_amazon']),
           film('Rocky IV',1985,'🥊',['essential'],'Ivan Drago kills Apollo Creed. Rocky trains in Russia. Cold War allegory.','Apollo\'s death here is the entire emotional engine of Creed 1 and Creed II. Essential.',91,65,1370,['prime','rent_amazon']),
           film('Rocky V',1990,'🥊',['optional'],'Rocky broke. Tommy Gunn. The franchise\'s weakest entry.','Stallone has publicly regretted this film. Skip if time is short.',104,43,1371,['prime','rent_amazon']),
@@ -2603,11 +2677,11 @@ film('Harry Potter and the Deathly Hallows - Part 1',2010,'⚡',['essential'],'T
 
   {id:'paranormal',slug:'paranormal-activity-watch-order',name:'Paranormal Activity',short:'Paranormal Activity',cat:'horror',tag:'Found Footage Horror',tagClass:'t-horror',emoji:'👁️',bg:'linear-gradient(135deg,#000a0a,#0a0000,#000000)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'Films available',url:'https://www.peacocktv.com'}],desc:'Eight found-footage horror films about demonic possession and a family curse, all connected by the demon Toby. The original remains one of the highest-profit-margin films in cinema history.',stats:{entries:8,years:'2007–2021',complexity:3,type:'Movies',runtime:740},xpBonus:200,mustKnow:['Paranormal Activity (2007) cost $15,000 and grossed $193 million — the most profitable film in cinema history by return on investment.','Films 1, 2, and 3 are essential. Film 2 is a PREQUEL that takes place before Film 1. Film 3 is a PREQUEL to Film 2.','The Marked Ones (2014) is a spin-off following a different family but connects to the main timeline.','Paranormal Activity: Next of Kin (2021) is a reboot with no connection to the original series.'],timelineWarn:'VIEWING ORDER ≠ CHRONOLOGICAL ORDER: Film 3 (1988) → Film 2 (2006) → Film 1 (2006) → Film 4 (2011). Release order recommended for first-timers.',faqs:[{q:'How many films do I actually need?',a:'Films 1, 2, and 3 are the essential core. The original trio tells a complete story about the demon Toby and the family curse. Films 4–7 are increasingly diminishing returns but add lore.'},{q:'Are these actually scary?',a:'The original was genuinely terrifying to 2007 audiences because found-footage domestic horror was new. The scares come from anticipation rather than jump scares — the door moving slightly, the shadow on the ceiling. Still effective if you watch alone at night.'}],orders:{release:{label:'Release Order (Recommended)',note:'<strong>Release order only.</strong> The chronological reveals are designed as surprises.',items:[film('Paranormal Activity',2007,'👁️',['essential'],'Katie and Micah. A demon. A camera on a tripod. $15,000 budget. $193M gross.','The most profitable film ever made. The bedroom door swings.',86,83,17725,['peacock','rent_amazon']),film('Paranormal Activity 2',2010,'👁️',['essential'],'Set two months before Film 1. Katie\'s sister and her family.','Essential — the prequel recontextualises the original.',91,59,37586,['peacock','rent_amazon']),film('Paranormal Activity 3',2011,'👁️',['essential'],'1988. The girls as children. The origin of Toby.','The best film in the franchise after the original. The oscillating fan camera.',83,68,76203,['peacock','rent_amazon']),film('Paranormal Activity 4',2012,'👁️',['optional'],'Five years after Film 1. The story continues.','NOTE' ,88,25,82990,['peacock','rent_amazon']),film('Paranormal Activity: The Marked Ones',2014,'👁️',['optional'],'A spin-off following a Latino family. Connects to the main timeline.','Shot in East Los Angeles specifically to represent a demographic almost entirely absent from found-footage horror.',84,40,227348,['peacock','rent_amazon']),film('Paranormal Activity: The Ghost Dimension',2015,'👻',['optional'],'A family finds a camera that can see into the spirit world. The supposed finale.','Billed as the concluding chapter. The 3D camera concept is genuinely clever.',88,12,290690,['rent_amazon'])]}}},
 
-  {id:'nightmare',slug:'nightmare-on-elm-street-watch-order',name:'A Nightmare on Elm Street',short:'Nightmare on Elm St.',cat:'horror',tag:'Horror Franchise',tagClass:'t-horror',emoji:'💤',bg:'linear-gradient(135deg,#1a0000,#0a0500,#000010)',streams:['hbo','rent_amazon'],wtw:[{p:'hbo',label:'Max',dot:'#8b5cf6',avail:'Original films',url:'https://www.max.com'},{p:'prime',label:'Amazon Video',dot:'#00a8e0',avail:'Rent from $3.99',url:'https://www.amazon.com/gp/video?tag=watchinorder-20'}],desc:'Wes Craven\'s dream-killer franchise — eight films following Freddy Krueger, who attacks teenagers in their dreams. One of horror\'s most creative monster concepts and the origin of Johnny Depp\'s career.',stats:{entries:9,years:'1984–2010',complexity:2,type:'Movies',runtime:900},xpBonus:250,mustKnow:['A Nightmare on Elm Street (1984) is Wes Craven\'s masterpiece and one of horror\'s most inventive premises.','Johnny Depp makes his film debut in the original. Watch for an early appearance by a future major star.','Dream Warriors (Part 3) is the best sequel — Nancy returns, and the franchise introduces the concept of "dream powers."','New Nightmare (1994) is a meta-film where Wes Craven and Robert Englund play themselves — the real Freddy is trying to enter the real world.','Freddy vs. Jason (2003) pits Freddy against Jason Voorhees — enormous fun, low expectations required.'],timelineWarn:null,faqs:[{q:'How many films do I need to watch?',a:'Original + Dream Warriors (Part 3) + New Nightmare forms the essential experience. The rest range from decent to poor. Parts 4, 5, 6, and the 2010 remake are for completionists only.'},{q:'What makes Freddy special?',a:'Freddy\'s concept (attacking in dreams, meaning you\'re never safe when asleep) is uniquely terrifying. Robert Englund gives the character unexpected wit and menace — Freddy jokes while he kills, which makes him both funny and deeply disturbing.'}],orders:{essential:{label:'Essential Path',note:'<strong>The three you actually need.</strong> Original, best sequel, and the brilliant meta-finale.',items:[film('A Nightmare on Elm Street',1984,'🔪',['essential'],'Freddy Krueger enters teen dreams. Nancy fights back.','Wes Craven\'s masterpiece. Johnny Depp\'s film debut. Still terrifying 40 years on.',91,85,2529,['hbo','rent_amazon']),film('A Nightmare on Elm Street 2: Freddy\'s Revenge',1985,'🔪',['optional'],'Freddy attempts to possess Jesse to enter the real world.','The most divisive entry — unusual tone. Complete for full context.',87,44,2530,['rent_amazon']),film('A Nightmare on Elm Street 3: Dream Warriors',1987,'🔪',['essential'],'Nancy returns. Teens in a psychiatric ward fight Freddy together.','The fan favourite sequel. Best in the series after the original.',96,81,2531,['hbo','rent_amazon']),film('A Nightmare on Elm Street 4: The Dream Master',1988,'🔪',['optional'],'Alice becomes the Dream Master, absorbing her friends\' abilities.','High energy and visually inventive. Best of the later sequels.',93,59,2532,['rent_amazon']),film('A Nightmare on Elm Street 5: The Dream Child',1989,'🔪',['optional'],'Freddy uses Alice\'s unborn child to haunt new victims.','Darker tone, interesting comic book sequences. Weaker overall.',89,31,2533,['rent_amazon']),film('Freddy\'s Dead: The Final Nightmare',1991,'🔪',['optional'],'Freddy\'s childhood origin revealed. Billed as the true finale.','Campy and meta. The 3D finale segment is memorable for all the wrong reasons.',89,24,4237,['rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,4238,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon']),film('A Nightmare on Elm Street',2010,'🔪',['optional'],'The remake. Jackie Earle Haley as a darker, more threatening Freddy.','A divisive reboot. The original cast was not involved.',95,14,22980,['rent_amazon'])]},bestof:{label:'Best of Elm Street (4 Films)',note:'The essential Nightmare on Elm Street experience — skip the weakest sequels.',items:[film('A Nightmare on Elm Street',1984,'🔪',['essential'],'Freddy Krueger enters teen dreams. Nancy fights back.','Wes Craven\'s masterpiece. Johnny Depp\'s film debut. Still terrifying 40 years on.',91,85,2529,['hbo','rent_amazon']),film('A Nightmare on Elm Street 3: Dream Warriors',1987,'🔪',['essential'],'Nancy returns. Teens in a psychiatric ward fight Freddy together.','The fan favourite sequel. Best in the series after the original.',96,81,2531,['hbo','rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,4238,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon'])]}}},
+  {id:'nightmare',slug:'nightmare-on-elm-street-watch-order',name:'A Nightmare on Elm Street',short:'Nightmare on Elm St.',cat:'horror',tag:'Horror Franchise',tagClass:'t-horror',emoji:'💤',bg:'linear-gradient(135deg,#1a0000,#0a0500,#000010)',streams:['hbo','rent_amazon'],wtw:[{p:'hbo',label:'Max',dot:'#8b5cf6',avail:'Original films',url:'https://www.max.com'},{p:'prime',label:'Amazon Video',dot:'#00a8e0',avail:'Rent from $3.99',url:'https://www.amazon.com/gp/video?tag=watchinorder-20'}],desc:'Wes Craven\'s dream-killer franchise — eight films following Freddy Krueger, who attacks teenagers in their dreams. One of horror\'s most creative monster concepts and the origin of Johnny Depp\'s career.',stats:{entries:9,years:'1984–2010',complexity:2,type:'Movies',runtime:900},xpBonus:250,mustKnow:['A Nightmare on Elm Street (1984) is Wes Craven\'s masterpiece and one of horror\'s most inventive premises.','Johnny Depp makes his film debut in the original. Watch for an early appearance by a future major star.','Dream Warriors (Part 3) is the best sequel — Nancy returns, and the franchise introduces the concept of "dream powers."','New Nightmare (1994) is a meta-film where Wes Craven and Robert Englund play themselves — the real Freddy is trying to enter the real world.','Freddy vs. Jason (2003) pits Freddy against Jason Voorhees — enormous fun, low expectations required.'],timelineWarn:null,faqs:[{q:'How many films do I need to watch?',a:'Original + Dream Warriors (Part 3) + New Nightmare forms the essential experience. The rest range from decent to poor. Parts 4, 5, 6, and the 2010 remake are for completionists only.'},{q:'What makes Freddy special?',a:'Freddy\'s concept (attacking in dreams, meaning you\'re never safe when asleep) is uniquely terrifying. Robert Englund gives the character unexpected wit and menace — Freddy jokes while he kills, which makes him both funny and deeply disturbing.'}],orders:{essential:{label:'Essential Path',note:'<strong>The three you actually need.</strong> Original, best sequel, and the brilliant meta-finale.',items:[film('A Nightmare on Elm Street',1984,'🔪',['essential'],'Freddy Krueger enters teen dreams. Nancy fights back.','Wes Craven\'s masterpiece. Johnny Depp\'s film debut. Still terrifying 40 years on.',91,85,2529,['hbo','rent_amazon']),film('A Nightmare on Elm Street 2: Freddy\'s Revenge',1985,'🔪',['optional'],'Freddy attempts to possess Jesse to enter the real world.','The most divisive entry — unusual tone. Complete for full context.',87,44,2530,['rent_amazon']),film('A Nightmare on Elm Street 3: Dream Warriors',1987,'🔪',['essential'],'Nancy returns. Teens in a psychiatric ward fight Freddy together.','The fan favourite sequel. Best in the series after the original.',96,81,2531,['hbo','rent_amazon']),film('A Nightmare on Elm Street 4: The Dream Master',1988,'🔪',['optional'],'Alice becomes the Dream Master, absorbing her friends\' abilities.','High energy and visually inventive. Best of the later sequels.',93,59,2532,['rent_amazon']),film('A Nightmare on Elm Street 5: The Dream Child',1989,'🔪',['optional'],'Freddy uses Alice\'s unborn child to haunt new victims.','Darker tone, interesting comic book sequences. Weaker overall.',89,31,2533,['rent_amazon']),film('Freddy\'s Dead: The Final Nightmare',1991,'🔪',['optional'],'Freddy\'s childhood origin revealed. Billed as the true finale.','Campy and meta. The 3D finale segment is memorable for all the wrong reasons.',89,24,2534,['rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,2535,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon']),film('A Nightmare on Elm Street',2010,'🔪',['optional'],'The remake. Jackie Earle Haley as a darker, more threatening Freddy.','A divisive reboot. The original cast was not involved.',95,14,22980,['rent_amazon'])]},bestof:{label:'Best of Elm Street (4 Films)',note:'The essential Nightmare on Elm Street experience — skip the weakest sequels.',items:[film('A Nightmare on Elm Street',1984,'🔪',['essential'],'Freddy Krueger enters teen dreams. Nancy fights back.','Wes Craven\'s masterpiece. Johnny Depp\'s film debut. Still terrifying 40 years on.',91,85,2529,['hbo','rent_amazon']),film('A Nightmare on Elm Street 3: Dream Warriors',1987,'🔪',['essential'],'Nancy returns. Teens in a psychiatric ward fight Freddy together.','The fan favourite sequel. Best in the series after the original.',96,81,2531,['hbo','rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,2535,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon'])]}}},
 
   {id:'fridaythe13th',slug:'friday-the-13th-watch-order',name:'Friday the 13th',short:'Friday the 13th',cat:'horror',tag:'Horror Franchise',tagClass:'t-horror',emoji:'🏕️',bg:'linear-gradient(135deg,#0a1a00,#000a00,#0a0000)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'Films available',url:'https://www.peacocktv.com'},{p:'prime',label:'Amazon Video',dot:'#00a8e0',avail:'Rent from $3.99',url:'https://www.amazon.com/gp/video?tag=watchinorder-20'}],desc:'Twelve films about Crystal Lake and Jason Voorhees — one of slasher cinema\'s most iconic killers. The original 1980 film has a famous twist; Jason as we know him doesn\'t appear until Part 2.',stats:{entries:12,years:'1980–2009',complexity:2,type:'Movies',runtime:1200},xpBonus:200,mustKnow:['Friday the 13th (1980) doesn\'t feature Jason as the killer — the identity is a famous twist. Watch completely blind.','Jason doesn\'t get his iconic hockey mask until Part III.','Jason Goes to Hell and Jason X are widely considered the franchise\'s low points.','Freddy vs. Jason (2003) is enormous fun — you need only basic knowledge of both franchises.','The Friday the 13th remake (2009) is a solid modern entry — works as a standalone.'],timelineWarn:null,faqs:[{q:'How many should I watch?',a:'Friday the 13th 1 + 2 + 3 + The Final Chapter (4) is the essential Jason Voorhees run. These four form the strongest connected arc. Parts 6, 7, and 8 are fun. Everything after that is for completionists.'},{q:'Is the original good?',a:'The original is a genuine classic — clever, tense, and the twist is legitimately shocking even today if you avoid spoilers. Go in blind.'}],orders:{essential:{label:'Essential Run',note:'<strong>Films 1–4: the classic Crystal Lake saga.</strong> The strongest run in the franchise.',items:[film('Friday the 13th',1980,'🔪',['essential'],'Camp Crystal Lake reopens. A killer stalks the counselors.','The slasher that launched a genre. The killer\'s identity is a genuine twist.',95,63,1574,['peacock','rent_amazon']),film('Friday the 13th Part 2',1981,'🔪',['essential'],'Jason Voorhees takes over from his mother. The bag-head era begins.','Jason\'s first full appearance as the killer.',87,52,8081,['peacock','rent_amazon']),film('Friday the 13th Part III',1982,'🔪',['optional'],'Jason gets his iconic hockey mask for the first time.','Notable for the mask origin. Originally released in 3D.',95,28,8082,['rent_amazon']),film('Friday the 13th: The Final Chapter',1984,'🔪',['optional'],'Billed as the definitive end. Tommy Jarvis defeats Jason.','The best of the sequels. Corey Feldman and Crispin Glover.',91,55,8083,['rent_amazon']),film('Friday the 13th: A New Beginning',1985,'🔪',['optional'],'Tommy Jarvis in a halfway house. Is the killer really Jason?','The most divisive entry — contains a major twist about the killer\'s identity.',92,13,8084,['rent_amazon']),film('Friday the 13th Part VI: Jason Lives',1986,'🔪',['optional'],'Tommy accidentally resurrects Jason. The zombie era begins.','Self-aware and fun. The best sequel after The Final Chapter.',86,63,8085,['rent_amazon']),film('Friday the 13th Part VII: The New Blood',1988,'🔪',['optional'],'A telekinetic girl faces Jason. Jason vs Carrie.','Kane Hodder debuts as Jason. The most physically imposing portrayal.',88,27,8086,['peacock','rent_amazon']),film('Friday the 13th Part VIII: Jason Takes Manhattan',1989,'🔪',['optional'],'Jason on a cruise ship. Briefly in New York City.','Mostly takes place at sea. The Manhattan sequences are the actual highlight.',100,12,8087,['peacock','rent_amazon']),film('Jason Goes to Hell: The Final Friday',1993,'🔪',['optional'],'Jason\'s heart possesses other bodies. A bounty hunter tracks him.','A strange supernatural detour. The ending teases Freddy Krueger.',87,15,8088,['peacock','rent_amazon']),film('Jason X',2001,'🔪',['optional'],'Jason in space. The year 2455. Uber-Jason is born.','So bad it\'s good. A cult classic among franchise fans.',91,11,8089,['peacock','rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Both icons in one film.','A love letter to both franchises. Watch after completing both series.',97,46,9003,['hbo','rent_amazon']),film('Friday the 13th',2009,'🔪',['optional'],'The reboot. New cast. A faster, more brutal Jason at Crystal Lake.','Divisive reboot — more brutal but loses some of the original\'s charm.',97,26,15296,['rent_amazon'])]},bestof:{label:'Essential Jason (5 Films)',note:'The Friday the 13th films that actually matter — skip the weak middle entries.',items:[film('Friday the 13th',1980,'🔪',['essential'],'Camp Crystal Lake reopens. A killer stalks the counselors.','The slasher that launched a genre. The killer\'s identity is a genuine twist.',95,63,1574,['peacock','rent_amazon']),film('Friday the 13th Part 2',1981,'🔪',['essential'],'Jason Voorhees takes over from his mother. The bag-head era begins.','Jason\'s first full appearance as the killer.',87,52,8081,['peacock','rent_amazon']),film('Friday the 13th: The Final Chapter',1984,'🔪',['optional'],'Billed as the definitive end. Tommy Jarvis defeats Jason.','The best of the sequels. Corey Feldman and Crispin Glover.',91,55,8083,['rent_amazon']),film('Friday the 13th Part VI: Jason Lives',1986,'🔪',['optional'],'Tommy accidentally resurrects Jason. The zombie era begins.','Self-aware and fun. The best sequel after The Final Chapter.',86,63,8085,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Both icons in one film.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon'])]}}},
 
-  {id:'minions',slug:'despicable-me-minions-watch-order',name:'Despicable Me / Minions',short:'Despicable Me',cat:'animated',tag:'Animated',tagClass:'t-animated',emoji:'💛',bg:'linear-gradient(135deg,#1a1000,#001000,#0a001a)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'All films available',url:'https://www.peacocktv.com'}],desc:'Illumination\'s Despicable Me / Minions universe — six films about Gru, his daughters, and the little yellow Minions. The highest-grossing animated franchise in history.',stats:{entries:6,years:'2010–2024',complexity:1,type:'Animated Movies',runtime:560},xpBonus:200,mustKnow:['Despicable Me and Despicable Me 2 are genuinely excellent — funny, warm, and emotionally surprising.','The Minions films (2015, 2022) focus on the Minions before they found Gru — set in the 1960s–70s.','Despicable Me 4 (2024) continues directly from Despicable Me 3.','Minions: The Rise of Gru is set in 1976 and shows how young Gru acquired the Minions.','The Minions have become one of the most recognised cultural icons of the 2010s — internet memes and all.'],timelineWarn:null,faqs:[{q:'Watch Minions before or after Despicable Me?',a:'Release order is recommended — watch Despicable Me 1 and 2 first, then the Minions prequels make more sense emotionally. Chronologically the Minions films come first (1960s-70s vs 2000s), but narrative satisfaction is better in release order.'},{q:'Are the Minions films good?',a:'Less so than the Gru films. The Minions standalone (2015) is the weakest in the series. Rise of Gru (2022) is better — having young Gru as an anchor character helps significantly.'}],orders:{release:{label:'Release Order',note:'<strong>Watch in release order</strong> for the best emotional experience.',items:[film('Despicable Me',2010,'💛',['essential'],'A supervillain adopts three orphan girls. He does not expect what happens next.','Genuinely warm and funny. Steve Carell\'s Gru voice is iconic.',95,81,20352,['peacock','rent_amazon']),film('Despicable Me 2',2013,'💛',['essential'],'Gru is recruited by the Anti-Villain League. Romance arrives.','' ,98,74,93456,['peacock','rent_amazon']),film('Minions',2015,'💛',['optional'],'The Minions in the 1960s, searching for the most despicable villain.','Weakest in the series but entertaining.',91,54,211672,['peacock','rent_amazon']),film('Despicable Me 3',2017,'💛',['optional'],'Gru\'s twin brother Dru appears.',90,59,324852,['peacock','rent_amazon']),film('Minions: The Rise of Gru',2022,'💛',['optional'],'1976. Young Gru joins the Vicious 6.','Better than Minions (2015). Young Gru is charming.',87,68,438148,['peacock','rent_amazon']),film('Despicable Me 4',2024,'💛',['optional'],'Gru and Lucy start a new chapter.',94,0,519182,['peacock','rent_amazon']),film('A Nightmare on Elm Street 5: The Dream Child',1989,'🔪',['optional'],'Freddy uses Alice\'s unborn child to haunt new victims.','Darker tone. Interesting comic book sequences. Weaker overall.',89,31,2533,['rent_amazon']),film('Freddy\'s Dead: The Final Nightmare',1991,'🔪',['optional'],'Freddy\'s origin and childhood revealed. Billed as the true finale.','Campy and meta. The 3D finale segment is memorable for all the wrong reasons.',89,24,4237,['rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,4238,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon']),film('A Nightmare on Elm Street',2010,'🔪',['optional'],'The remake. Jackie Earle Haley as a darker, more threatening Freddy.','A divisive reboot. The original cast was not involved.',95,14,22980,['rent_amazon']),film('Friday the 13th Part VII: The New Blood',1988,'🔪',['optional'],'A telekinetic girl faces Jason. Often called Jason vs Carrie.','Kane Hodder debuts as Jason. The most physically imposing portrayal.',88,27,8086,['peacock','rent_amazon']),film('Friday the 13th Part VIII: Jason Takes Manhattan',1989,'🔪',['optional'],'Jason on a cruise ship. Briefly in New York City.','Mostly takes place at sea. The Manhattan sequences are the actual highlight.',100,12,8087,['peacock','rent_amazon']),film('Jason Goes to Hell: The Final Friday',1993,'🔪',['optional'],'Jason\'s heart possesses other bodies. A bounty hunter tracks him.','A strange supernatural detour. The ending teases Freddy Krueger.',87,15,8088,['peacock','rent_amazon']),film('Jason X',2001,'🔪',['optional'],'Jason in space. The year 2455. Uber-Jason is born.','So bad it\'s good. A cult classic among franchise fans.',91,11,8089,['peacock','rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Both icons in one glorious film.','A love letter to both franchises. Watch after completing both series.',97,46,9003,['hbo','rent_amazon']),film('Friday the 13th',2009,'🔪',['optional'],'The reboot. New cast. A faster, more brutal Jason at Crystal Lake.','Divisive reboot — more brutal but loses some of the original\'s charm.',97,26,15296,['rent_amazon'])]}}},
+  {id:'minions',slug:'despicable-me-minions-watch-order',name:'Despicable Me / Minions',short:'Despicable Me',cat:'animated',tag:'Animated',tagClass:'t-animated',emoji:'💛',bg:'linear-gradient(135deg,#1a1000,#001000,#0a001a)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'All films available',url:'https://www.peacocktv.com'}],desc:'Illumination\'s Despicable Me / Minions universe — six films about Gru, his daughters, and the little yellow Minions. The highest-grossing animated franchise in history.',stats:{entries:6,years:'2010–2024',complexity:1,type:'Animated Movies',runtime:560},xpBonus:200,mustKnow:['Despicable Me and Despicable Me 2 are genuinely excellent — funny, warm, and emotionally surprising.','The Minions films (2015, 2022) focus on the Minions before they found Gru — set in the 1960s–70s.','Despicable Me 4 (2024) continues directly from Despicable Me 3.','Minions: The Rise of Gru is set in 1976 and shows how young Gru acquired the Minions.','The Minions have become one of the most recognised cultural icons of the 2010s — internet memes and all.'],timelineWarn:null,faqs:[{q:'Watch Minions before or after Despicable Me?',a:'Release order is recommended — watch Despicable Me 1 and 2 first, then the Minions prequels make more sense emotionally. Chronologically the Minions films come first (1960s-70s vs 2000s), but narrative satisfaction is better in release order.'},{q:'Are the Minions films good?',a:'Less so than the Gru films. The Minions standalone (2015) is the weakest in the series. Rise of Gru (2022) is better — having young Gru as an anchor character helps significantly.'}],orders:{release:{label:'Release Order',note:'<strong>Watch in release order</strong> for the best emotional experience.',items:[film('Despicable Me',2010,'💛',['essential'],'A supervillain adopts three orphan girls. He does not expect what happens next.','Genuinely warm and funny. Steve Carell\'s Gru voice is iconic.',95,81,20352,['peacock','rent_amazon']),film('Despicable Me 2',2013,'💛',['essential'],'Gru is recruited by the Anti-Villain League. Romance arrives.','' ,98,74,93456,['peacock','rent_amazon']),film('Minions',2015,'💛',['optional'],'The Minions in the 1960s, searching for the most despicable villain.','Weakest in the series but entertaining.',91,54,211672,['peacock','rent_amazon']),film('Despicable Me 3',2017,'💛',['optional'],'Gru\'s twin brother Dru appears.',90,59,324852,['peacock','rent_amazon']),film('Minions: The Rise of Gru',2022,'💛',['optional'],'1976. Young Gru joins the Vicious 6.','Better than Minions (2015). Young Gru is charming.',87,68,438148,['peacock','rent_amazon']),film('Despicable Me 4',2024,'💛',['optional'],'Gru and Lucy start a new chapter.',94,0,519182,['peacock','rent_amazon']),film('A Nightmare on Elm Street 5: The Dream Child',1989,'🔪',['optional'],'Freddy uses Alice\'s unborn child to haunt new victims.','Darker tone. Interesting comic book sequences. Weaker overall.',89,31,2533,['rent_amazon']),film('Freddy\'s Dead: The Final Nightmare',1991,'🔪',['optional'],'Freddy\'s origin and childhood revealed. Billed as the true finale.','Campy and meta. The 3D finale segment is memorable for all the wrong reasons.',89,24,2534,['rent_amazon']),film('Wes Craven\'s New Nightmare',1994,'🔪',['optional'],'The real Heather Langenkamp is stalked by a real version of Freddy.','Meta before Scream made it cool. Craven at his most self-aware and clever.',112,67,2535,['rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Freddy pits Jason against Elm Street.','A love letter to both franchises. Gory fun for dedicated horror fans.',97,46,9003,['hbo','rent_amazon']),film('A Nightmare on Elm Street',2010,'🔪',['optional'],'The remake. Jackie Earle Haley as a darker, more threatening Freddy.','A divisive reboot. The original cast was not involved.',95,14,22980,['rent_amazon']),film('Friday the 13th Part VII: The New Blood',1988,'🔪',['optional'],'A telekinetic girl faces Jason. Often called Jason vs Carrie.','Kane Hodder debuts as Jason. The most physically imposing portrayal.',88,27,8086,['peacock','rent_amazon']),film('Friday the 13th Part VIII: Jason Takes Manhattan',1989,'🔪',['optional'],'Jason on a cruise ship. Briefly in New York City.','Mostly takes place at sea. The Manhattan sequences are the actual highlight.',100,12,8087,['peacock','rent_amazon']),film('Jason Goes to Hell: The Final Friday',1993,'🔪',['optional'],'Jason\'s heart possesses other bodies. A bounty hunter tracks him.','A strange supernatural detour. The ending teases Freddy Krueger.',87,15,8088,['peacock','rent_amazon']),film('Jason X',2001,'🔪',['optional'],'Jason in space. The year 2455. Uber-Jason is born.','So bad it\'s good. A cult classic among franchise fans.',91,11,8089,['peacock','rent_amazon']),film('Freddy vs. Jason',2003,'🔪',['optional'],'The ultimate horror crossover. Both icons in one glorious film.','A love letter to both franchises. Watch after completing both series.',97,46,9003,['hbo','rent_amazon']),film('Friday the 13th',2009,'🔪',['optional'],'The reboot. New cast. A faster, more brutal Jason at Crystal Lake.','Divisive reboot — more brutal but loses some of the original\'s charm.',97,26,15296,['rent_amazon'])]}}},
 
   {id:'kungfu',slug:'kung-fu-panda-watch-order',name:'Kung Fu Panda',short:'Kung Fu Panda',cat:'animated',tag:'Animated',tagClass:'t-animated',emoji:'🐼',bg:'linear-gradient(135deg,#1a0800,#001a00,#000a00)',streams:['peacock','rent_amazon'],wtw:[{p:'peacock',label:'Peacock',dot:'#00688b',avail:'All films available',url:'https://www.peacocktv.com'}],desc:'DreamWorks\' martial arts animated franchise — four films following Po the panda from noodle-shop dreamer to Dragon Warrior to legendary kung fu master.',stats:{entries:4,years:'2008–2024',complexity:1,type:'Animated Movies',runtime:400},xpBonus:200,mustKnow:['All four films are one continuous story — watch in order.','Kung Fu Panda 4 (2024) ends Po\'s story as Dragon Warrior and sets up a new chapter of the franchise.','The franchise is set in an alternate ancient China — deeply informed by real martial arts philosophy and animation traditions.','The "Furious Five" and Master Shifu are recurring characters across all four films.'],timelineWarn:null,faqs:[{q:'Is Kung Fu Panda 4 good?',a:'Generally seen as the weakest of the four — the shift from the Dragon Warrior arc to a new chapter feels abrupt. But strong visuals and likeable characters make it worthwhile for fans.'},{q:'Are these just kids films?',a:'The best ones transcend the label. Kung Fu Panda 2 has one of the most genuinely moving backstory reveals in animated film history. The "inner peace" arc in film 2 is sophisticated emotional filmmaking for any age.'}],orders:{release:{label:'All 4 Films',note:'<strong>One continuous story. Watch in order.</strong>',items:[film('Kung Fu Panda',2008,'🐼',['essential'],'Po the noodle-shop panda is chosen as the Dragon Warrior. He is not ready.','One of DreamWorks\' finest films. "There is no secret ingredient."',92,87,9502,['peacock','rent_amazon']),film('Kung Fu Panda 2',2011,'🐼',['essential'],'Po\'s origin. Lord Shen. Inner peace. The most emotionally complex entry.','The flashback to Po\'s past is genuinely devastating. Underrated animated masterpiece.',90,81,49519,['peacock','rent_amazon']),film('Kung Fu Panda 3',2016,'🐼',['optional'],'Po\'s biological father. The Spirit Realm. The Panda village.',95,77,140300,['peacock','rent_amazon']),film('Kung Fu Panda 4',2024,'🐼',['optional'],'A new Dragon Warrior must be found. The franchise\'s transition film.',94,70,1011985,['peacock','rent_amazon'])]}}},
 
@@ -2814,7 +2888,7 @@ film('Harry Potter and the Deathly Hallows - Part 1',2010,'⚡',['essential'],'T
   orders:{release:{label:'Benoit Blanc Trilogy',note:'<strong>Each is standalone but watch in release order</strong> for the best Blanc character experience.',items:[
     film('Knives Out',2019,'🔪',['essential'],'A famous crime novelist. A suspicious family gathering. Detective Blanc investigates. Go in blind.','Daniel Craig\'s Blanc is one of cinema\'s great recent detectives. The plot twists are extraordinary.',130,97,546554,['prime','rent_amazon']),
     film('Glass Onion: A Knives Out Mystery',2022,'🔪',['essential'],'A tech billionaire invites friends to his Greek island. Murder follows. Blanc returns.','Edward Norton. Janelle Monáe. A sharp satire of tech industry billionaires.',139,92,661374,['netflix']),
-    film('Wake Up Dead Man: A Knives Out Mystery',2025,'🔪',['essential'],'The third Benoit Blanc mystery. Details under wraps.','' ,0,0,0,['netflix'])]}}},
+    film('Wake Up Dead Man: A Knives Out Mystery',2025,'🔪',['essential'],'The third Benoit Blanc mystery. Details under wraps.','' ,0,0,1062927,['netflix'])]}}},
 
   {id:'karatekid',hidden:true,slug:'karate-kid-cobra-kai-watch-order',name:'The Karate Kid / Cobra Kai',short:'Karate Kid',cat:'action',tag:'Drama / Action',tagClass:'t-action',emoji:'🥋',bg:'linear-gradient(135deg,#1a0800,#000a00,#0a0010)',streams:['netflix','rent_amazon'],wtw:[{p:'netflix',label:'Netflix',dot:'#e50914',avail:'Cobra Kai series + Karate Kid: Legends',url:'https://www.netflix.com'},{p:'prime',label:'Amazon Video',dot:'#00a8e0',avail:'Original films rent',url:'https://www.amazon.com/gp/video?tag=watchinorder-20'}],
   desc:'From the 1984 original to the acclaimed Cobra Kai TV series — the Karate Kid universe spans 40 years and is still actively expanding. Daniel LaRusso and Johnny Lawrence\'s rivalry continues decades later.',
@@ -2826,8 +2900,8 @@ film('Harry Potter and the Deathly Hallows - Part 1',2010,'⚡',['essential'],'T
     film('The Karate Kid',1984,'🥋',['essential'],'Daniel LaRusso moves to California. Mr. Miyagi. The Cobra Kai dojo. "Wax on, wax off."','One of the defining films of the 1980s. Still completely works.',126,89,1885,['rent_amazon']),
     film('The Karate Kid Part II',1986,'🥋',['optional'],'Mr. Miyagi returns to Okinawa. Daniel follows. A complete change of setting.','' ,113,57,1890,['rent_amazon']),
     film('The Karate Kid Part III',1989,'🥋',['optional'],'Terry Silver. A new tournament. Miyagi and Daniel\'s friendship tested.','' ,111,28,1891,['rent_amazon']),
-    film('Cobra Kai (Series — 6 Seasons)',2018,'🥋',['essential'],'30 years later. Johnny Lawrence tries to rebuild his life. Daniel is now successful.','Watch after the original film. 6 seasons on Netflix. One of the best continuations ever made.',0,0,0,['netflix']),
-    film('Karate Kid: Legends',2025,'🥋',['optional'],'Daniel LaRusso meets Li Fong. A new tournament. Two universes converge.','' ,110,0,0,['netflix','rent_amazon'])]}}},
+    film('Cobra Kai (Series — 6 Seasons)',2018,'🥋',['essential'],'30 years later. Johnny Lawrence tries to rebuild his life. Daniel is now successful.','Watch after the original film. 6 seasons on Netflix. One of the best continuations ever made.',0,0,136315,['netflix']),
+    film('Karate Kid: Legends',2025,'🥋',['optional'],'Daniel LaRusso meets Li Fong. A new tournament. Two universes converge.','' ,110,0,1184534,['netflix','rent_amazon'])]}}},
 
   {id:'hangover',hidden:true,slug:'hangover-watch-order',name:'The Hangover Trilogy',short:'The Hangover',cat:'action',tag:'Comedy',tagClass:'t-action',emoji:'🍾',bg:'linear-gradient(135deg,#1a0800,#0a0a00,#001a00)',streams:['hbo','rent_amazon'],wtw:[{p:'hbo',label:'Max',dot:'#8b5cf6',avail:'All 3 films',url:'https://www.max.com'}],
   desc:'Todd Phillips\'s R-rated comedy trilogy about the Wolf Pack — four friends who keep losing time and memory during increasingly disastrous events. The original is a comedy masterpiece.',
@@ -3066,9 +3140,60 @@ film('Harry Potter and the Deathly Hallows - Part 1',2010,'⚡',['essential'],'T
 // ════════════════════════════════════════════════════════════
 let CU=null,COK=null,currentFilter='all';
 
+
+function renderContinueWatching(){
+  const sec=document.getElementById('continueWatchingSec');
+  const grid=document.getElementById('continueWatchingGrid');
+  if(!sec||!grid) return;
+  if(!STATE.user){ sec.style.display='none'; return; }
+  // Find franchises with some progress but not complete
+  const inProgress=U.filter(u=>{
+    if(u.hidden) return false;
+    const key=u.id+'_'+Object.keys(u.orders)[0];
+    const w=STATE.watched[key]||{};
+    const done=Object.values(w).filter(Boolean).length;
+    const total=u.orders[Object.keys(u.orders)[0]].items.length;
+    return done>0 && done<total;
+  }).sort((a,b)=>{
+    // Sort by recently viewed
+    const rv=STATE.recentlyViewed||[];
+    return rv.indexOf(a.id)-rv.indexOf(b.id);
+  }).slice(0,4);
+  if(!inProgress.length){ sec.style.display='none'; return; }
+  sec.style.display='';
+  grid.innerHTML=inProgress.map(u=>{
+    const key=u.id+'_'+Object.keys(u.orders)[0];
+    const w=STATE.watched[key]||{};
+    const done=Object.values(w).filter(Boolean).length;
+    const total=u.orders[Object.keys(u.orders)[0]].items.length;
+    const pct=Math.round((done/total)*100);
+    const img=franchisePosterImg(u);
+    return `<div class="ucard" onclick="openUniverse('${u.id}')" style="position:relative">
+      <div class="ucard-poster">${img?`<img src="${img}" alt="${u.short}" loading="lazy" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'"><div class='ucard-poster-bg' style='background:${u.bg}'></div>`:`<div class='ucard-poster-bg' style='background:${u.bg}'></div>`}</div>
+      <div class="ucard-info">
+        <div class="ucard-name">${u.short}</div>
+        <div style="font-size:10px;color:var(--dim);margin-bottom:4px">${done}/${total} films · ${pct}%</div>
+        <div class="ucard-progress"><div class="ucard-progress-fill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
 function renderGrid(cat='all'){
   currentFilter=cat;
-  const list=(cat==='all'?U:U.filter(u=>u.cat===cat)).filter(u=>!u.hidden);
+  renderContinueWatching();
+  const rawList=(cat==='all'?U:U.filter(u=>u.cat===cat)).filter(u=>!u.hidden);
+  const sortVal=document.getElementById('gridSort')?.value||'default';
+  const list=[...rawList].sort((a,b)=>{
+    if(sortVal==='az') return a.name.localeCompare(b.name);
+    if(sortVal==='za') return b.name.localeCompare(a.name);
+    if(sortVal==='films') return Object.values(b.orders)[0].items.length - Object.values(a.orders)[0].items.length;
+    if(sortVal==='progress'){
+      const pa=Object.values(STATE.watched[a.id+'_'+Object.keys(a.orders)[0]]||{}).filter(Boolean).length;
+      const pb=Object.values(STATE.watched[b.id+'_'+Object.keys(b.orders)[0]]||{}).filter(Boolean).length;
+      return pb-pa;
+    }
+    return 0;
+  });
   document.getElementById('secTitle').textContent=CAT_LBL[cat]||'FRANCHISES';
   document.getElementById('secCount').textContent=`— ${list.length} franchise${list.length!==1?'s':''}`;
   document.getElementById('ugrid').innerHTML=list.map(u=>{
@@ -3116,9 +3241,13 @@ function renderGrid(cat='all'){
 function filterCat(cat){
   renderGrid(cat);showPage('home');
   if(cat!=='all')setTimeout(()=>document.getElementById('mainSec')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
+  document.querySelectorAll('.nav-link').forEach(el=>{
+    el.classList.toggle('active',el.getAttribute('onclick')===`filterCat('${cat}')`);
+  });
 }
 function goHome(){
   showPage('home');renderGrid('all');
+  document.querySelectorAll('.nav-link').forEach(el=>el.classList.remove('active'));
   const _t='WatchInOrder — The Right Watch Order for Every Movie Universe';
   const _d='The definitive watch order for every movie universe — Marvel, Star Wars, Harry Potter, Lord of the Rings and 80+ more franchises.';
   document.title=_t;
@@ -3136,6 +3265,11 @@ function goHome(){
 // ════════════════════════════════════════════════════════════
 function openUniverse(id){
   const u=U.find(x=>x.id===id); if(!u)return;
+  // Track recently viewed
+  if(!STATE.recentlyViewed) STATE.recentlyViewed=[];
+  STATE.recentlyViewed=STATE.recentlyViewed.filter(x=>x!==id);
+  STATE.recentlyViewed.unshift(id);
+  if(STATE.recentlyViewed.length>5) STATE.recentlyViewed=STATE.recentlyViewed.slice(0,5);
   CU=u; COK=Object.keys(u.orders)[0];
   // Set gradient background immediately
   const heroBg = document.getElementById('uheroBg');
@@ -3226,7 +3360,7 @@ function renderList(){
     const tags=(item.tags||[]).map(t=>`<span class="wtag ${TAG_MAP[t]||'wt-optional'}">${TAG_LBL[t]||t}</span>`).join('');
     const streamArr=item.streams||CU.streams||[];
     const filmStreams=streamArr.slice(0,3).map(s=>{const p=SP[s];return p?`<a class="sbtn ${p.cls}" href="${p.url}" target="_blank" rel="nofollow sponsored noopener">${p.label}</a>`:''}).join('');
-    const scoreHtml=item.score?`<span class="wcard-score">★ ${item.score}%</span>`:'';
+    const scoreHtml=item.score?`<span class="wcard-score" title="Rotten Tomatoes score: ${item.score}% — click to search" style="cursor:pointer" onclick="event.stopPropagation();window.open('https://www.rottentomatoes.com/search?search='+encodeURIComponent(item.title),'_blank')">🍅 ${item.score}%</span>`:'';
     const rtHtml=item.runtime?`<span class="wcard-runtime">${Math.floor(item.runtime/60)}h ${item.runtime%60||''}${item.runtime%60?'m':''}</span>`:'';
     const spoiler=STATE.settings.spoilerMode&&item.tip;
     return `<div class="witem ${w?'watched':''}" id="wi${i}">
@@ -3241,12 +3375,13 @@ function renderList(){
             ${item.note?`<div class="wcard-note">${item.note}</div>`:''}
             ${item.tip&&!spoiler?`<div class="wcard-tip">💡 <strong>Must Know:</strong> ${item.tip}</div>`:''}
             <div class="score-wrap" onclick="event.stopPropagation()">
-              ${[1,2,3,4,5,6,7,8,9,10].map(n=>{
+              ${STATE.user ? [1,2,3,4,5,6,7,8,9,10].map(n=>{
                 const rk=CU.id+'_'+i;
                 const active=STATE.filmRatings[rk]===n;
-                return `<button class="score-btn score-${n}${active?' active':''}" onclick="rateFilm('${rk}',${n},${i})" title="${n}/10">${n}</button>`;
-              }).join('')}
-              <span class="score-label">your score</span>
+                const rangeCls = n <= 4 ? 'score-lo' : n <= 7 ? 'score-mid' : 'score-hi';
+                return `<button class="score-btn ${rangeCls}${active?' active':''}" onclick="rateFilm('${rk}',${n},${i})" title="${n}/10" aria-label="Rate ${n}/10">${n}</button>`;
+              }).join('') + '<span class="score-label">your score</span>'
+              : '<span class="score-login-prompt" onclick="openAuth(\'register\')&quot;>⭐ Rate — <u>free sign in</u></span>'}
             </div>
             ${item.tip&&spoiler?`<div class="wcard-tip" style="color:var(--dim)">💡 Must Know: <em>Hidden in spoiler-safe mode</em></div>`:''}
           </div>
@@ -3685,6 +3820,7 @@ const POSTERS_STATIC = {
   954: '/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg',
   981: '/dKUubjvxO78XDts6VP1Ggcp4R9O.jpg',
   1366: '/hEjK9A9BkNXejFW4tfacVAEHtkn.jpg',
+  1368: '/bOFaAXmWWXC3Rok17x1gWoUsmaN.jpg',
   1634: '/9iBgd9gi9ztWiVcYSG6zl8wDFBN.jpg',
   1635: '/9MaZYEyFmQwNeDTxZGQEN8E0e4p.jpg',
   1724: '/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg',
@@ -3700,6 +3836,8 @@ const POSTERS_STATIC = {
   2529: '/5jkE2SzR5dqzYyFcBfyAXhfBM8p.jpg',
   2530: '/bGREQAK2MxmXcnbDt2VNeSXJ7MK.jpg',
   2531: '/9g0Jb3ILPQpeTYnIPSfuFjZCuBt.jpg',
+  2534: '/7CgEMrHTaWBo21KYzJEKWLWqFGW.jpg',
+  2535: '/bYktWRoQGiMBoqJWFrJKP97EMFP.jpg',
   2690: '/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg',
   4233: '/dORlVasiaDkJXTqt9bdH7nFNs6C.jpg',
   4234: '/qpH8ToZVlFD1bakL04LkEKodyDI.jpg',
@@ -3773,6 +3911,7 @@ const POSTERS_STATIC = {
   131634: '/lImKHDfExAulp16grYm8zD5eONE.jpg',
   131635: '/lImKHDfExAulp16grYm8zD5eONE.jpg',
   135397: '/rhr4y79GpxQF9IsfJItRXVaoGs4.jpg',
+  136315: '/oX9ZPHZgJBCBjGFd2jGZiLPTc6v.jpg',
   138843: '/wVYREutTvI2tmxr6ujrHT704wGF.jpg',
   140607: '/wqnLdwVXoBjKibFRR5U3y0aDUhs.jpg',
   172139: '/5O5a7JvkKnR7g4Fs9Dx33AfYxHM.jpg',
@@ -3856,6 +3995,7 @@ const POSTERS_STATIC = {
   533514: '/bajajkoErDst0JxdFyBkABiF9rW.jpg',
   533535: '/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg',
   566525: '/d08HqqeBQSwN8i8MEvpsZ8Cb438.jpg',
+  574736: '/jxKnD4vvZ0EXBM3MpQfG0dCNsTU.jpg',
   575264: '/5UmCmGNEPpicMvjvWd6RJWHfz9K.jpg',
   576845: '/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg',
   585511: '/1HOYvwGFioUFL58UVvDRG6beEDm.jpg',
@@ -3889,9 +4029,12 @@ const POSTERS_STATIC = {
   1002001: '/jRZascAWZoWFOg93nL9C4F91Ppf.jpg',
   1022789: '/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
   1022864: '/b8AtUoFwBvkt0QW15ORI4evC8eA.jpg',
+  1030032: '/tSsHNMVB4Hnn0HjJbVHpHFRjjTe.jpg',
   1052758: '/pGbbQlIE52Ncjk8mtThKORTe1bH.jpg',
+  1062927: '/4TXAM2QqzQ9rGOcRiClFBKGDXH5.jpg',
   1083491: '/aJOWa338KIM1GnOTzS9J1hLxGdY.jpg',
   1098135: '/qNiqZz6IAEw9QJ6LPglnu2p4JJg.jpg',
+  1184534: '/mBaXZ95R2OxueZhvQbcEWy2DqyO.jpg',
 };
 let POSTERS = {}; // tmdbId -> poster_path
 let BACKDROPS = {}; // tmdbId -> backdrop_path
@@ -4235,7 +4378,8 @@ function rateFilm(ratingKey, score, filmIdx) {
   const btns = document.querySelectorAll(`[onclick*="rateFilm('${ratingKey}'"]`);
   btns.forEach(btn => {
     const n = parseInt(btn.textContent.trim());
-    btn.classList.toggle('active', STATE.filmRatings[ratingKey] === n);
+    const isActive = STATE.filmRatings[ratingKey] === n;
+    btn.classList.toggle('active', isActive);
   });
   // Update badge next to title
   const titleEls = document.querySelectorAll(`[data-rk="${ratingKey}"]`);
@@ -4537,8 +4681,9 @@ function getScoreBadge(franchiseId, filmIdx) {
   const rk = franchiseId + '_' + filmIdx;
   const score = STATE.filmRatings[rk];
   if (!score) return `<span data-rk="${rk}"></span>`;
-  const cls = score >= 9 ? 'score-hi' : score <= 4 ? 'score-low' : '';
-  return `<span class="score-display ${cls}" data-rk="${rk}" style="margin-left:5px">${score}/10</span>`;
+  const cls = score >= 8 ? 'score-hi' : score <= 4 ? 'score-low' : '';
+  const stars = score >= 8 ? '⭐' : score <= 4 ? '💀' : '👍';
+  return `<span class="score-display ${cls}" data-rk="${rk}" title="Your rating: ${score}/10" style="margin-left:5px;cursor:default">${stars} ${score}/10</span>`;
 }
 
 // ════════════════════════════════════════════════════════════
@@ -4664,6 +4809,84 @@ else if(initPath==='settings')showPage('settings');
   history.replaceState({page:'home'}, '', window.location.pathname || '/');
 })();
 
+</script>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);overflow-y:auto;padding:2rem 1rem">
+    <div style="max-width:700px;margin:0 auto;background:var(--card);border-radius:12px;padding:2.5rem;position:relative">
+      <button onclick="document.getElementById('privacyModal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1">×</button>
+      <h2 style="font-family:var(--font-d);letter-spacing:2px;font-size:22px;margin-bottom:1.5rem">PRIVACY POLICY</h2>
+      <div style="color:var(--muted);font-size:13px;line-height:1.8">
+        <p style="margin-bottom:1rem"><strong style="color:var(--text)">Last updated: March 2026</strong></p>
+        <p style="margin-bottom:1rem">WatchInOrder ("we", "us") operates watchinorder.org. This policy explains what data we collect and how we use it.</p>
+        <h3 style="color:var(--text);font-size:14px;margin-bottom:.5rem;margin-top:1.5rem">Data We Collect</h3>
+        <p style="margin-bottom:1rem">We store your watch progress, film ratings, XP, and preferences locally in your browser (localStorage). If you create an account, your username and email are stored securely. We do not sell your data.</p>
+        <h3 style="color:var(--text);font-size:14px;margin-bottom:.5rem;margin-top:1.5rem">Third-Party Services</h3>
+        <p style="margin-bottom:1rem">We use The Movie Database (TMDB) API for film posters. Streaming links may include affiliate tracking parameters. We use no advertising trackers or analytics that share data with advertisers.</p>
+        <h3 style="color:var(--text);font-size:14px;margin-bottom:.5rem;margin-top:1.5rem">Cookies & Storage</h3>
+        <p style="margin-bottom:1rem">We use localStorage to save your preferences and progress. No third-party cookies are set by this site.</p>
+        <h3 style="color:var(--text);font-size:14px;margin-bottom:.5rem;margin-top:1.5rem">Contact</h3>
+        <p>Questions? Email us at <strong style="color:var(--text)">hello@watchinorder.org</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Affiliate Disclosure Modal -->
+  <div id="affiliateModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);overflow-y:auto;padding:2rem 1rem">
+    <div style="max-width:700px;margin:0 auto;background:var(--card);border-radius:12px;padding:2.5rem;position:relative">
+      <button onclick="document.getElementById('affiliateModal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1">×</button>
+      <h2 style="font-family:var(--font-d);letter-spacing:2px;font-size:22px;margin-bottom:1.5rem">AFFILIATE DISCLOSURE</h2>
+      <div style="color:var(--muted);font-size:13px;line-height:1.8">
+        <p style="margin-bottom:1rem">WatchInOrder participates in affiliate programs. This means some links on this site — including "Rent on Amazon", "Disney+", and "Apple TV+" buttons — include affiliate tracking codes.</p>
+        <p style="margin-bottom:1rem"><strong style="color:var(--text)">When you click an affiliate link and make a purchase or subscription, WatchInOrder may earn a small commission at no extra cost to you.</strong></p>
+        <p style="margin-bottom:1rem">Affiliate relationships do not influence which films are listed, the order they appear in, or our editorial recommendations. We cover every franchise regardless of affiliate availability.</p>
+        <h3 style="color:var(--text);font-size:14px;margin-bottom:.5rem;margin-top:1.5rem">Programs We Participate In</h3>
+        <ul style="margin-bottom:1rem;padding-left:1.25rem">
+          <li>Amazon Associates (rent/buy links)</li>
+          <li>Disney+ Affiliate Program</li>
+          <li>Apple TV+ Affiliate Program</li>
+        </ul>
+        <p>This disclosure is made in accordance with the FTC's guidelines on endorsements and testimonials.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+['privacyModal','affiliateModal'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener('click',e=>{if(e.target===el)el.style.display='none';});
+});
+
+function toggleMobileNav(){
+  let mn=document.getElementById('mobileNav');
+  if(!mn){
+    mn=document.createElement('div');
+    mn.id='mobileNav';
+    mn.style.cssText='position:fixed;top:52px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:999;padding:.75rem 1rem;display:flex;flex-direction:column;gap:0';
+    const links=[
+      ['All',()=>{filterCat('all');mn.remove()}],
+      ['Superhero',()=>{filterCat('superhero');mn.remove()}],
+      ['Horror',()=>{filterCat('horror');mn.remove()}],
+      ['Sci-Fi',()=>{filterCat('scifi');mn.remove()}],
+      ['Action',()=>{filterCat('action');mn.remove()}],
+      ['Animated',()=>{filterCat('animated');mn.remove()}],
+      ['Fantasy',()=>{filterCat('fantasy');mn.remove()}],
+      ['Before Release',()=>{showPage('before');mn.remove()}],
+      ['Beginner Guide',()=>{showPage('guide');mn.remove()}],
+    ];
+    links.forEach(([label,fn])=>{
+      const a=document.createElement('a');
+      a.textContent=label;
+      a.style.cssText='padding:.6rem .25rem;color:var(--text);font-size:14px;cursor:pointer;border-bottom:1px solid var(--border);text-decoration:none';
+      a.onclick=fn;
+      mn.appendChild(a);
+    });
+    document.body.appendChild(mn);
+    setTimeout(()=>document.addEventListener('click',function close(e){if(!mn.contains(e.target)){mn.remove();document.removeEventListener('click',close);}},),50);
+  } else {
+    mn.remove();
+  }
+}
 </script>
 </body>
 </html>
