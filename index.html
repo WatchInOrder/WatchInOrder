@@ -3118,7 +3118,7 @@ function filterCat(cat){
   renderGrid(cat);showPage('home');
   if(cat!=='all')setTimeout(()=>document.getElementById('mainSec')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
 }
-function goHome(){showPage('home');renderGrid(currentFilter);}
+function goHome(){showPage('home');renderGrid('all');}
 // ════════════════════════════════════════════════════════════
 // UNIVERSE PAGE
 // ════════════════════════════════════════════════════════════
