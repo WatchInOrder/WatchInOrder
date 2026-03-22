@@ -3631,7 +3631,7 @@ function getWatchlistFranchises(){
 // Then set it here OR in your Vercel environment variables
 const TMDB_KEY = (typeof process !== 'undefined' && process.env?.TMDB_API_KEY) || 'abdb5f3a4a494419a295de1027d5423b';
 const TMDB_IMG = 'https://image.tmdb.org/t/p/';
-const POSTER_CACHE_KEY = 'wio_posters_v2';
+const POSTER_CACHE_KEY = 'wio_posters_v3';
 const BACKDROP_CACHE_KEY = 'wio_backdrops_v1';
 
 // In-memory cache (also persisted to localStorage)
@@ -3645,16 +3645,19 @@ const POSTERS_STATIC = {
   129: '/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg',
   155: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
   176: '/rLNSOudrayDBo1uqXjrhxcjODIC.jpg',
-  214: '/cEpHc7WZt3HMuEUVKFvYZJNq4s5.jpg',
-  215: '/cQnePqVVf5bNMGfRbIjGnfWZNp7.jpg',
+  214: '/4iO9n24Rb10peXV0JH2EldIOrAp.jpg',
+  215: '/gTnaTysN8HsvVQqTRUh8m35mmUA.jpg',
   218: '/qvktm0BHcnmDpul4Hz01GIazWPr.jpg',
   223: '/1qz3qUOHnVy7dL7M7G8jSErxE4b.jpg',
   268: '/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg',
-  272: '/lr3cYNKhHkFkKJMbXhLEBSr1Sqj.jpg',
+  270: '/le35Cod2vJWmWSbrUjeClZMC8JK.jpg',
+  271: '/gatMa1qfwpJqiawPjJxodUvdB0.jpg',
+  272: '/sPX89Td70IDDjVr85jdSBb4rWGr.jpg',
   296: '/nvsoLAclNfpyJSp73TiGKwZoqJW.jpg',
   330: '/6fSkhv35nPSw9hwPVCMINQFG1WD.jpg',
   331: '/oQXj4NUfS3r3gHXtDOzcJgj1lLc.jpg',
-  364: '/jsTsS98VQSO9Fmq6PApXJ0aSNON.jpg',
+  348: '/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg',
+  364: '/jKBjeXM7iBBV9UkUcOXx3m7FSHY.jpg',
   425: '/gLhHHZUzeseRXShoDyC4VqLgsNv.jpg',
   534: '/gw6JhlekZgtKUFlDTezq3j5JEPK.jpg',
   562: '/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg',
@@ -3664,7 +3667,7 @@ const POSTERS_STATIC = {
   605: '/bkkS61w94ZVMNVd8KEyyJl2tnY5.jpg',
   608: '/enA22EPyzc2WQ1VVyY7zxresQQr.jpg',
   620: '/7E8nLijS9AwwUEPu2oFYOVKhdFA.jpg',
-  663: '/nGsNruW3W27V6r4gkyc3oPZ3hkq.jpg',
+  663: '/ku1QdCXOU4ckz3zxLLlis8MIJVm.jpg',
   674: '/fECBtHlr0RB3foNHDiCBXeg9Bv9.jpg',
   679: '/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg',
   680: '/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg',
@@ -3689,6 +3692,7 @@ const POSTERS_STATIC = {
   1885: '/1mp4ViklKvA0WXXsNvNx0RBuiit.jpg',
   1894: '/oZNPzxqM2s5DyVWab09NTQScDQt.jpg',
   1895: '/xfSAoBEm9MNBjmlNcDYLvLSMlnq.jpg',
+  2080: '/yj8LbTju1p7CUJg7US2unSBk33s.jpg',
   2501: '/aP8swke3gmowbkfZ6lmNidu0y9p.jpg',
   2503: '/15rMz5MRXFp7CP4VxhjYw4y0FUn.jpg',
   2690: '/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg',
@@ -3702,7 +3706,7 @@ const POSTERS_STATIC = {
   8392: '/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg',
   8961: '/yCvB5fG5aEPqa1St7ihY6KEAsHD.jpg',
   9311: '/3jhfbqVv1rTCKKMPDFw4B6c1lkL.jpg',
-  9312: '/4TqnSuUX4kQBcKXkM4hKNhQpbqO.jpg',
+  9312: '/fcK7tzSSXMYiMN8E9KlZJL1BYyp.jpg',
   9651: '/o49a2RDChZkry84LomEORCPDWfk.jpg',
   9799: '/gqY0ITBgT7A82poL9jv851qdnIb.jpg',
   9800: '/tFe5Yoo5zT495okA49bq1vPPkiV.jpg',
@@ -3716,16 +3720,22 @@ const POSTERS_STATIC = {
   10828: '/bZ27LmdoJnp00sUEyPjmQswgH8g.jpg',
   11575: '/9rL8GWuFdO3fLXcNV9rZRHskoOn.jpg',
   11645: '/fOzEsMLeCwB0eBiMRB7G4VVw1ML.jpg',
+  11917: '/rKl79KqLXg60KFyKsLe4wSSjQ08.jpg',
   12477: '/k9tv1rXZbOhH7eiCk378x61kNQ1.jpg',
   12622: '/9MmLBW1xFlSBu0xcv5KZOKp89OC.jpg',
   14160: '/mFvoEwSfLqbcWwFsDjQebn9bzFe.jpg',
   15909: '/1KCgtq413cBz1qgMT0gkPX67xzZ.jpg',
   18785: '/A0uS9rHR56FeBtpjVki16M5xxSW.jpg',
+  22804: '/9JtluosCbioSXJSABZByaODyPpa.jpg',
   24428: '/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg',
+  36647: '/oWT70TvbsmQaqyphCZpsnQR7R32.jpg',
+  36657: '/bRDAc4GogyS9ci3ow7UnInOcriN.jpg',
+  36658: '/bst4alFUXCxISwdRUKSMhhkrX1M.jpg',
   37645: '/4spRV4Qw0YGaWBHYJ6enu84sR81.jpg',
+  41439: '/qHCZ6LjtmqWDfXXN28TlIC9OppK.jpg',
   46748: '/l8gnjkOv5GKg0fyW8hf7tA2dix4.jpg',
-  49026: '/dEYnvnUfXrqvqeRSqvIztizsnAf.jpg',
-  49538: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg',
+  49026: '/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg',
+  49538: '/hNEokmUke0dazoBhttFN0o3L7Xv.jpg',
   56292: '/eRZTGx7GsiKqPch96k27LK005ZL.jpg',
   57158: '/u7Lp1Hi8aBS73jv4KRMIv5aK4ax.jpg',
   63584: '/nNmADiHUlkGKLVWzpFKWOnJQxwF.jpg',
@@ -3756,7 +3766,7 @@ const POSTERS_STATIC = {
   131634: '/lImKHDfExAulp16grYm8zD5eONE.jpg',
   131635: '/lImKHDfExAulp16grYm8zD5eONE.jpg',
   135397: '/rhr4y79GpxQF9IsfJItRXVaoGs4.jpg',
-  138843: '/a4Ce3qHqIyHM3QfGsiVTAu3YADJ.jpg',
+  138843: '/wVYREutTvI2tmxr6ujrHT704wGF.jpg',
   140607: '/wqnLdwVXoBjKibFRR5U3y0aDUhs.jpg',
   172139: '/5O5a7JvkKnR7g4Fs9Dx33AfYxHM.jpg',
   174181: '/46X1ei9uf13nkkr0OhWldGyr5Uh.jpg',
@@ -3770,8 +3780,9 @@ const POSTERS_STATIC = {
   241252: '/9u4yW7yPA0BQ2pv9XwiNzItwvp8.jpg',
   245891: '/wXqWR7dHncNRbxoEGybEy7QTe9h.jpg',
   246655: '/ikA8UhYdTGpqbatFa93nIf6noSr.jpg',
+  250546: '/yLsuU2P2SpDYFwtZQ7dtfVAf6TE.jpg',
   259316: '/fLsaFKExQt05yqjoAvKsmOMYvJR.jpg',
-  259693: '/wVYREutTvI2tmxr6ujrHT704wGF.jpg',
+  259693: '/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg',
   263115: '/fnbjcRDYn6YviCcePDnGdyAkYsB.jpg',
   271110: '/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg',
   281338: '/3vYhLLxrTtZLysXtIWktmd57Snv.jpg',
@@ -3782,6 +3793,7 @@ const POSTERS_STATIC = {
   286217: '/3ndAx3weG6KDkJIRMCi5vXX6Dyb.jpg',
   293660: '/3E53WEZJqP6aM84D8CckXx4pIHw.jpg',
   297802: '/ufl63EFcc5XpByEV2Ecdw6WJZAI.jpg',
+  298250: '/7RwHxhdUNS996JPFNB9a7CJtlwR.jpg',
   298618: '/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg',
   299534: '/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg',
   299536: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg',
@@ -3789,6 +3801,7 @@ const POSTERS_STATIC = {
   306264: '/xXNptqQ9efuJovALhs4cuXKj07t.jpg',
   315162: '/kuf6dutpsT0vSVehic3EZIqkOBt.jpg',
   315635: '/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg',
+  315837: '/zCtL3UBgCoZzd7XTVGhvl6XY75E.jpg',
   324857: '/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg',
   337339: '/dImWM7GJqryWJO9LHa3XQ8DD5NH.jpg',
   338953: '/3c5GNLB4yRSLBby0trHoA1DSQxQ.jpg',
@@ -3802,9 +3815,10 @@ const POSTERS_STATIC = {
   383498: '/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg',
   384018: '/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg',
   384262: '/cRcEjGfXCFoTf7Xz8SijybllcVa.jpg',
-  396422: '/tbhdm8UJAb4ViCTHzCfIsgNKlie.jpg',
+  396422: '/tb86j8jVCVsdZnzf8I6cIi65IeM.jpg',
   397837: '/eowzonDJMCuNXoJGVkP9Z7oCmiM.jpg',
-  414906: '/74xTEgt7R36Fpocon6NNSm51Wsh.jpg',
+  414906: '/74xTEgt7R36Fpooo50r9T25onhq.jpg',
+  423108: '/rQfX2xx8TUoNvyk892yKWNikJaM.jpg',
   424172: '/bvnBVR9UQVYEzixPLPo6War40YZ.jpg',
   424784: '/19Hp3LysWDYHGEck9YCK59Xz8c9.jpg',
   429617: '/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg',
@@ -3827,6 +3841,7 @@ const POSTERS_STATIC = {
   502223: '/lFByFSLV5WDJEv3KabbdAF959F2.jpg',
   503919: '/f1tIYarTbkBdIT1aW0gzelDwknv.jpg',
   505642: '/sv1xJUazXeYqALzczSZ3O6nkH75.jpg',
+  521029: '/qWsHMrbg9DsBY3bCMk9jyYCRVRs.jpg',
   524434: '/lFByFSLV5WDJEv3KabbdAF959F2.jpg',
   533514: '/bajajkoErDst0JxdFyBkABiF9rW.jpg',
   533535: '/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg',
@@ -3834,6 +3849,7 @@ const POSTERS_STATIC = {
   575264: '/NNxYkU70HPurnNCSiCjYAmacwm.jpg',
   576845: '/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg',
   585511: '/1HOYvwGFioUFL58UVvDRG6beEDm.jpg',
+  602734: '/cTvSDfBuXTZTdRCNduGMANd7VEP.jpg',
   609681: '/9GBhzXMFjgcZ3FdR9w3bUMMTps5.jpg',
   610745: '/wSfKE3bd7YViSVAk7JZWBRlouh3.jpg',
   614911: '/l8lXesOLXKS0VYjzWNZN6gDxv2F.jpg',
@@ -3849,12 +3865,15 @@ const POSTERS_STATIC = {
   693134: '/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
   698687: '/iRCgqpdVE4wyLQvGYU3ZP7pAtUc.jpg',
   759644: '/gFSC5xV7hv6tYcxqIDyBZNr1DGX.jpg',
+  766507: '/2FKjLRt7oK1bRRIrxgWmthbBdFh.jpg',
   822119: '/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg',
   823507: '/5ik4ATKmNtmJU6AYD0bLm56BCVM.jpg',
   912649: '/1RaSkWakWBxxYOWRrqmwo2my5zg.jpg',
   912908: '/n1hqbSCtyBAxaXEl1Dj3ipXJAJG.jpg',
+  945961: '/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg',
   950526: '/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg',
   951491: '/u7Lp1Hi8aBS73jv4KRMIv5aK4ax.jpg',
+  968051: '/5gzzkR7y3hnY8AD1wXjCnVlHba5.jpg',
   986056: '/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg',
   1002001: '/jRZascAWZoWFOg93nL9C4F91Ppf.jpg',
   1022789: '/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
@@ -3877,6 +3896,16 @@ function loadPosterCache() {
     const savedKey = localStorage.getItem('wio_tmdb_key');
     if (savedKey) window._tmdbKeyOverride = savedKey;
   } catch(e) {}
+  // POSTERS_STATIC is authoritative — override any stale cached paths
+  let cacheFixed = false;
+  Object.entries(POSTERS_STATIC).forEach(([id, correctPath]) => {
+    const numId = Number(id);
+    if (POSTERS[numId] !== undefined && POSTERS[numId] !== correctPath) {
+      POSTERS[numId] = correctPath;
+      cacheFixed = true;
+    }
+  });
+  if (cacheFixed) savePosterCache();
 }
 
 function savePosterCache() {
