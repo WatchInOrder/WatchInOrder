@@ -1066,7 +1066,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       </div>
       <div class="otabs" id="otabsEl"></div>
       <div class="onote" id="onoteEl"></div>
-      <div class="progwrap"><div class="progbar"><div class="progfill" id="pfill" style="width:0%"></div></div><div class="proglbl"><span class="progpct" id="ppct">0</span>% watched</div><button class="prog-reset" onclick="resetProgress()">↺ Reset</button>${STATE.streak>0?`<span style="font-size:11px;color:var(--gold2);margin-left:.5rem">🔥 ${STATE.streak} day streak</span>`:''}</div>
+      <div class="progwrap"><div class="progbar"><div class="progfill" id="pfill" style="width:0%"></div></div><div class="proglbl"><span class="progpct" id="ppct">0</span>% watched</div><button class="prog-reset" onclick="resetProgress()">↺ Reset</button><span id="streakInline"></span></div>
       <div class="wlist" id="wlistEl"></div>
       <div id="faqEl"></div>
       <div id="recContainer"></div>
@@ -1441,7 +1441,7 @@ function renderXPSideCard(){
     <div class="xp-stats">
       <div class="xp-stat"><div class="xp-stat-n">${getTotalWatched()}</div><div class="xp-stat-l">Watched</div></div>
       <div class="xp-stat"><div class="xp-stat-n">${getTotalCompletedFranchises()}</div><div class="xp-stat-l">Finished</div></div>
-      <div class="xp-stat"><div class="xp-stat-n">${STATE.streak||0}🔥</div><div class="xp-stat-l">Day Streak</div></div>
+      <div class="xp-stat"><div class="xp-stat-n">${STATE.streakDays||0}🔥</div><div class="xp-stat-l">Day Streak</div></div>
     </div>
     <button class="xp-view-profile" onclick="showPage('profile')">View full profile →</button>`;
 }
@@ -1588,7 +1588,7 @@ function shareProfile(){
   const r=getRank(STATE.xp);
   const watched=getTotalWatched();
   const finished=getTotalCompletedFranchises();
-  const streak=STATE.streak||0;
+  const streak=STATE.streakDays||0;
   const topBadges=BADGES.filter(b=>STATE.badges.includes(b.id)).slice(0,3).map(b=>b.ico).join('');
   const txt=[
     '🎬 '+u.username+' on WatchInOrder',
@@ -3353,6 +3353,8 @@ function renderList(){
   const pct=total?Math.round((done/total)*100):0;
   document.getElementById('pfill').style.width=pct+'%';
   document.getElementById('ppct').textContent=pct;
+  const _si=document.getElementById('streakInline');
+  if(_si) _si.innerHTML=STATE.streakDays>1?'<span style="font-size:11px;color:var(--gold2);margin-left:.5rem">🔥 '+STATE.streakDays+' day streak</span>':'';
   calcBinge();
 
   document.getElementById('wlistEl').innerHTML=order.items.map((item,i)=>{
@@ -3443,6 +3445,8 @@ function tog(i){
   const ppct = document.getElementById('ppct');
   if (pfill) pfill.style.width = pct + '%';
   if (ppct) ppct.textContent = pct;
+  const _si=document.getElementById('streakInline');
+  if(_si) _si.innerHTML=STATE.streakDays>1?'<span style="font-size:11px;color:var(--gold2);margin-left:.5rem">🔥 '+STATE.streakDays+' day streak</span>':'';
   calcBinge();
   saveState();renderXPSideCard();checkBadges();
   if(!wasWatched&&STATE.user)updateStreak();
