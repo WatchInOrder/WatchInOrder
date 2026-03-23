@@ -3239,7 +3239,7 @@ function renderGrid(cat='all'){
     const queueBadge=isQueued&&!isComplete?'<div class="queue-ring">📋 Queued</div>':'';
     return `<div class="ucard${isComplete?' completed':''}${isQueued&&!isComplete?' queued-card':''}" onclick="openUniverse('${u.id}')">
       ${completeBadge}${queueBadge}
-      <div class="ucard-poster">${(()=>{const img=franchisePosterImg(u);return img?`<img src="${img}" alt="${u.short}" loading="lazy" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'"><div class='ucard-poster-bg' style='background:${u.bg}'></div>`:`<div class='ucard-poster-bg' style='background:${u.bg}'></div>`})()} <div class="ucard-emoji" style="${franchisePosterImg(u)?'opacity:0;pointer-events:none':''}">${u.emoji}</div><div class="ucard-fade"></div></div>
+      <div class="ucard-poster">${(()=>{const img=franchisePosterImg(u);return img?`<img src="${img}" alt="${u.short}" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'"><div class='ucard-poster-bg' style='background:${u.bg}'></div>`:`<div class='ucard-poster-bg' style='background:${u.bg}'></div>`})()} <div class="ucard-emoji" style="${franchisePosterImg(u)?'opacity:0;pointer-events:none':''}">${u.emoji}</div><div class="ucard-fade"></div></div>
       <div class="ucard-body">
         <span class="utag ${u.tagClass}">${u.tag}</span>
         <div class="ucard-name">${u.short}</div>
