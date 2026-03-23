@@ -215,7 +215,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .ucard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;position:relative}
 .ucard:hover{border-color:var(--border3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
 .ucard-new{position:absolute;top:8px;left:8px;z-index:3;background:var(--teal);color:#000;font-size:9px;font-weight:800;padding:2px 7px;border-radius:3px;letter-spacing:1px;text-transform:uppercase}
-.ucard-poster{height:200px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ucard-poster{height:260px;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .ucard-poster-bg{position:absolute;inset:0;background-size:cover;background-position:center top;transition:transform .3s ease}
 .ucard:hover .ucard-poster-bg{transform:scale(1.04)}
 .ucard-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:opacity .3s ease,transform .3s ease;z-index:1}
@@ -251,7 +251,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .sm-apple{background:rgba(150,150,150,.12);color:#bbb}
 .sm-rent{background:rgba(255,255,255,.06);color:var(--dim)}
 .ucard-tip{font-size:10.5px;color:var(--dim);line-height:1.3;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;flex:1;min-width:0;font-style:italic}
-.ucard-rating{display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.06)}.ucard-rating-stars{display:flex;gap:2px}.ucard-rating-star{font-size:15px;cursor:pointer;opacity:0.35;transition:opacity .15s,transform .15s;line-height:1}.ucard-rating-star:hover,.ucard-rating-star.voted{opacity:1;transform:scale(1.18)}.ucard-rating-star.voted{filter:drop-shadow(0 0 4px rgba(255,200,60,0.6))}.ucard-rating-pct{font-size:11px;font-weight:700;color:var(--gold);min-width:32px}.ucard-rating-votes{font-size:10px;color:var(--muted)}.ucard-rating-locked{font-size:10px;color:var(--muted);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;opacity:.7}.ucard-progress{height:2px;background:var(--bg5);border-radius:1px;overflow:hidden;margin-top:8px}
+.ucard-rating{display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.06)}.ucard-rating-stars{display:flex;gap:2px}.ucard-rating-star{font-size:15px;cursor:pointer;opacity:0.35;transition:opacity .15s,transform .15s;line-height:1}.ucard-rating-star:hover,.ucard-rating-star.voted{opacity:1;transform:scale(1.18)}.ucard-rating-star.voted{filter:drop-shadow(0 0 4px rgba(255,200,60,0.6))}.ucard-rating-pct{font-size:11px;font-weight:700;color:var(--gold);min-width:32px}.ucard-rating-votes{font-size:10px;color:var(--muted)}.ucard-rating-locked{font-size:10px;color:var(--muted);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;opacity:.7}
+/* ── CONTINUE WATCHING CARDS ── */
+.cw-card{position:relative;border-radius:var(--r2);overflow:hidden;cursor:pointer;flex-shrink:0;transition:transform .22s,box-shadow .22s;border:1px solid var(--border)}
+.cw-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.6);border-color:var(--border3)}
+.cw-poster{position:relative;width:100%;height:300px;overflow:hidden}
+.cw-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1;transition:opacity .3s,transform .3s}
+.cw-poster img.img-loading{opacity:0}
+.cw-poster img.img-loaded{opacity:1}
+.cw-card:hover .cw-poster img{transform:scale(1.04)}
+.cw-poster-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.cw-card:hover .cw-poster-bg{transform:scale(1.04)}
+.cw-overlay{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:.85rem .9rem .75rem;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.6) 60%,transparent 100%)}
+.cw-name{font-family:var(--font-d);font-size:17px;letter-spacing:.6px;color:#fff;line-height:1.1;margin-bottom:3px}
+.cw-meta{font-size:10px;color:rgba(255,255,255,.55);margin-bottom:6px}
+.cw-bar{height:3px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden}
+.cw-bar-fill{height:100%;background:var(--red2);border-radius:2px;transition:width .4s ease}
+.ucard-progress{height:2px;background:var(--bg5);border-radius:1px;overflow:hidden;margin-top:8px}
 .ucard-progress-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:1px;transition:width .4s ease}
 .ucard.completed{border-color:rgba(74,222,128,.2)}
 .ucard.completed:hover{border-color:rgba(74,222,128,.4)}
@@ -965,8 +981,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 
   <!-- Continue Watching (shown when logged in with progress) -->
   <div class="sec" id="continueWatchingSec" style="display:none">
-    <div class="sec-head"><div><span class="sec-title">▶ Continue Watching</span></div></div>
-    <div class="ugrid" id="continueWatchingGrid"></div>
+    <div class="sec-head"><div><span class="sec-title">▶ CONTINUE WATCHING</span></div></div>
+    <div id="continueWatchingGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem"></div>
   </div>
 
   <div class="sec" id="mainSec">
@@ -3168,12 +3184,17 @@ function renderContinueWatching(){
     const total=u.orders[Object.keys(u.orders)[0]].items.length;
     const pct=Math.round((done/total)*100);
     const img=franchisePosterImg(u);
-    return `<div class="ucard" onclick="openUniverse('${u.id}')" style="position:relative">
-      <div class="ucard-poster">${img?`<img src="${img}" alt="${u.short}" loading="lazy" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'"><div class='ucard-poster-bg' style='background:${u.bg}'></div>`:`<div class='ucard-poster-bg' style='background:${u.bg}'></div>`}</div>
-      <div class="ucard-info">
-        <div class="ucard-name">${u.short}</div>
-        <div style="font-size:10px;color:var(--dim);margin-bottom:4px">${done}/${total} films · ${pct}%</div>
-        <div class="ucard-progress"><div class="ucard-progress-fill" style="width:${pct}%"></div></div>
+    return `<div class="cw-card" onclick="openUniverse('${u.id}')">
+      <div class="cw-poster">
+        ${img
+          ? `<img src="${img}" alt="${u.short}" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'">`
+          : ''}
+        <div class="cw-poster-bg" style="background:${u.bg}"></div>
+        <div class="cw-overlay">
+          <div class="cw-name">${u.short}</div>
+          <div class="cw-meta">${done}/${total} films · ${pct}%</div>
+          <div class="cw-bar"><div class="cw-bar-fill" style="width:${pct}%"></div></div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -4330,16 +4351,22 @@ function posterImg(tmdbId, emoji, alt, size = 'w185') {
 
 // For franchise grid cards — use the franchise's first film poster as a real image
 function franchisePosterImg(franchise) {
-  // 1. Use explicit franchise-level poster TMDB if set
-  if (franchise.posterTmdb && POSTERS[franchise.posterTmdb]) {
-    return posterUrl(POSTERS[franchise.posterTmdb], 'w342');
+  // 1. Use explicit franchise-level poster TMDB if set and cached
+  if (franchise.posterTmdb) {
+    const p = POSTERS[franchise.posterTmdb] || POSTERS_STATIC[franchise.posterTmdb];
+    if (p) return posterUrl(p, 'w342');
   }
-  // 2. Find first film that has a cached poster path
+  // 2. Try FRANCHISE_TMDB collection id
+  const fc = FRANCHISE_TMDB[franchise.id];
+  if (fc && fc.t === 'c') {
+    // collection id — try to find a poster from any film tmdb near the collection
+  }
+  // 3. Find first film that has a cached poster path (POSTERS or POSTERS_STATIC)
   const firstOrder = Object.values(franchise.orders)[0];
   if (!firstOrder) return null;
   for (const item of firstOrder.items) {
     if (item.tmdb && item.tmdb !== 0) {
-      const path = POSTERS[item.tmdb];
+      const path = POSTERS[item.tmdb] || POSTERS_STATIC[item.tmdb];
       if (path) return posterUrl(path, 'w342');
     }
   }
