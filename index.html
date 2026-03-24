@@ -5115,15 +5115,37 @@ else if(initPath==='settings')showPage('settings');
   const _origShowPage = showPage;
   const _origGoHome = goHome;
 
-  // ── CRITICAL: replaceState FIRST so the initial entry is
-  // always owned by us. Back from any page will land here
-  // instead of going back to Google/previous site.
-  history.replaceState({page:'home'}, '', window.location.pathname || '/');
+  // ── STEP 1: Replace whatever entry Google/referrer left with
+  // a clean home state. This means the very bottom of our owned
+  // history stack is always {page:'home'} — back can never
+  // escape to a previous site.
+  history.replaceState({page:'home'}, '', '/');
+
+  // ── STEP 2: Handle direct URL loads AFTER replaceState.
+  // If user landed on /halloween directly, we push the universe
+  // state ON TOP of the home state we just set.
+  const path = window.location.pathname.replace(/^\//, '');
+  if(path && path !== '') {
+    if(path === 'before-release') { _origShowPage('before'); history.replaceState({page:'before'}, '', '/before-release'); }
+    else if(path === 'guide') { _origShowPage('guide'); history.replaceState({page:'guide'}, '', '/guide'); }
+    else if(path === 'profile') { _origShowPage('profile'); history.replaceState({page:'profile'}, '', '/profile'); }
+    else if(path === 'settings') { _origShowPage('settings'); history.replaceState({page:'settings'}, '', '/settings'); }
+    else {
+      const franchise = U.find(f => f && f.slug === path) || (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f.slug === path));
+      if(franchise) {
+        // Push home first so back-from-franchise lands on home
+        history.pushState({page:'home'}, '', '/');
+        _origGoHome();
+        history.pushState({page:'universe', id:franchise.id}, '', '/' + franchise.slug);
+        _origOpenUniverse(franchise.id);
+      }
+    }
+  }
 
   window.openUniverse = function(id, skipPush){
     const franchise = U.find(f => f && f.id === id) || (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f && f.id === id));
     const slug = franchise ? franchise.slug : id;
-    if(!skipPush) history.pushState({page:'universe',id}, '', '/' + slug);
+    if(!skipPush) history.pushState({page:'universe', id}, '', '/' + slug);
     _origOpenUniverse(id);
   };
 
@@ -5138,27 +5160,13 @@ else if(initPath==='settings')showPage('settings');
     _origGoHome();
   };
 
-  // Handle back/forward navigation
+  // ── Handle back/forward navigation ───────────────────────
   window.addEventListener('popstate', function(e){
     const state = e.state;
-    // state is always set now because replaceState ran first
     if(!state || state.page === 'home') { _origGoHome(); return; }
-    if(state.page === 'universe') _origOpenUniverse(state.id);
-    else _origShowPage(state.page);
+    if(state.page === 'universe') { _origOpenUniverse(state.id); return; }
+    _origShowPage(state.page);
   });
-
-  // Handle direct URL loads (e.g. watchinorder.org/halloween)
-  const path = window.location.pathname.replace(/^\//, '');
-  if(path && path !== '') {
-    if(path === 'before-release') { _origShowPage('before'); }
-    else if(path === 'guide') { _origShowPage('guide'); }
-    else if(path === 'profile') { _origShowPage('profile'); }
-    else if(path === 'settings') { _origShowPage('settings'); }
-    else {
-      const franchise = U.find(f => f && f.slug === path) || (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f.slug === path));
-      if(franchise) _origOpenUniverse(franchise.id);
-    }
-  }
 })();
 
 </script>
