@@ -5115,35 +5115,37 @@ else if(initPath==='settings')showPage('settings');
   const _origShowPage = showPage;
   const _origGoHome = goHome;
 
-  // ── STEP 1: Replace whatever entry Google/referrer left with
-  // a clean home state. This means the very bottom of our owned
-  // history stack is always {page:'home'} — back can never
-  // escape to a previous site.
-  history.replaceState({page:'home'}, '', '/');
+  // ── The only reliable way to stop back-to-Google:
+  // Push TWO home entries onto the stack immediately.
+  // Entry 0 (bottom): replaceState — replaces whatever the
+  //   browser had (Google, referrer, etc.)
+  // Entry 1: pushState — an extra home buffer
+  // Now hitting back from a franchise always lands on entry 1,
+  // and hitting back again lands on entry 0 (still home).
+  // The user can never escape to Google.
+  history.replaceState({page:'home', depth:0}, '', '/');
+  history.pushState({page:'home', depth:1}, '', '/');
 
-  // ── STEP 2: Handle direct URL loads AFTER replaceState.
-  // If user landed on /halloween directly, we push the universe
-  // state ON TOP of the home state we just set.
+  // Handle direct URL loads AFTER setting up the stack
   const path = window.location.pathname.replace(/^\//, '');
   if(path && path !== '') {
-    if(path === 'before-release') { _origShowPage('before'); history.replaceState({page:'before'}, '', '/before-release'); }
-    else if(path === 'guide') { _origShowPage('guide'); history.replaceState({page:'guide'}, '', '/guide'); }
-    else if(path === 'profile') { _origShowPage('profile'); history.replaceState({page:'profile'}, '', '/profile'); }
-    else if(path === 'settings') { _origShowPage('settings'); history.replaceState({page:'settings'}, '', '/settings'); }
-    else {
-      const franchise = U.find(f => f && f.slug === path) || (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f.slug === path));
-      if(franchise) {
-        // Push home first so back-from-franchise lands on home
-        history.pushState({page:'home'}, '', '/');
-        _origGoHome();
-        history.pushState({page:'universe', id:franchise.id}, '', '/' + franchise.slug);
-        _origOpenUniverse(franchise.id);
+    const franchise = U.find(f => f && f.slug === path) ||
+      (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f.slug === path));
+    if(franchise) {
+      history.pushState({page:'universe', id:franchise.id}, '', '/' + franchise.slug);
+      _origOpenUniverse(franchise.id);
+    } else {
+      const pages = {'before-release':'before', 'guide':'guide', 'profile':'profile', 'settings':'settings'};
+      if(pages[path]) {
+        history.pushState({page:pages[path]}, '', '/' + path);
+        _origShowPage(pages[path]);
       }
     }
   }
 
   window.openUniverse = function(id, skipPush){
-    const franchise = U.find(f => f && f.id === id) || (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f && f.id === id));
+    const franchise = U.find(f => f && f.id === id) ||
+      (typeof BEFORE_RELEASE!=='undefined' && BEFORE_RELEASE.find(f => f && f.id === id));
     const slug = franchise ? franchise.slug : id;
     if(!skipPush) history.pushState({page:'universe', id}, '', '/' + slug);
     _origOpenUniverse(id);
@@ -5156,14 +5158,18 @@ else if(initPath==='settings')showPage('settings');
   };
 
   window.goHome = function(skipPush){
-    if(!skipPush) history.pushState({page:'home'}, '', '/');
+    if(!skipPush) history.pushState({page:'home', depth:1}, '', '/');
     _origGoHome();
   };
 
-  // ── Handle back/forward navigation ───────────────────────
   window.addEventListener('popstate', function(e){
     const state = e.state;
-    if(!state || state.page === 'home') { _origGoHome(); return; }
+    if(!state || state.page === 'home') {
+      _origGoHome();
+      // Re-push a home buffer so future back presses still work
+      history.pushState({page:'home', depth:1}, '', '/');
+      return;
+    }
     if(state.page === 'universe') { _origOpenUniverse(state.id); return; }
     _origShowPage(state.page);
   });
