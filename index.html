@@ -5761,7 +5761,7 @@ function renderNotifPanel() {
   if(!list) return;
   const notifs = getNotifications();
   if(!notifs.length) {
-    list.innerHTML = '<div class="notif-empty">🔔<br>You're all caught up!<br><span style="font-size:10px;color:var(--faint)">Major releases & announcements will appear here</span></div>';
+    list.innerHTML = '<div class="notif-empty">🔔<br>You\'re all caught up!<br><span style="font-size:10px;color:var(--faint)">Major releases & announcements will appear here</span></div>';
     return;
   }
   list.innerHTML = notifs.map(n => {
