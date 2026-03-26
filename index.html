@@ -5371,7 +5371,7 @@ loadState();
 loadPosterCache(); // Load cached TMDB poster paths from localStorage
 renderGrid('all');
 refreshNavUI()
-  initNotifications();;
+  if(typeof initNotifications==="function")initNotifications();
 refreshHeroXP();
 if(STATE.user)document.getElementById('gameBanner').style.display='none';
 
