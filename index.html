@@ -3475,7 +3475,6 @@ function openUniverse(id){
   if(_e('ogDesc'))_e('ogDesc').setAttribute('content',_sd);
   if(_e('ogUrl'))_e('ogUrl').setAttribute('content',_su);
   if(_e('canonical'))_e('canonical').setAttribute('href',_su);
-  history.pushState({page:'universe',id:u.id},'','/'+( u.slug||u.id));
   if(_e('twTitle'))_e('twTitle').setAttribute('content',_st);
   if(_e('twDesc'))_e('twDesc').setAttribute('content',_sd);
   if(_e('twImage'))_e('twImage').setAttribute('content','WatchInOrder — '+u.name+' Watch Order');
@@ -5532,8 +5531,12 @@ window.wioResetStats = function() {
   // Now hitting back from a franchise always lands on entry 1,
   // and hitting back again lands on entry 0 (still home).
   // The user can never escape to Google.
-  history.replaceState({page:'home', depth:0}, '', '/');
-  history.pushState({page:'home', depth:1}, '', '/');
+  try {
+    history.replaceState({page:'home', depth:0}, '', '/');
+    history.pushState({page:'home', depth:1}, '', '/');
+  } catch(e) {
+    // SecurityError if navigated from cross-origin — safe to ignore
+  }
 
   // Handle direct URL loads AFTER setting up the stack
   const path = window.location.pathname.replace(/^\//, '');
@@ -5567,16 +5570,16 @@ window.wioResetStats = function() {
   };
 
   window.goHome = function(skipPush){
-    if(!skipPush) history.pushState({page:'home', depth:1}, '', '/');
+    if(!skipPush) history.replaceState({page:'home', depth:1}, '', '/');
     _origGoHome();
   };
 
   window.addEventListener('popstate', function(e){
     const state = e.state;
-    if(!state || state.page === 'home') {
+    if(!state || state.page === 'home' || state.depth !== undefined) {
       _origGoHome();
       // Re-push a home buffer so future back presses still work
-      history.pushState({page:'home', depth:1}, '', '/');
+      history.replaceState({page:'home', depth:1}, '', '/');
       return;
     }
     if(state.page === 'universe') { _origOpenUniverse(state.id); return; }
