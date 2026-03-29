@@ -7,7 +7,6 @@
 <meta name="robots" content="index, follow">
 <title id="pageTitle">WatchInOrder — The Right Watch Order for Every Movie Universe</title>
 <meta id="metaDesc" name="description" content="The complete watch order for every major movie franchise. MCU, Star Wars, Harry Potter, James Bond, Fast &amp; Furious and 40+ more — free franchise guides.">
-  <title>WatchInOrder — Movie Franchise Watch Orders | MCU, Star Wars & More</title>
 <meta id="ogTitle" property="og:title" content="WatchInOrder — The Right Watch Order for Every Movie Franchise">
 <meta id="ogDesc" property="og:description" content="The definitive watch order guide for every movie universe and franchise.">
 <meta property="og:type" content="website">
@@ -24,12 +23,11 @@
   <meta name="theme-color" content="#0a0a0f">
   <meta name="author" content="WatchInOrder">
   <meta id="metaKeywords" name="keywords" content="watch order, movie franchise order, MCU watch order, Marvel watch order, Star Wars watch order, film franchise guide">
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">h
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <meta name="twitter:site" content="@WatchInOrder">
   <meta name="twitter:creator" content="@WatchInOrder">
 <meta id="twTitle" name="twitter:title" content="WatchInOrder">
 <meta id="twDesc" name="twitter:description" content="The right watch order for every movie universe.">
-<link rel="canonical" id="canonical" href="https://watchinorder.org">
 <!-- Google Analytics — replace G-XXXXXXXXXX with your real ID -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X07T6ZRLB6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X07T6ZRLB6');</script>
@@ -2051,11 +2049,9 @@ function cancelPwdEdit() {
 }
 
 
-function startEmailEdit(){  const wrap=document.getElementById('emailEditWrap');
-  STATE.settings[key]=!STATE.settings[key];
-  document.getElementById(btnId).classList.toggle('on',STATE.settings[key]);
-  saveState();
-  showToast(`${key.replace(/([A-Z])/g,' $1')} ${STATE.settings[key]?'enabled':'disabled'}`,'xp');
+function startEmailEdit(){
+  const wrap=document.getElementById('emailEditWrap');
+  if(wrap) wrap.style.display='flex';
 }
 function saveTmdbKey(){
   const key = document.getElementById('tmdbKeyInput')?.value?.trim();
@@ -2169,7 +2165,7 @@ const UPCOMING_FILMS=[
    essential:[{id:'scream',order:'release',title:'Scream Franchise (All 6)',why:'One connected timeline'}],optional:[]},
   {name:'Sunrise on the Reaping',date:'November 2026',shortDate:'Nov 2026',type:'Hunger Games Film',emoji:'🏹',tmdb:1008042,
    why:"Young Haymitch's story set during the 50th Hunger Games.",
-   essential:[{id:'hungeragmes',order:'firsttime',title:'The Hunger Games Saga',why:"Essential context for Haymitch's arc"}],optional:[]},
+   essential:[{id:'hungergames',order:'firsttime',title:'The Hunger Games Saga',why:"Essential context for Haymitch's arc"}],optional:[]},
   {name:'Shrek 5',date:'July 2026',shortDate:'Jul 2026',type:'Animated Sequel',emoji:'🧅',tmdb:574736,
    why:'The Shrek franchise returns after 15 years.',
    essential:[{id:'shrek',order:'release',title:'Shrek Franchise',why:'The full Shrek story'}],optional:[]},
@@ -2383,7 +2379,7 @@ const U=[
       },
       h20:{label:'H20 Timeline',note:'<strong>The classic Jamie Lee Curtis saga.</strong> 1978 origin + 1981 continuation + the 1998 comeback. Ignores films 4–6.',
         items:[
-          film('Halloween',1978,'🎃',['essential'],'The origi. Laurie Strode\'s first encounter with The Shape.','John Carpenter composed the entire score in 3 days on a $70,000 budget using only 5 notes on a piano.',91,90,948,['peacock','rent_amazon']),
+          film('Halloween',1978,'🎃',['essential'],'The original. Laurie Strode\'s first encounter with The Shape.','John Carpenter composed the entire score in 3 days on a $70,000 budget using only 5 notes on a piano.',91,90,948,['peacock','rent_amazon']),
           film('Halloween II',1981,'🎃',['essential'],'Continues the same night as the original. New revelations about Michael and Laurie.','New backstory for Michael and Laurie — canon in this timeline, ignored in the Blumhouse version.',92,62,11281,['peacock','rent_amazon']),
           film('Halloween III: Season of the Witch',1982,'🎃',['optional'],'No Michael Myers. Silver Shamrock masks. A standalone horror anthology entry.','Hated on release, now a cult classic. Watch as a standalone oddity.',98,54,10676,['peacock','rent_amazon']),film('Halloween 4: The Return of Michael Myers',1988,'🎃',['optional'],'Michael awakens after 10 years. He targets Jamie Lloyd, Laurie\'s daughter.','Donald Pleasence returns as Loomis. A solid return to the slasher formula.',88,56,11357,['peacock','rent_amazon']),film('Halloween 5: The Revenge of Michael Myers',1989,'🎃',['optional'],'Michael pursues Jamie. A mysterious Man in Black watches from the shadows.','Sets up the Thorn mythology. Weaker than 4 but advances the storyline.',96,27,11361,['peacock','rent_amazon']),film('Halloween: The Curse of Michael Myers',1995,'🎃',['optional'],'The Thorn cult origin revealed. A young Paul Rudd investigates.','The most divisive entry. The Producer\'s Cut is considered far superior.',87,18,10987,['peacock','rent_amazon']),film('Halloween H20: 20 Years Later',1998,'🎃',['essential'],'Laurie faked her death. She\'s now a school principal. The best post-original sequel.','Josh Hartnett\'s film debut. He was paid $75,000 — within 3 years he was being offered $20M per film.',86,61,11675,['rent_amazon']),
           film('Halloween: Resurrection',2002,'🎃',['optional'],'Reality TV in the Myers house. Busta Rhymes fights Michael. Generally terrible.','Most fans skip this. The treatment of Laurie in the opening is universally condemned.',94,22,11442,['rent_amazon']),
@@ -2561,6 +2557,7 @@ const U=[
           film('Harry Potter and the Goblet of Fire',2005,'⚡',['essential'],'The Triwizard Tournament. The moment everything changes. The darkest film yet.','The graveyard scene is the moment the franchise becomes genuinely dark and frightening.',157,88,674,['peacock','rent_amazon']),
           film('Harry Potter and the Order of the Phoenix',2007,'⚡',['essential'],'Umbridge. Dumbledore\'s Army. The Department of Mysteries.','Dolores Umbridge is one of fiction\'s most effectively hateable antagonists.',138,77,675,['peacock','rent_amazon']),
           film('Harry Potter and the Half-Blood Prince',2009,'⚡',['essential'],'Horcruxes revealed. Dumbledore\'s death. The war begins in earnest.','The cave sequence and the Astronomy Tower are among the franchise\'s most powerful moments.',153,84,767,['peacock','rent_amazon']),
+          film('Harry Potter and the Deathly Hallows – Part 1',2010,'⚡',['essential'],'The trio hunts Horcruxes. The Ministry falls. Dobby\'s sacrifice. A dark, intimate road movie.','The first HP film without Hogwarts as a home base. The animation of the Tale of the Three Brothers is stunning.',146,81,12444,['peacock','rent_amazon']),
           film("Harry Potter and the Deathly Hallows – Part 2",2011,'⚡',['essential'],'The Battle of Hogwarts. "All was well."','Have tissues. The Prince\'s Tale (Snape\'s memories) is one of cinema\'s great character reveals.',130,96,12445,['peacock','rent_amazon']),
           film('Fantastic Beasts and Where to Find Them',2016,'🦄',['optional'],'1926 New York. Newt Scamander. A fresh take on the Wizarding World.','Works as a standalone magical adventure even without HP knowledge.',133,72,259316,['rent_amazon']),
           film('Fantastic Beasts: The Crimes of Grindelwald',2018,'🦄',['optional'],'1927 Paris. Young Dumbledore. Grindelwald\'s rise.','Dense lore. The Credence backstory twist is controversial.',134,37,338952,['rent_amazon']),
@@ -2880,7 +2877,7 @@ const U=[
   },
 
   {
-    id:'hungeragmes',posterTmdb:70160,slug:'hunger-games-watch-order',name:'The Hunger Games',short:'Hunger Games',
+    id:'hungergames',posterTmdb:70160,slug:'hunger-games-watch-order',name:'The Hunger Games',short:'Hunger Games',
     cat:'fantasy',tag:'Fantasy / Dystopia',tagClass:'t-fantasy',emoji:'🏹',
     bg:'linear-gradient(135deg,#1a1000,#0a1a0a,#001a0a)',
     streams:['netflix','rent_amazon','rent_apple'],
@@ -4004,9 +4001,9 @@ const SIMILAR={
   dceu:['mcu','batman','xmen'],
   batman:['dceu','mcu','johnwick'],
   xmen:['mcu','dceu'],
-  starwars:['lotr','hungeragmes','matrix'],
-  lotr:['harrypotter','starwars','hungeragmes'],
-  harrypotter:['lotr','hungeragmes'],
+  starwars:['lotr','hungergames','matrix'],
+  lotr:['harrypotter','starwars','hungergames'],
+  harrypotter:['lotr','hungergames'],
   halloween:['saw','scream','nightmare','fridaythe13th'],
   saw:['halloween','insidious','evildead','paranormal'],
   scream:['halloween','nightmare','fridaythe13th'],
@@ -4040,7 +4037,7 @@ const SIMILAR={
   minions:['shrek','toystory','icage','sonic'],
   icage:['shrek','minions','toystory'],
   sonic:['minions','shrek'],
-  hungeragmes:['lotr','harrypotter','starwars'],
+  hungergames:['lotr','harrypotter','starwars'],
   rockycreed:['johnwick','fastfurious'],
   transformers:['monsterverse','jurassicpark'],
   indiana:['lotr','starwars'],
@@ -4840,7 +4837,7 @@ const FRANCHISE_TMDB = {
   matrix:       {t:'c', id:2344},
   spiderverse:  {t:'c', id:573436},
   shrek:        {t:'c', id:2150},
-  hungeragmes:  {t:'c', id:131635},
+  hungergames:  {t:'c', id:131635},
   mission:      {t:'c', id:87359},
   xmen:         {t:'c', id:748},
   dceu:         {t:'m', id:297762},
@@ -6093,7 +6090,7 @@ const NEWS_FEED = [
    title:'Scream 7 trailer released',
    body:'Sidney Prescott is back. Neve Campbell returns after salary dispute resolved. Melissa Barrera out.',
    link:''},
-  {id:'n005',date:'2026-03-05',type:'release',emoji:'🏹',franchise:'hungeragmes',
+  {id:'n005',date:'2026-03-05',type:'release',emoji:'🏹',franchise:'hungergames',
    title:'Sunrise on the Reaping — November 2026',
    body:'Young Haymitch Abernathy during the 50th Hunger Games. Francis Lawrence returns to direct.',
    link:''},
