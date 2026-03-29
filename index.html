@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
 <title id="pageTitle">WatchInOrder — The Right Watch Order for Every Movie Universe</title>
-<meta id="metaDesc" name="description" content="Watch every movie franchise in the right order. MCU, Star Wars, Harry Potter, James Bond, Indiana Jones — 85+ franchise watch order guides, all free.">
-  <title>WatchInOrder — The Right Watch Order for Every Movie Universe</title>
+<meta id="metaDesc" name="description" content="The complete watch order for every major movie franchise. MCU, Star Wars, Harry Potter, James Bond, Fast &amp; Furious and 40+ more — free franchise guides.">
+  <title>WatchInOrder — Movie Franchise Watch Orders | MCU, Star Wars & More</title>
 <meta id="ogTitle" property="og:title" content="WatchInOrder — The Right Watch Order for Every Movie Franchise">
 <meta id="ogDesc" property="og:description" content="The definitive watch order guide for every movie universe and franchise.">
 <meta property="og:type" content="website">
@@ -837,7 +837,8 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="//image.tmdb.org">
   <link rel="dns-prefetch" href="//api.themoviedb.org">
-</head>
+
+  <link id="canonicalLink" rel="canonical" href="https://www.watchinorder.org/"></head>
 <body>
 
 <!-- TOAST STACK -->
@@ -2041,6 +2042,53 @@ const f=(title,year,emoji,tags,note,tip='',runtime=0,score=0,streams=[])=>({titl
 const film=(title,year,emoji,tags,note,tip='',runtime=0,score=0,tmdb=0,streams=[])=>({title,year,emoji,tags,note,tip,runtime,score,tmdb,streams});
 
 // Core established franchises (abbreviated for space — same deep data as v3)
+const FRANCHISE_SEO = {
+  'mcu-watch-order': {t:'MCU Watch Order — All 44 Marvel Films & Shows in Order | WatchInOrder',d:'The complete Marvel Cinematic Universe watch order. Every film and Disney+ show in chronological and release order — from Iron Man to the latest Marvel release.'},
+  'dc-movies-watch-order': {t:'DC / DCEU Watch Order — All Films in Order | WatchInOrder',d:'The complete DC Extended Universe watch order. Every DCEU and DCU film from Man of Steel to the latest release, in the best viewing order.'},
+  'batman-movies-watch-order': {t:'Batman Movies Watch Order — All 8 Films Across Every Era | WatchInOrder',d:'Every Batman film in order — from Tim Burton\'s 1989 original to The Dark Knight trilogy, Batman v Superman, and The Batman (2022). All eras covered.'},
+  'spider-verse-watch-order': {t:'Spider-Man Watch Order — Every Spider-Man Film in Order | WatchInOrder',d:'Every Spider-Man film in order — MCU, Into the Spider-Verse, Tobey Maguire, Andrew Garfield, and Venom. The complete Spider-Man watch order.'},
+  'star-wars-watch-order': {t:'Star Wars Watch Order — All 13 Films in Order | WatchInOrder',d:'The definitive Star Wars watch order. Every film from the Skywalker Saga, the prequels, and standalone entries — in release order and Machete Order.'},
+  'lord-of-the-rings-watch-order': {t:'Lord of the Rings & Hobbit Watch Order — All 7 Films | WatchInOrder',d:'The complete Middle-earth watch order. The Lord of the Rings trilogy, The Hobbit trilogy, and The War of the Rohirrim — in the best viewing order.'},
+  'matrix-watch-order': {t:'The Matrix Watch Order — All 5 Films in Order | WatchInOrder',d:'The complete Matrix watch order. The original trilogy, Resurrections, and Animatrix — in the right order for first-timers and returning fans.'},
+  'monsterverse-watch-order': {t:'MonsterVerse Watch Order — Godzilla & Kong Films in Order | WatchInOrder',d:'The complete MonsterVerse watch order. Every Godzilla and Kong film from 2014 to Godzilla x Kong — in chronological and release order.'},
+  'dune-watch-order': {t:'Dune Watch Order — Both Films in Order | WatchInOrder',d:'The Dune watch order. Dune Part One and Dune Part Two — everything you need to watch Denis Villeneuve\'s adaptation in order.'},
+  'avatar-watch-order': {t:'Avatar Watch Order — Both Films in Order | WatchInOrder',d:'The Avatar watch order. Avatar (2009) and Avatar: The Way of Water (2022) — watch James Cameron\'s Pandora saga in the right order.'},
+  'terminator-watch-order': {t:'Terminator Watch Order — All 6 Films & Which to Skip | WatchInOrder',d:'The Terminator watch order across 4 timelines. The essential films, the skippable ones, and the best way to experience the franchise without confusion.'},
+  'alien-watch-order': {t:'Alien Watch Order — All 7 Films Including Prometheus | WatchInOrder',d:'The complete Alien franchise watch order. Every film from Alien (1979) through Prometheus, Covenant, and Alien: Romulus — in the best order.'},
+  'predator-watch-order': {t:'Predator Watch Order — All Films Including Prey | WatchInOrder',d:'The complete Predator watch order. Every film from the 1987 original through Prey (2022) — in release and chronological order.'},
+  'planet-of-the-apes-watch-order': {t:'Planet of the Apes Watch Order — All 9 Films | WatchInOrder',d:'The complete Planet of the Apes watch order. The original 1968 classic, the Tim Burton reboot, and the Caesar trilogy — all in the right order.'},
+  'transformers-watch-order': {t:'Transformers Watch Order — All 7 Films in Order | WatchInOrder',d:'The complete Transformers watch order. Every Bayverse film, Bumblebee, and Rise of the Beasts — in release order with notes on what to skip.'},
+  'resident-evil-watch-order': {t:'Resident Evil Watch Order — All 6 Films in Order | WatchInOrder',d:'The complete Resident Evil film watch order. All 6 Paul W.S. Anderson films starring Milla Jovovich — from the 2002 original to The Final Chapter.'},
+  'fast-and-furious-watch-order': {t:'Fast & Furious Watch Order — All 11 Films in Order | WatchInOrder',d:'The complete Fast & Furious watch order. Every film in the saga in the right order — including Hobbs & Shaw and the best chronological sequence.'},
+  'john-wick-watch-order': {t:'John Wick Watch Order — All 6 Films in Order | WatchInOrder',d:'The complete John Wick watch order. Every film from John Wick (2014) through Chapter 4, Ballerina, and the Continental spinoff — in order.'},
+  'james-bond-watch-order': {t:'James Bond Watch Order — All 25 Films in Order | WatchInOrder',d:'The complete James Bond watch order. All 25 official 007 films from Dr. No (1962) to No Time to Die — by actor era and in release order.'},
+  'rocky-creed-watch-order': {t:'Rocky & Creed Watch Order — All 9 Films in Order | WatchInOrder',d:'The complete Rocky and Creed saga watch order. Every film from Rocky (1976) through Creed III — in chronological story order.'},
+  'mission-impossible-watch-order': {t:'Mission: Impossible Watch Order — All Films in Order | WatchInOrder',d:'The complete Mission: Impossible watch order. Every Tom Cruise film from the 1996 original to Dead Reckoning — with notes on the story arc.'},
+  'indiana-jones-watch-order': {t:'Indiana Jones Watch Order — All 5 Films in Order | WatchInOrder',d:'The complete Indiana Jones watch order. Every film from Raiders of the Lost Ark through The Dial of Destiny — in release and chronological order.'},
+  'bourne-watch-order': {t:'Jason Bourne Watch Order — All 5 Films in Order | WatchInOrder',d:'The complete Jason Bourne watch order. Every film from The Bourne Identity through Jason Bourne (2016) — including Legacy and how it fits in.'},
+  'kingsman-watch-order': {t:'Kingsman Watch Order — All 3 Films in Order | WatchInOrder',d:'The complete Kingsman watch order. Kingsman: The Secret Service, The Golden Circle, and The King\'s Man — in the best viewing order.'},
+  'jurassic-park-watch-order': {t:'Jurassic Park Watch Order — All 7 Films in Order | WatchInOrder',d:'The complete Jurassic Park and Jurassic World watch order. Every film from the 1993 original through Dominion — in chronological and release order.'},
+  'pirates-of-the-caribbean-watch-order': {t:'Pirates of the Caribbean Watch Order — All 5 Films | WatchInOrder',d:'The complete Pirates of the Caribbean watch order. Every Jack Sparrow film from The Curse of the Black Pearl through Dead Men Tell No Tales.'},
+  'back-to-the-future-watch-order': {t:'Back to the Future Watch Order — All 3 Films in Order | WatchInOrder',d:'The Back to the Future watch order. All three films in the trilogy — the easiest franchise watch order there is, but we break it down anyway.'},
+  'conjuring-universe-watch-order': {t:'Conjuring Universe Watch Order — All 10 Films in Order | WatchInOrder',d:'The complete Conjuring Universe watch order. Every film from The Conjuring through Annabelle, The Nun, and La Llorona — in the best order.'},
+  'halloween-movies-watch-order': {t:'Halloween Watch Order — All 13 Films Across 5 Timelines | WatchInOrder',d:'The complete Halloween watch order across all 5 timelines. The original, Rob Zombie, H20, and the Blumhouse trilogy — which to watch and in what order.'},
+  'saw-movies-watch-order': {t:'Saw Watch Order — All 10 Films in Order | WatchInOrder',d:'The complete Saw watch order. Every film from the 2004 original through Jigsaw, Spiral, and Saw X — in the right order with no spoilers.'},
+  'scream-movies-watch-order': {t:'Scream Watch Order — All 7 Films in Order | WatchInOrder',d:'The complete Scream watch order. Every film from Wes Craven\'s 1996 original through Scream VI and Scream 7 — in release order.'},
+  'insidious-watch-order': {t:'Insidious Watch Order — All 5 Films in Chronological Order | WatchInOrder',d:'The complete Insidious watch order. The Insidious franchise in both chronological and recommended order — including where The Last Key fits.'},
+  'evil-dead-watch-order': {t:'Evil Dead Watch Order — All 5 Films in Order | WatchInOrder',d:'The complete Evil Dead watch order. The original trilogy, the 2013 remake, and Evil Dead Rise — in release and recommended order.'},
+  'paranormal-activity-watch-order': {t:'Paranormal Activity Watch Order — All 6 Films in Order | WatchInOrder',d:'The complete Paranormal Activity watch order. All 6 found footage films from the 2007 original through The Ghost Dimension — in the right order.'},
+  'nightmare-on-elm-street-watch-order': {t:'A Nightmare on Elm Street Watch Order — All 9 Films | WatchInOrder',d:'The complete A Nightmare on Elm Street watch order. Every Freddy Krueger film from the 1984 original through Freddy vs. Jason and the 2010 remake.'},
+  'friday-the-13th-watch-order': {t:'Friday the 13th Watch Order — All 12 Films in Order | WatchInOrder',d:'The complete Friday the 13th watch order. Every Jason Voorhees film from the 1980 original through Jason X, Freddy vs. Jason, and the 2009 remake.'},
+  'final-destination-watch-order': {t:'Final Destination Watch Order — All 6 Films in Order | WatchInOrder',d:'The complete Final Destination watch order. Every film from the 2000 original through Final Destination 5 and Bloodlines (2025) — in the right order.'},
+  'despicable-me-minions-watch-order': {t:'Despicable Me Watch Order — All 6 Films in Order | WatchInOrder',d:'The complete Despicable Me and Minions watch order. Every film from Despicable Me (2010) through Despicable Me 4 — in chronological and release order.'},
+  'kung-fu-panda-watch-order': {t:'Kung Fu Panda Watch Order — All 4 Films in Order | WatchInOrder',d:'The complete Kung Fu Panda watch order. Every film from the 2008 original through Kung Fu Panda 4 — in the right order for the full Po arc.'},
+  'how-to-train-your-dragon-watch-order': {t:'How to Train Your Dragon Watch Order — All 3 Films | WatchInOrder',d:'The complete How to Train Your Dragon watch order. All three films in the trilogy — in release and story order with notes on the short films.'},
+  'toy-story-pixar-watch-order': {t:'Toy Story & Pixar Watch Order — All 28 Films | WatchInOrder',d:'The complete Toy Story and Pixar universe watch order. Every Pixar film from Toy Story (1995) through the latest release — in order.'},
+  'sonic-the-hedgehog-watch-order': {t:'Sonic the Hedgehog Watch Order — All 3 Films in Order | WatchInOrder',d:'The complete Sonic the Hedgehog movie watch order. All three films from the 2020 original through Sonic the Hedgehog 3 — in order.'},
+  'harry-potter-watch-order': {t:'Harry Potter Watch Order — All 10 Films in Order | WatchInOrder',d:'The complete Wizarding World watch order. All 8 Harry Potter films plus the Fantastic Beasts trilogy — in chronological and release order.'},
+  'ghostbusters-watch-order': {t:'Ghostbusters Watch Order — All 4 Films in Order | WatchInOrder',d:'The complete Ghostbusters watch order. The original 1984 classic, Ghostbusters II, the 2016 reboot, Afterlife, and Frozen Empire — in order.'},
+};
+
 const U=[
   // ─── SUPERHERO ─────────────────────────────────────────────────────────
   {
@@ -3392,7 +3440,9 @@ function filterCat(cat){
 function goHome(){
   showPage('home');renderGrid('all');
   // Reset all SEO meta to homepage defaults
-  document.title='WatchInOrder — The Right Watch Order for Every Movie Universe';
+  document.title='WatchInOrder — Movie Franchise Watch Orders | MCU, Star Wars & More';
+  const _cl2=document.getElementById('canonicalLink');
+  if(_cl2) _cl2.setAttribute('href','https://www.watchinorder.org/');
   const _e2=id=>document.getElementById(id);
   if(_e2('metaDesc'))_e2('metaDesc').setAttribute('content','The definitive watch order for every movie universe — Marvel, Star Wars, Harry Potter, Lord of the Rings and 80+ more franchises.');
   if(_e2('ogTitle'))_e2('ogTitle').setAttribute('content','WatchInOrder — Find the Right Watch Order');
@@ -3421,6 +3471,19 @@ function goHome(){
 // ════════════════════════════════════════════════════════════
 function openUniverse(id){
   const u=U.find(x=>x.id===id); if(!u)return;
+  // SEO: update title and meta description per franchise
+  const _seo=FRANCHISE_SEO[u.slug];
+  if(_seo){
+    document.title=_seo.t;
+    const _md=document.getElementById('metaDesc');
+    if(_md) _md.setAttribute('content',_seo.d);
+    const _og=document.getElementById('ogTitle');
+    if(_og) _og.setAttribute('content',_seo.t);
+    const _ogd=document.getElementById('ogDesc');
+    if(_ogd) _ogd.setAttribute('content',_seo.d);
+    const _cl=document.getElementById('canonicalLink');
+    if(_cl) _cl.setAttribute('href','https://www.watchinorder.org/'+u.slug);
+  }
   trackFranchiseOpen(id, u.name||id);
   // Track recently viewed
   if(!STATE.recentlyViewed) STATE.recentlyViewed=[];
