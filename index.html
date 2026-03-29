@@ -833,6 +833,27 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 .notif-type-update{background:var(--bg5);color:var(--muted)}
 .notif-unread-dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px}
 .notif-empty{padding:2rem 1rem;text-align:center;color:var(--muted);font-size:13px}
+
+/* Card Flip */
+.ucard{perspective:1000px}
+.ucard-inner{position:relative;width:100%;min-height:380px;transition:transform .45s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;display:flex;flex-direction:column}
+.ucard:hover .ucard-inner{transform:rotateY(180deg)}
+.ucard-front{backface-visibility:hidden;-webkit-backface-visibility:hidden;flex:1;display:flex;flex-direction:column}
+.ucard-back{backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:var(--bg2);border-radius:var(--r2);padding:1.2rem 1.1rem;position:absolute;inset:0;display:flex;flex-direction:column;gap:.55rem;overflow:hidden}
+.ucard:hover .ucard-front{pointer-events:none}
+.ucard-back-hdr{display:flex;align-items:center;gap:.55rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.ucard-back-ttl{font-family:var(--font-d);font-size:15px;letter-spacing:.5px;color:var(--text);line-height:1.15}
+.ucard-back-emo{font-size:24px;flex-shrink:0}
+.flip-stat{display:flex;align-items:center;justify-content:space-between;padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.flip-stat:last-of-type{border-bottom:none}
+.flip-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);font-weight:600}
+.flip-val{font-size:12.5px;color:var(--text);font-weight:700}
+.flip-val.fv-g{color:var(--teal)}.flip-val.fv-y{color:var(--gold2)}.flip-val.fv-r{color:#f87171}
+.flip-dots{display:flex;gap:3px}
+.flip-dot{width:8px;height:8px;border-radius:50%;background:var(--border3)}
+.flip-dot.dl{background:var(--teal)}.flip-dot.dm{background:var(--gold2)}.flip-dot.dh{background:#f87171}
+.flip-tip{padding:.55rem .6rem;background:rgba(255,255,255,.04);border-radius:6px;border-left:2px solid var(--gold2);font-size:10px;color:var(--dim);line-height:1.45;font-style:italic;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:.1rem}
+.flip-cta{margin-top:auto;padding-top:.55rem;border-top:1px solid var(--border);font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);font-weight:700;text-align:center}
 </style>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="//image.tmdb.org">
@@ -3404,12 +3425,27 @@ function renderGrid(cat='all'){
     const doneItems=Object.values(wdata).filter(Boolean).length;
     const pct=totalItems>0?Math.round((doneItems/totalItems)*100):0;
     const isComplete=pct===100&&totalItems>0;
+    // flip back vars
+    const _fl=Object.values(u.orders)[0]?.items||[];
+    const _rt=u.stats.runtime||0;
+    const _rtStr=_rt>0?(Math.floor(_rt/60)+'h'+(_rt%60>0?' '+(_rt%60)+'m':'')):'?';
+    const _yrs=_fl.map(f=>f.year).filter(Boolean);
+    const _y1=_yrs.length?Math.min(..._yrs):'?';
+    const _y2=_yrs.length?Math.max(..._yrs):'?';
+    const _yrStr=String(_y1)+(_y1!==_y2?'\u2013'+String(_y2):'');
+    const _scs=_fl.map(f=>f.score).filter(s=>s&&s>0&&s<=100);
+    const _avg=_scs.length?Math.round(_scs.reduce((a,b)=>a+b,0)/_scs.length):0;
+    const _scCls=_avg>=70?'fv-g':_avg>=50?'fv-y':'fv-r';
+    const _cx=u.stats.complexity||1;
+    const _dts=[1,2,3,4,5].map(i=>{const on=i<=_cx;const cl=i<=2?'dl':i<=4?'dm':'dh';return '<div class="flip-dot'+(on?' '+cl:'')+'"></div>';}).join('');
+    const _tipRaw=(u.mustKnow&&u.mustKnow[0])||'';
+    const _tipHtml=_tipRaw?'<div class="flip-tip">'+_tipRaw+'</div>':'';
     const progressBar=doneItems>0?`<div class="ucard-progress"><div class="ucard-progress-fill" style="width:${pct}%"></div></div>`:'';
     const completeBadge=isComplete?'<div class="ucard-complete-badge">✓ Done</div>':'';
     const isQueued=(STATE.watchlist||[]).includes(u.id);
     const queueBadge=isQueued&&!isComplete?'<div class="queue-ring">📋 Queued</div>':'';
     return `<div class="ucard${isComplete?' completed':''}${isQueued&&!isComplete?' queued-card':''}" onclick="openUniverse('${u.id}')">
-      ${completeBadge}${queueBadge}
+      <div class="ucard-inner"><div class="ucard-front">${completeBadge}${queueBadge}
       <div class="ucard-poster">${(()=>{const img=franchisePosterImg(u);return img?`<img src="${img}" alt="${u.short}" class="img-loading" onload="this.classList.remove('img-loading');this.classList.add('img-loaded')" onerror="this.style.display='none'"><div class='ucard-poster-bg' style='background:${u.bg}'></div>`:`<div class='ucard-poster-bg' style='background:${u.bg}'></div>`})()} <div class="ucard-emoji" style="${franchisePosterImg(u)?'opacity:0;pointer-events:none':''}">${u.emoji}</div><div class="ucard-fade"></div></div>
       <div class="ucard-body">
         <span class="utag ${u.tagClass}">${u.tag}</span>
@@ -3421,7 +3457,17 @@ function renderGrid(cat='all'){
         </div>
         ${progressBar}
       </div>
-    </div>`;
+    </div>
+      <div class="ucard-back">
+        <div class="ucard-back-hdr"><span class="ucard-back-emo">${u.emoji}</span><div class="ucard-back-ttl">${u.name}</div></div>
+        <div class="flip-stat"><span class="flip-lbl">Films</span><span class="flip-val">${_fl.length} entries</span></div>
+        <div class="flip-stat"><span class="flip-lbl">Years</span><span class="flip-val">${_yrStr}</span></div>
+        <div class="flip-stat"><span class="flip-lbl">Total Runtime</span><span class="flip-val">${_rtStr}</span></div>
+        <div class="flip-stat"><span class="flip-lbl">Avg Score</span><span class="flip-val ${_scCls}">${_avg>0?_avg+'%':'?'}</span></div>
+        <div class="flip-stat"><span class="flip-lbl">Complexity</span><span class="flip-dots">${_dts}</span></div>
+        ${_tipHtml}
+        <div class="flip-cta">Click to explore &rarr;</div>
+      </div></div></div>`;
   }).join('');
   // Activate correct chip
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
