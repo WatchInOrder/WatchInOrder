@@ -843,9 +843,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 .ucard:hover .ucard-front{pointer-events:none}
 .ucard-back-hdr{display:flex;align-items:center;gap:.55rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
 .ucard-back-ttl{font-family:var(--font-d);font-size:15px;letter-spacing:.5px;color:var(--text);line-height:1.15}
-.ucard-back-emo{font-size:24px;flex-shrink:0}
 .flip-stat{display:flex;align-items:center;justify-content:space-between;padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
-.flip-stat:last-of-type{border-bottom:none}
 .flip-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);font-weight:600}
 .flip-val{font-size:12.5px;color:var(--text);font-weight:700}
 .flip-val.fv-g{color:var(--teal)}.flip-val.fv-y{color:var(--gold2)}.flip-val.fv-r{color:#f87171}
@@ -854,6 +852,133 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
 .flip-dot.dl{background:var(--teal)}.flip-dot.dm{background:var(--gold2)}.flip-dot.dh{background:#f87171}
 .flip-tip{padding:.55rem .6rem;background:rgba(255,255,255,.04);border-radius:6px;border-left:2px solid var(--gold2);font-size:10px;color:var(--dim);line-height:1.45;font-style:italic;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:.1rem}
 .flip-cta{margin-top:auto;padding-top:.55rem;border-top:1px solid var(--border);font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);font-weight:700;text-align:center}
+.ucard-back.g-horror{background:linear-gradient(160deg,#1a0000 0%,#0d0505 60%,#1a0008 100%);border-top:3px solid #ef4444}
+.ucard-back.g-horror .ucard-back-hdr{border-bottom-color:#ef444433}
+.ucard-back.g-horror .ucard-back-ttl{color:#ef4444}
+.ucard-back.g-horror .flip-stat{border-bottom-color:#ef444418}
+.ucard-back.g-horror .flip-lbl{color:#ef444488}
+.ucard-back.g-horror .flip-val{color:#e2e8f0}
+.ucard-back.g-horror .flip-val.fv-g{color:#ef4444}
+.ucard-back.g-horror .flip-val.fv-y{color:#ef4444bb}
+.ucard-back.g-horror .flip-tip{background:#ef44440e;border-left-color:#ef4444;color:#ef4444bb}
+.ucard-back.g-horror .flip-cta{color:#ef4444;border-top-color:#ef444422}
+.ucard-back.g-horror .flip-dot.dl,.ucard-back.g-horror .flip-dot.dm{background:#ef444488}
+.ucard-back.g-horror .flip-dot.dh{background:#ef4444}
+.ucard-back.g-superhero{background:linear-gradient(160deg,#00051a 0%,#060010 60%,#00101a 100%);border-top:3px solid #818cf8}
+.ucard-back.g-superhero .ucard-back-hdr{border-bottom-color:#818cf833}
+.ucard-back.g-superhero .ucard-back-ttl{color:#818cf8}
+.ucard-back.g-superhero .flip-stat{border-bottom-color:#818cf818}
+.ucard-back.g-superhero .flip-lbl{color:#818cf888}
+.ucard-back.g-superhero .flip-val{color:#e2e8f0}
+.ucard-back.g-superhero .flip-val.fv-g{color:#818cf8}
+.ucard-back.g-superhero .flip-val.fv-y{color:#818cf8bb}
+.ucard-back.g-superhero .flip-tip{background:#818cf80e;border-left-color:#818cf8;color:#818cf8bb}
+.ucard-back.g-superhero .flip-cta{color:#818cf8;border-top-color:#818cf822}
+.ucard-back.g-superhero .flip-dot.dl,.ucard-back.g-superhero .flip-dot.dm{background:#818cf888}
+.ucard-back.g-superhero .flip-dot.dh{background:#818cf8}
+.ucard-back.g-scifi{background:linear-gradient(160deg,#001214 0%,#000a0d 60%,#001a14 100%);border-top:3px solid #22d3ee}
+.ucard-back.g-scifi .ucard-back-hdr{border-bottom-color:#22d3ee33}
+.ucard-back.g-scifi .ucard-back-ttl{color:#22d3ee}
+.ucard-back.g-scifi .flip-stat{border-bottom-color:#22d3ee18}
+.ucard-back.g-scifi .flip-lbl{color:#22d3ee88}
+.ucard-back.g-scifi .flip-val{color:#e2e8f0}
+.ucard-back.g-scifi .flip-val.fv-g{color:#22d3ee}
+.ucard-back.g-scifi .flip-val.fv-y{color:#22d3eebb}
+.ucard-back.g-scifi .flip-tip{background:#22d3ee0e;border-left-color:#22d3ee;color:#22d3eebb}
+.ucard-back.g-scifi .flip-cta{color:#22d3ee;border-top-color:#22d3ee22}
+.ucard-back.g-scifi .flip-dot.dl,.ucard-back.g-scifi .flip-dot.dm{background:#22d3ee88}
+.ucard-back.g-scifi .flip-dot.dh{background:#22d3ee}
+.ucard-back.g-sci_fi{background:linear-gradient(160deg,#001214 0%,#000a0d 60%,#001a14 100%);border-top:3px solid #22d3ee}
+.ucard-back.g-sci_fi .ucard-back-hdr{border-bottom-color:#22d3ee33}
+.ucard-back.g-sci_fi .ucard-back-ttl{color:#22d3ee}
+.ucard-back.g-sci_fi .flip-stat{border-bottom-color:#22d3ee18}
+.ucard-back.g-sci_fi .flip-lbl{color:#22d3ee88}
+.ucard-back.g-sci_fi .flip-val{color:#e2e8f0}
+.ucard-back.g-sci_fi .flip-val.fv-g{color:#22d3ee}
+.ucard-back.g-sci_fi .flip-val.fv-y{color:#22d3eebb}
+.ucard-back.g-sci_fi .flip-tip{background:#22d3ee0e;border-left-color:#22d3ee;color:#22d3eebb}
+.ucard-back.g-sci_fi .flip-cta{color:#22d3ee;border-top-color:#22d3ee22}
+.ucard-back.g-sci_fi .flip-dot.dl,.ucard-back.g-sci_fi .flip-dot.dm{background:#22d3ee88}
+.ucard-back.g-sci_fi .flip-dot.dh{background:#22d3ee}
+.ucard-back.g-fantasy{background:linear-gradient(160deg,#140a00 0%,#0d0800 60%,#1a1000 100%);border-top:3px solid #f59e0b}
+.ucard-back.g-fantasy .ucard-back-hdr{border-bottom-color:#f59e0b33}
+.ucard-back.g-fantasy .ucard-back-ttl{color:#f59e0b}
+.ucard-back.g-fantasy .flip-stat{border-bottom-color:#f59e0b18}
+.ucard-back.g-fantasy .flip-lbl{color:#f59e0b88}
+.ucard-back.g-fantasy .flip-val{color:#e2e8f0}
+.ucard-back.g-fantasy .flip-val.fv-g{color:#f59e0b}
+.ucard-back.g-fantasy .flip-val.fv-y{color:#f59e0bbb}
+.ucard-back.g-fantasy .flip-tip{background:#f59e0b0e;border-left-color:#f59e0b;color:#f59e0bbb}
+.ucard-back.g-fantasy .flip-cta{color:#f59e0b;border-top-color:#f59e0b22}
+.ucard-back.g-fantasy .flip-dot.dl,.ucard-back.g-fantasy .flip-dot.dm{background:#f59e0b88}
+.ucard-back.g-fantasy .flip-dot.dh{background:#f59e0b}
+.ucard-back.g-action{background:linear-gradient(160deg,#140600 0%,#0d0400 60%,#1a0800 100%);border-top:3px solid #f97316}
+.ucard-back.g-action .ucard-back-hdr{border-bottom-color:#f9731633}
+.ucard-back.g-action .ucard-back-ttl{color:#f97316}
+.ucard-back.g-action .flip-stat{border-bottom-color:#f9731618}
+.ucard-back.g-action .flip-lbl{color:#f9731688}
+.ucard-back.g-action .flip-val{color:#e2e8f0}
+.ucard-back.g-action .flip-val.fv-g{color:#f97316}
+.ucard-back.g-action .flip-val.fv-y{color:#f97316bb}
+.ucard-back.g-action .flip-tip{background:#f973160e;border-left-color:#f97316;color:#f97316bb}
+.ucard-back.g-action .flip-cta{color:#f97316;border-top-color:#f9731622}
+.ucard-back.g-action .flip-dot.dl,.ucard-back.g-action .flip-dot.dm{background:#f9731688}
+.ucard-back.g-action .flip-dot.dh{background:#f97316}
+.ucard-back.g-animated{background:linear-gradient(160deg,#001400 0%,#000d00 60%,#001a08 100%);border-top:3px solid #4ade80}
+.ucard-back.g-animated .ucard-back-hdr{border-bottom-color:#4ade8033}
+.ucard-back.g-animated .ucard-back-ttl{color:#4ade80}
+.ucard-back.g-animated .flip-stat{border-bottom-color:#4ade8018}
+.ucard-back.g-animated .flip-lbl{color:#4ade8088}
+.ucard-back.g-animated .flip-val{color:#e2e8f0}
+.ucard-back.g-animated .flip-val.fv-g{color:#4ade80}
+.ucard-back.g-animated .flip-val.fv-y{color:#4ade80bb}
+.ucard-back.g-animated .flip-tip{background:#4ade800e;border-left-color:#4ade80;color:#4ade80bb}
+.ucard-back.g-animated .flip-cta{color:#4ade80;border-top-color:#4ade8022}
+.ucard-back.g-animated .flip-dot.dl,.ucard-back.g-animated .flip-dot.dm{background:#4ade8088}
+.ucard-back.g-animated .flip-dot.dh{background:#4ade80}
+
+/* Flip back genre themes */
+.ucard-back.theme-horror{background:linear-gradient(160deg,#1a0005,#0d0000,#120008);border-color:#4a0010}
+.ucard-back.theme-horror .ucard-back-hdr{border-color:rgba(180,0,30,.3)}
+.ucard-back.theme-horror .flip-stat{border-color:rgba(180,0,30,.12)}
+.ucard-back.theme-horror .flip-lbl{color:#c0495a}
+.ucard-back.theme-horror .flip-cta{color:#ff4d6d;border-color:rgba(180,0,30,.25)}
+.ucard-back.theme-horror .flip-tip{border-left-color:#ff4d6d;background:rgba(180,0,30,.08)}
+
+.ucard-back.theme-superhero{background:linear-gradient(160deg,#00061a,#060014,#001020);border-color:#1a2a6c}
+.ucard-back.theme-superhero .ucard-back-hdr{border-color:rgba(80,120,255,.3)}
+.ucard-back.theme-superhero .flip-stat{border-color:rgba(80,120,255,.1)}
+.ucard-back.theme-superhero .flip-lbl{color:#6b8cff}
+.ucard-back.theme-superhero .flip-cta{color:#7ba7ff;border-color:rgba(80,120,255,.25)}
+.ucard-back.theme-superhero .flip-tip{border-left-color:#7ba7ff;background:rgba(80,120,255,.08)}
+
+.ucard-back.theme-scifi{background:linear-gradient(160deg,#00100a,#001018,#00080d);border-color:#004d40}
+.ucard-back.theme-scifi .ucard-back-hdr{border-color:rgba(0,200,160,.25)}
+.ucard-back.theme-scifi .flip-stat{border-color:rgba(0,200,160,.1)}
+.ucard-back.theme-scifi .flip-lbl{color:#00c8a0}
+.ucard-back.theme-scifi .flip-cta{color:#00e5b8;border-color:rgba(0,200,160,.25)}
+.ucard-back.theme-scifi .flip-tip{border-left-color:#00e5b8;background:rgba(0,200,160,.08)}
+
+.ucard-back.theme-action{background:linear-gradient(160deg,#1a0e00,#100800,#0d0500);border-color:#5c2d00}
+.ucard-back.theme-action .ucard-back-hdr{border-color:rgba(220,120,0,.25)}
+.ucard-back.theme-action .flip-stat{border-color:rgba(220,120,0,.1)}
+.ucard-back.theme-action .flip-lbl{color:#e07800}
+.ucard-back.theme-action .flip-cta{color:#ffaa00;border-color:rgba(220,120,0,.25)}
+.ucard-back.theme-action .flip-tip{border-left-color:#ffaa00;background:rgba(220,120,0,.08)}
+
+.ucard-back.theme-animated{background:linear-gradient(160deg,#080018,#001008,#00101a);border-color:#2a0060}
+.ucard-back.theme-animated .ucard-back-hdr{border-color:rgba(160,80,255,.25)}
+.ucard-back.theme-animated .flip-stat{border-color:rgba(160,80,255,.1)}
+.ucard-back.theme-animated .flip-lbl{color:#c084fc}
+.ucard-back.theme-animated .flip-cta{color:#d8b4fe;border-color:rgba(160,80,255,.25)}
+.ucard-back.theme-animated .flip-tip{border-left-color:#d8b4fe;background:rgba(160,80,255,.08)}
+
+.ucard-back.theme-fantasy{background:linear-gradient(160deg,#001a10,#0a1000,#001510);border-color:#004d20}
+.ucard-back.theme-fantasy .ucard-back-hdr{border-color:rgba(0,180,80,.25)}
+.ucard-back.theme-fantasy .flip-stat{border-color:rgba(0,180,80,.1)}
+.ucard-back.theme-fantasy .flip-lbl{color:#34d399}
+.ucard-back.theme-fantasy .flip-cta{color:#6ee7b7;border-color:rgba(0,180,80,.25)}
+.ucard-back.theme-fantasy .flip-tip{border-left-color:#6ee7b7;background:rgba(0,180,80,.08)}
 </style>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="//image.tmdb.org">
@@ -3425,7 +3550,7 @@ function renderGrid(cat='all'){
     const doneItems=Object.values(wdata).filter(Boolean).length;
     const pct=totalItems>0?Math.round((doneItems/totalItems)*100):0;
     const isComplete=pct===100&&totalItems>0;
-    // flip back vars
+    // flip vars
     const _fl=Object.values(u.orders)[0]?.items||[];
     const _rt=u.stats.runtime||0;
     const _rtStr=_rt>0?(Math.floor(_rt/60)+'h'+(_rt%60>0?' '+(_rt%60)+'m':'')):'?';
@@ -3440,6 +3565,9 @@ function renderGrid(cat='all'){
     const _dts=[1,2,3,4,5].map(i=>{const on=i<=_cx;const cl=i<=2?'dl':i<=4?'dm':'dh';return '<div class="flip-dot'+(on?' '+cl:'')+'"></div>';}).join('');
     const _tipRaw=(u.mustKnow&&u.mustKnow[0])||'';
     const _tipHtml=_tipRaw?'<div class="flip-tip">'+_tipRaw+'</div>':'';
+    const _catKey=(u.cat||'').toLowerCase().replace('-','');
+    const _theme={horror:'horror',superhero:'superhero',scifi:'scifi','sci-fi':'scifi',action:'action',animated:'animated',fantasy:'fantasy'}[_catKey]||'scifi';
+    const _genreCls=u.cat.replace('-','_');
     const progressBar=doneItems>0?`<div class="ucard-progress"><div class="ucard-progress-fill" style="width:${pct}%"></div></div>`:'';
     const completeBadge=isComplete?'<div class="ucard-complete-badge">✓ Done</div>':'';
     const isQueued=(STATE.watchlist||[]).includes(u.id);
@@ -3458,7 +3586,7 @@ function renderGrid(cat='all'){
         ${progressBar}
       </div>
     </div>
-      <div class="ucard-back">
+      <div class="ucard-back theme-${_theme}">
         <div class="ucard-back-hdr"><div class="ucard-back-ttl">${u.name}</div></div>
         <div class="flip-stat"><span class="flip-lbl">Films</span><span class="flip-val">${_fl.length} entries</span></div>
         <div class="flip-stat"><span class="flip-lbl">Years</span><span class="flip-val">${_yrStr}</span></div>
@@ -3486,9 +3614,7 @@ function filterCat(cat){
 function goHome(){
   showPage('home');renderGrid('all');
   // Reset all SEO meta to homepage defaults
-  document.title='WatchInOrder — Movie Franchise Watch Orders | MCU, Star Wars & More';
-  const _cl2=document.getElementById('canonicalLink');
-  if(_cl2) _cl2.setAttribute('href','https://www.watchinorder.org/');
+  document.title='WatchInOrder — The Right Watch Order for Every Movie Universe';
   const _e2=id=>document.getElementById(id);
   if(_e2('metaDesc'))_e2('metaDesc').setAttribute('content','The definitive watch order for every movie universe — Marvel, Star Wars, Harry Potter, Lord of the Rings and 80+ more franchises.');
   if(_e2('ogTitle'))_e2('ogTitle').setAttribute('content','WatchInOrder — Find the Right Watch Order');
@@ -3517,18 +3643,13 @@ function goHome(){
 // ════════════════════════════════════════════════════════════
 function openUniverse(id){
   const u=U.find(x=>x.id===id); if(!u)return;
-  // SEO: update title and meta description per franchise
   const _seo=FRANCHISE_SEO[u.slug];
   if(_seo){
     document.title=_seo.t;
-    const _md=document.getElementById('metaDesc');
-    if(_md) _md.setAttribute('content',_seo.d);
-    const _og=document.getElementById('ogTitle');
-    if(_og) _og.setAttribute('content',_seo.t);
-    const _ogd=document.getElementById('ogDesc');
-    if(_ogd) _ogd.setAttribute('content',_seo.d);
-    const _cl=document.getElementById('canonicalLink');
-    if(_cl) _cl.setAttribute('href','https://www.watchinorder.org/'+u.slug);
+    const _md=document.getElementById('metaDesc'); if(_md)_md.setAttribute('content',_seo.d);
+    const _og=document.getElementById('ogTitle'); if(_og)_og.setAttribute('content',_seo.t);
+    const _ogd=document.getElementById('ogDesc'); if(_ogd)_ogd.setAttribute('content',_seo.d);
+    const _cl=document.getElementById('canonicalLink'); if(_cl)_cl.setAttribute('href','https://www.watchinorder.org/'+u.slug);
   }
   trackFranchiseOpen(id, u.name||id);
   // Track recently viewed
