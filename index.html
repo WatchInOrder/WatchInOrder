@@ -361,9 +361,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .binge-calc{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);padding:.85rem 1.2rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
 .binge-inp{background:var(--bg4);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font-b);font-size:14px;font-weight:600;padding:5px 9px;width:52px;outline:none;text-align:center;transition:border-color var(--trans)}
 .binge-inp:focus{border-color:rgba(224,58,40,.38)}
-.otabs-wrap{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
-.otabs-lbl{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--red);opacity:.85;padding-left:2px}
-.otabs{display:flex;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:3px;width:fit-content;margin-bottom:0;flex-wrap:wrap;gap:2px}
+.otabs-wrap{display:flex;flex-direction:column;gap:0;margin-bottom:1.25rem;border-radius:var(--r2);overflow:hidden;border:1px solid var(--border2)}
+.otabs-lbl{font-family:var(--font-d);font-size:17px;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,var(--red),#b02a1a);padding:.6rem 1.1rem .55rem;display:flex;align-items:center;justify-content:space-between}
+.otabs-lbl-sub{font-family:var(--font-b);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:.7;color:#fff}
+.otabs{display:flex;background:var(--bg3);padding:6px 6px;width:100%;margin-bottom:0;flex-wrap:wrap;gap:4px;border-radius:0}
 .otab{padding:7px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;color:var(--muted);transition:all var(--trans);white-space:nowrap;letter-spacing:.4px;text-transform:uppercase;border:none;background:none}
 .otab:hover{color:var(--text)}
 .otab.on{background:var(--red);color:#fff}
@@ -1301,7 +1302,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
         <div style="display:flex;align-items:center;gap:.5rem;font-size:13px;color:var(--muted)">Watch<input class="binge-inp" type="number" id="bingeHrs" value="2" min="1" max="24" oninput="calcBinge()">hrs/day</div>
         <div style="font-size:13px;color:var(--text);margin-left:auto" id="bingeResult">–</div>
       </div>
-      <div class="otabs-wrap"><span class="otabs-lbl">⚡ Watch Order</span><div class="otabs" id="otabsEl"></div></div>
+      <div class="otabs-wrap"><div class="otabs-lbl">WATCH ORDER<span class="otabs-lbl-sub">Select a guide below</span></div><div class="otabs" id="otabsEl"></div></div>
       <div class="onote" id="onoteEl"></div>
       <div class="progwrap"><div class="progbar"><div class="progfill" id="pfill" style="width:0%"></div></div><div class="proglbl"><span class="progpct" id="ppct">0</span>% watched</div><button class="prog-reset" onclick="resetProgress()">↺ Reset</button><span id="streakInline"></span></div>
       <div class="wlist" id="wlistEl"></div>
