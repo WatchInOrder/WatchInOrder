@@ -358,8 +358,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .mk-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
 .twarn{background:rgba(224,58,40,.05);border:1px solid rgba(224,58,40,.18);border-radius:var(--r2);padding:.85rem 1.1rem;margin-bottom:1.2rem;font-size:13px;color:var(--muted)}
 .twarn-h{display:flex;align-items:center;gap:5px;font-weight:700;color:var(--red2);margin-bottom:.3rem;font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.binge-calc{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r2);padding:.85rem 1.2rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
-.binge-inp{background:var(--bg4);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font-b);font-size:14px;font-weight:600;padding:5px 9px;width:52px;outline:none;text-align:center;transition:border-color var(--trans)}
+.binge-calc{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.85rem;padding:.35rem 0;border-bottom:1px solid var(--border);}
+.binge-inp{background:var(--bg4);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:var(--font-b);font-size:13px;font-weight:600;padding:3px 7px;width:46px;outline:none;text-align:center;transition:border-color var(--trans)}
 .binge-inp:focus{border-color:rgba(224,58,40,.38)}
 .otabs-wrap{display:flex;flex-direction:column;gap:0;margin-bottom:1.25rem;border-radius:var(--r2);overflow:hidden;border:1px solid var(--border2)}
 .otabs-lbl{font-family:var(--font-d);font-size:17px;letter-spacing:2px;color:#fff;background:linear-gradient(90deg,var(--red),#b02a1a);padding:.6rem 1.1rem .55rem;display:flex;align-items:center;justify-content:space-between}
@@ -495,7 +495,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:56px;display:flex;ali
 .prem-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#000;font-weight:700;font-size:13px;padding:10px;border-radius:var(--r);cursor:pointer;margin-top:.7rem;transition:opacity var(--trans)}
 .prem-btn:hover{opacity:.87}
 .prem-trial{font-size:11px;color:var(--dim);text-align:center;margin-top:.4rem}
-.sb-ad{background:var(--bg4);border:1px dashed rgba(255,255,255,.06);border-radius:var(--r2);min-height:250px;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:10px;letter-spacing:2px;text-transform:uppercase;position:relative}
+.sb-ad{display:none}
 .sb-ad::before{content:'Advertisement';opacity:.2}
 
 /* ── FAQ ── */
@@ -1298,9 +1298,9 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;text-align:center;
       <div id="mkEl"></div>
       <div id="twEl"></div>
       <div class="binge-calc" id="bingeCalc">
-        <span style="font-size:13px;color:var(--muted);flex-shrink:0">⏱ Binge calc:</span>
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:13px;color:var(--muted)">Watch<input class="binge-inp" type="number" id="bingeHrs" value="2" min="1" max="24" oninput="calcBinge()">hrs/day</div>
-        <div style="font-size:13px;color:var(--text);margin-left:auto" id="bingeResult">–</div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);flex-shrink:0">⏱ Binge</span>
+        <div style="display:flex;align-items:center;gap:.4rem;font-size:12px;color:var(--muted)"><input class="binge-inp" type="number" id="bingeHrs" value="2" min="1" max="24" oninput="calcBinge()"><span>hrs/day</span></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-left:auto" id="bingeResult">–</div>
       </div>
       <div class="otabs-wrap"><div class="otabs-lbl">WATCH ORDER<span class="otabs-lbl-sub">Select a guide below</span></div><div class="otabs" id="otabsEl"></div></div>
       <div class="onote" id="onoteEl"></div>
@@ -3883,10 +3883,10 @@ function openUniverse(id){
   document.getElementById('uDescEl').textContent=u.desc;
   const c=u.stats.complexity;
   document.getElementById('uStatsEl').innerHTML=`
-    <div><div class="ustat-n">${u.stats.entries}</div><div class="ustat-l">Entries</div></div>
-    <div><div class="ustat-n">${u.stats.years.split('–')[0]}</div><div class="ustat-l">Since</div></div>
+    <div><div class="ustat-n">${u.stats.entries}</div><div class="ustat-l">Films</div></div>
+    <div><div class="ustat-n" style="font-size:${u.stats.runtime>0?'16px':'28px'};padding-top:${u.stats.runtime>0?'6px':'0'}">${u.stats.runtime>0?(Math.floor(u.stats.runtime/60)+'h '+(u.stats.runtime%60>0?u.stats.runtime%60+'m':'')):'?'}</div><div class="ustat-l">Runtime</div></div>
     <div><div class="ustat-n" style="color:var(--gold2);font-size:14px;padding-top:8px">${CX_LBL[c]||'Complex'}</div><div class="ustat-l">Complexity</div></div>
-    <div><div class="ustat-n" style="font-size:13px;padding-top:8px">${u.stats.type}</div><div class="ustat-l">Format</div></div>`;
+    <div><div class="ustat-n">${u.stats.years.split('–')[0]}</div><div class="ustat-l">Since</div></div>`;
   document.getElementById('ubCat').textContent=CAT_LBL[u.cat]||'All';
   document.getElementById('ubName').textContent=u.short;
   document.getElementById('uLastUpd').textContent='Last updated: March 2026';
